@@ -1,5 +1,94 @@
 package sg.edu.iss.team6.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+
+@Data
+@NoArgsConstructor
+@Table(name = "courses")
+@Entity
 public class Courses {
-    private
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int courseId;
+    private String courseName;
+    private int size;
+    private int actualEnroll;
+    private String description;
+
+    @OneToMany(mappedBy = "courses")
+    private Collection<LectureCanTeach> lectureCanTeaches = new ArrayList<LectureCanTeach>();
+
+    @OneToMany(mappedBy = "courses")
+    private Collection<StudentAttendCourse> studentAttendCourses = new ArrayList<StudentAttendCourse>();
+
+    public Courses(String courseName, int size, int actualEnroll, String description) {
+        this.courseName = courseName;
+        this.size = size;
+        this.actualEnroll = actualEnroll;
+        this.description = description;
+    }
+
+    public Courses(int courseId, String courseName, int size, int actualEnroll, String description) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.size = size;
+        this.actualEnroll = actualEnroll;
+        this.description = description;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getActualEnroll() {
+        return actualEnroll;
+    }
+
+    public void setActualEnroll(int actualEnroll) {
+        this.actualEnroll = actualEnroll;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Courses{" +
+                "courseId=" + courseId +
+                ", courseName='" + courseName + '\'' +
+                ", size=" + size +
+                ", actualEnroll=" + actualEnroll +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
