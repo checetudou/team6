@@ -14,7 +14,7 @@ import java.util.Collection;
 public class Courses {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int courseId;
+    private String courseId;
     private String courseName;
     private int size;
     private int actualEnroll;
@@ -33,7 +33,7 @@ public class Courses {
         this.description = description;
     }
 
-    public Courses(int courseId, String courseName, int size, int actualEnroll, String description) {
+    public Courses(String courseId, String courseName, int size, int actualEnroll, String description) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.size = size;
@@ -41,11 +41,11 @@ public class Courses {
         this.description = description;
     }
 
-    public int getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
 

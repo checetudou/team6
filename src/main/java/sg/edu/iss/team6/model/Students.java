@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Students {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int studentId;
+    private String studentId;
     private String firstName;
     private String lastName;
     private Date enrollmentDate;
@@ -26,7 +26,7 @@ public class Students {
     @OneToMany(mappedBy = "students")
     private Collection<StudentAttendCourse> studentAttendCourses = new ArrayList<StudentAttendCourse>();
 
-    public Students(int studentId, String firstName, String lastName, Date enrollmentDate, String email, byte[] photo, String password) {
+    public Students(String studentId, String firstName, String lastName, Date enrollmentDate, String email, byte[] photo, String password) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,11 +45,11 @@ public class Students {
         this.password = password;
     }
 
-    public int getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
