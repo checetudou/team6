@@ -8,4 +8,8 @@ import java.util.ArrayList;
 public interface LecturerRepo extends JpaRepository<Lecturers,String> {
     ArrayList<Lecturers> findLecturersByLecturerId(String lecturerId);
     //@Query
+
+	ArrayList<Lecturers> findCoursesByLecturer(String s);
+
+	ArrayList<Lecturers> coursesByLecturer();
 }
