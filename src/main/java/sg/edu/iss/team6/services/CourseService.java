@@ -16,8 +16,8 @@ public interface CourseService {
 
 	void removeCourse(Courses course);
 
-	ArrayList<LectureCanTeach> findCoursesByLecturerId(Integer lecturerId);
+	ArrayList<LectureCanTeach> findCoursesByLecturerId(String lecturerId);
 	
-	ArrayList<StudentAttendCourse> findCoursesByStudentId(Integer studentId);
+	ArrayList<StudentAttendCourse> findCoursesByStudentId(String studentId);
 
 }
