@@ -19,14 +19,14 @@ public abstract class LecturerServiceImpl implements LecturerService{
 	
 	@Override
 	@Transactional
-	public ArrayList <Lecturers> findCoursesByLecturer(String s){
-		return lecturerRepo.findCoursesByLecturer(s);
+	public ArrayList <Lecturers> findCoursesByLecturers(String s){
+		return lecturerRepo.findCoursesByLecturers(s);
 	}
 	
 	@Override
 	@Transactional
-	public ArrayList <Lecturers> coursesByLecturer(){
-		return lecturerRepo.coursesByLecturer();
+	public ArrayList <Lecturers> coursesByLecturer(String lecturerId){
+		return lecturerRepo.coursesByLecturer(lecturerId);
 	}
 	
 	@Override

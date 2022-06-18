@@ -49,8 +49,8 @@ public class LecturerController {
 	@Autowired
 	private CourseService cService;
 	
-	@Autowired
-	private LecturerService lService;
+	//@Autowired
+	//private LecturerService lService;
 	
 	//@Autowired
 	//private CourseValidator cValidator;
@@ -68,7 +68,7 @@ public class LecturerController {
 	
 	/*viewing all courses the lecturer teaches*/
 	@RequestMapping(value = "/lectureCanTeach/list/{id}", method = RequestMethod.GET)
-	public ModelAndView lectureCanTeachList(@PathVariable int id ) {
+	public ModelAndView lectureCanTeachList(@PathVariable String id ) {
 		ModelAndView mav = new ModelAndView("lecture-can-teach");//"LectureCanTeach-list naming to be confirmed
 		ArrayList<LectureCanTeach> lecturerCanTeach= cService.findCoursesByLecturerId(id); 
 		mav.addObject("lectureCanTeach", lecturerCanTeach);
@@ -77,7 +77,7 @@ public class LecturerController {
 	
 	//viewing a student enrolled specific course the lecturer teaches
 	@RequestMapping(value = "/studentAttendCourse/list/{id}", method = RequestMethod.GET)
-	public ModelAndView studentAttendCourse(@PathVariable int id ) {
+	public ModelAndView studentAttendCourse(@PathVariable String id ) {
 		ModelAndView mav = new ModelAndView("student-attend-course");//"StudentAttendCourse-list naming to be confirmed
 		ArrayList<StudentAttendCourse> studentAttendCourse = cService.findCoursesByStudentId(id); 
 		mav.addObject("studentAttendCourse", studentAttendCourse);

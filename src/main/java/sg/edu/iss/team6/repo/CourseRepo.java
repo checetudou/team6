@@ -9,12 +9,12 @@ import sg.edu.iss.team6.model.*;
 import java.util.ArrayList;
 
 public interface CourseRepo extends JpaRepository<Courses,Integer> {
-    @Query("Select c from Courses WHERE c.CourseId = :cid")
-    ArrayList<Courses> findCoursesByCourseId(@Param("cid") Integer cid);
+    @Query("Select c from Courses c WHERE c.courseId = :cid")
+    ArrayList<Courses> findCoursesByCourseId(@Param("cid") String cid);
 
-    @Query("Select lc from LectureCanTeach WHERE lc.LecturerId = :lid")
-	ArrayList<LectureCanTeach> findCoursesByLecturerId(@Param("lid") Integer lecturerId);
+    @Query("Select lc from LectureCanTeach lc WHERE lc.lecturers.lecturerId = :lid")
+	ArrayList<LectureCanTeach> findCoursesByLecturerId(@Param("lid") String lecturerId);
     
-    @Query("Select sc from StudentAttendCourse WHERE sc.studentId = :sid")
-	ArrayList<StudentAttendCourse> findCoursesByStudentId(@Param("sid") Integer lecturerId);
+    @Query("Select sc from StudentAttendCourse sc WHERE sc.students.studentId = :sid")
+	ArrayList<StudentAttendCourse> findCoursesByStudentId(@Param("sid") String studentId);
 }

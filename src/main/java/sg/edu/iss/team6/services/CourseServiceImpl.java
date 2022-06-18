@@ -74,13 +74,13 @@ public class CourseServiceImpl implements CourseService {
 	 */
 	@Override
 	@Transactional
-	public ArrayList<LectureCanTeach> findCoursesByLecturerId(Integer lecturerId) {
+	public ArrayList<LectureCanTeach> findCoursesByLecturerId(String lecturerId) {
 		return courseRepo.findCoursesByLecturerId(lecturerId);
 	}
 	
 	@Override
 	@Transactional
-	public ArrayList<StudentAttendCourse> findCoursesByStudentId(Integer studentId) {
+	public ArrayList<StudentAttendCourse> findCoursesByStudentId(String studentId) {
 		return courseRepo.findCoursesByStudentId(studentId);
 	}
 }
