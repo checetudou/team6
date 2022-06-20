@@ -87,26 +87,26 @@ public class AdminManageCourses {
 		return mav;
 	}
 
-	@RequestMapping(value = "/course/create", method = RequestMethod.POST)
-	public ModelAndView createNewCourse(@ModelAttribute @Validated Courses course, BindingResult result,
-			HttpSession session) {
-		UserSession usession = (UserSession) session.getAttribute("usession");
-		if (result.hasErrors())
-			return new ModelAndView("staff-course-new");
-		ModelAndView mav = new ModelAndView();
-		String message = "New course " + course.getCourseId() + " was successfully created.";
-		System.out.println(message);
-		course.setEmployeeId(usession.getEmployee().getEmployeeId());
-		course.setStatus(CourseEventEnum.SUBMITTED);
-		mav.setViewName("forward:/staff/history");
-		Courses ce = new Courses();
-		ce.setCourseId(course);
-		ce.setEventBy(usession.getEmployee().getEmployeeId());
-		ce.setEventType(CourseEventEnum.SUBMITTED);
-		ce.setTimeStamp(Calendar.getInstance().getTime());
-		adcserv.createCourse(course);
-		return mav;
-	}
+//	@RequestMapping(value = "/course/create", method = RequestMethod.POST)
+//	public ModelAndView createNewCourse(@ModelAttribute @Validated Courses course, BindingResult result,
+//			HttpSession session) {
+//		UserSession usession = (UserSession) session.getAttribute("usession");
+//		if (result.hasErrors())
+//			return new ModelAndView("staff-course-new");
+//		ModelAndView mav = new ModelAndView();
+//		String message = "New course " + course.getCourseId() + " was successfully created.";
+//		System.out.println(message);
+//		course.setEmployeeId(usession.getEmployee().getEmployeeId());
+//		course.setStatus(CourseEventEnum.SUBMITTED);
+//		mav.setViewName("forward:/staff/history");
+//		Courses ce = new Courses();
+//		ce.setCourseId(course);
+//		ce.setEventBy(usession.getEmployee().getEmployeeId());
+//		ce.setEventType(CourseEventEnum.SUBMITTED);
+//		ce.setTimeStamp(Calendar.getInstance().getTime());
+//		adcserv.createCourse(course);
+//		return mav;
+//	}
 
 	
 	
@@ -154,17 +154,17 @@ public class AdminManageCourses {
 	}
 
 	//for pagination
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter printWriterOut=response.getWriter();
-		String stringPageNumber=request.getParameter("page");
-		int paginationPageID=Integer.parseInt(stringPageNumber);
-		int toalCount=pageNumbers;
-		if(paginationPageID==1){}
-		else{
-		paginationPageID=paginationPageID-1;
-		paginationPageID=paginationPageID*toalCount+1;
-		}
-		}
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		response.setContentType("text/html");
+//		PrintWriter printWriterOut=response.getWriter();
+//		String stringPageNumber=request.getParameter("page");
+//		int paginationPageID=Integer.parseInt(stringPageNumber);
+//		int toalCount=pageNumbers;
+//		if(paginationPageID==1){}
+//		else{
+//		paginationPageID=paginationPageID-1;
+//		paginationPageID=paginationPageID*toalCount+1;
+//		}
+//		}
 
 }
