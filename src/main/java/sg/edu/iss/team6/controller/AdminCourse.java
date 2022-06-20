@@ -1,4 +1,4 @@
-package sg.edu.iss.team6.controllers;
+package sg.edu.iss.team6.controller;
 
 import java.util.List;
 

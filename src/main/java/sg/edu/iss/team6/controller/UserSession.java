@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import sg.edu.iss.team6.model.Students;
+import sg.edu.iss.team6.model.User;
 import sg.edu.iss.team6.model.Lecturers;
 
 
@@ -11,7 +12,7 @@ public class UserSession implements Serializable {
 	
 
 	private static final long serialVersionUID = 1L;
-	//private User user = null;
+	private User user = null;
 	private Lecturers lecturerId = null;
 	private Students studentId = null;
 	private ArrayList<Lecturers> lecturerList = null;
@@ -20,15 +21,21 @@ public class UserSession implements Serializable {
 	public UserSession() {
 		super();
 	}
-   //String sessionId,
-	public UserSession( /*User user,*/ Lecturers lecturer, Students student, ArrayList<Lecturers> lecturerList, ArrayList<Students> studentList) {
+  // String sessionId,
+	public UserSession( User user, Lecturers lecturer, Students student, ArrayList<Lecturers> lecturerList, ArrayList<Students> studentList) {
 		super();
 		//this.sessionId = sessionId;
-		//this.user = user;
+		this.user = user;
 		this.lecturerId = lecturer;
 		this.studentId = student;
 		this.lecturerList = lecturerList;
 		this.studentList = studentList;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public Lecturers getLecturerId() {
 		return lecturerId;
