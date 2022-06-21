@@ -24,30 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface StudentRepo extends JpaRepository<Students,String> {
-
-	@Query("select c from Courses c where c in (select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId)")
-
-    
-	@Query("select s from Students s where s.Id like %?1%")
-	ArrayList<Students> findStudentsByStudentId(String studentId);
-    
-	@Query("select s from Students s where s.Name like %?1%")
-    List<Students> findStudentsByStudentName(String Name);
-	
-	@Query("select s from Students s where s.Id or s.Name like %?1%")
-	Courses getCurrentSize (int count);
-
-	List<Students> getStudentById(String id);
-		
-
-
-    //@Query
-//    ArrayList<Students> findstudentsByStudentId(String studentId);
-    
-    
-       
-       @Query("select c from Courses c where c not in (select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId)")
-       ArrayList<Courses> findAvailableCoursesByStudentId(@Param("sid") String studentId);
+      
+    @Query("select c from Courses c where c not in (select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId)")
+    ArrayList<Courses> findAvailableCoursesByStudentId(@Param("sid") String studentId);
 
 
 //       @Query("Select c.size from Courses c WHERE c.courseId = :cid")
@@ -79,26 +58,14 @@ public interface StudentRepo extends JpaRepository<Students,String> {
        ArrayList<Courses> findAvailableCoursesByStudentId(@Param("sid") String studentId);
        
 
-    
-	@Query("select s from Students s where s.Id like %?1%")
-	ArrayList<Students> findStudentsByStudentId(String studentId);
-    
-	@Query("select s from Students s where s.Name like %?1%")
-    List<Students> findStudentsByStudentName(String Name);
-	
 	@Query("select s from Students s where s.Id or s.Name like %?1%")
 	Courses getCurrentSize (int count);
-
-	List<Students> getStudentById(String id);
-		
+	
+	@Query("select s from Students s where s.Id like %?1%")
+	ArrayList<Students> getStudentProfileById(String id);
+	
+	static Students saveAndFlush(String id) {
+		return null;
+	}
 }
 
-
-//Admin's
-//@Query("select s from Students s where s.Id like %?1%")
-//ArrayList<Students> getStudentProfileById(String id);
-//
-//static Students saveAndFlush(String id) {
-//	// TODO Auto-generated method stub
-//	return null;
-//}
