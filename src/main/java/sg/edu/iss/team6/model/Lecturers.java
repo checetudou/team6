@@ -1,7 +1,6 @@
 package sg.edu.iss.team6.model;
 
 import javax.persistence.*;
-import javax.xml.transform.sax.SAXResult;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -41,7 +40,7 @@ public class Lecturers {
         this.email = email;
         this.photo = photo;
         this.password = password;
-        this.adminOrNot = adminOrNot;
+        this.adminOrNot = adminOrNot; true
     }
 
     public Lecturers(String firstName, String lastName, String email, byte[] photo, String password, boolean adminOrNot) {

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: html_head"/>
+
+<body>
+	<div th:replace="fragments/layout.html :: menu"/>
+	<div th:replace="fragments/layout.html :: header"/> 
+	<h3>Add New Lecturer</h3>
+	<!--form start-->
+	<form action="#" th:action="@{/admin/employee/create}" th:object="${employee}" method="post">
+		<table>
+			<tbody>
+				<tr> <!--Input lecturer firstname-->
+					<td><span th:text="#{fieldLabel.employeeId}"></span></td>
+					<td>
+						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
+				</tr>
+				<tr> <!--Input lecturer lastname-->
+					<td><span th:text="#{fieldLabel.employeeId}"></span></td>
+					<td>
+						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
+				</tr>
+				<tr> <!--Input lecturer email-->
+					<td><span th:text="#{fieldLabel.managerId}"></span></td>
+					<td>
+						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
+				</tr>
+				<tr><!--dropdown menu to decide if admin or not-->
+					<td><span th:text="#{fieldLabel.managerId}"></span></td>
+					<td>
+						<fieldset>
+							<select th:field="*{managerId}"><option th:each="manager : ${eidlist}" th:value="${manager}" th:text="${manager}">List</option></select>
+						</fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></td>
+				</tr>
+				<tr>
+					<td>
+						<fieldset><input type="submit" value="Create" class="blcass" /></fieldset>
+					</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+</body>
+
+</html>

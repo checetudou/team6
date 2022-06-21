@@ -1,4 +1,4 @@
-package sg.edu.iss.team6.service;
+package sg.edu.iss.team6.services;
 
 import java.util.List;
 import java.util.Optional;
