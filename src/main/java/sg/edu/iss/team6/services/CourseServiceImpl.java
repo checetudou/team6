@@ -35,7 +35,7 @@ public class CourseServiceImpl implements CourseService {
 	 */
 	@Override
 	@Transactional
-	public Courses findCourse(Integer courseId) {
+	public Courses findCourse(String courseId) {
 		return courseRepo.findById(courseId).orElse(null);
 
 	}
@@ -74,7 +74,7 @@ public class CourseServiceImpl implements CourseService {
 	 */
 	@Override
 	@Transactional
-	public ArrayList<LectureCanTeach> findCoursesByLecturerId(String lecturerId) {
+	public ArrayList<Courses> findCoursesByLecturerId(String lecturerId) {
 		return courseRepo.findCoursesByLecturerId(lecturerId);
 	}
 	

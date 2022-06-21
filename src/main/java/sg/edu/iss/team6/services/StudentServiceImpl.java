@@ -13,35 +13,33 @@ import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.repo.StudentRepo;
 
 @Service
-public abstract class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService{
 	
 	@Resource
 	private StudentRepo StudentRepo;
-	
-	
-	
+
 	@Override
 	@Transactional
 	public ArrayList<Courses> findAvailableCoursesByStudentId(String studentId) {
 		return StudentRepo.findAvailableCoursesByStudentId(studentId);
 	}
 	
-	@Override
-	@Transactional
-	public int getCourseCapacityById(String courseId) {
-		return StudentRepo.getCourseCapacityById(courseId);
-	}
-	
-	@Override
-	@Transactional
-	public int getActualEnrolledById(String courseId) {
-		return StudentRepo.getActualEnrolledById(courseId);
-	}
-	
-	@Override
-	@Transactional
-	public Courses findCourseByCourseId(String courseId) {
-		return StudentRepo.findCourseByCourseId(courseId);
-	}
+//	@Override
+//	@Transactional
+//	public int getCourseCapacityById(String courseId) {
+//		return StudentRepo.getCourseCapacityById(courseId);
+//	}
+//
+//	@Override
+//	@Transactional
+//	public int getActualEnrolledById(String courseId) {
+//		return StudentRepo.getActualEnrolledById(courseId);
+//	}
+//
+//	@Override
+//	@Transactional
+//	public Courses findCourseByCourseId(String courseId) {
+//		return StudentRepo.findCourseByCourseId(courseId);
+//	}
 
 }

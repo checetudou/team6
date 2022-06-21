@@ -128,7 +128,7 @@ public class AdminManageCourses {
 		return null;
 	}
 
-	@PostMapping ("/searchCourse")
+	@PostMapping ("/searchCourseid")
 	public String searchCourseById (@Param("id") String id, Model model){
 		List<Courses> listCourse = adcserv.returnCourseById(id);
 		model.addAttribute("listCourse", listCourse);
@@ -141,7 +141,7 @@ public class AdminManageCourses {
 		return null;
 	}
 
-	@PostMapping ("/searchCourse")
+	@PostMapping ("/searchCoursename")
 	public String searchCourseByName (@Param("name") String name, Model model){
 		List<Courses> listCourse = adcserv.returnCourseByName(name);
 		model.addAttribute("listCourse", listCourse);

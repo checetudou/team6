@@ -8,20 +8,21 @@ import javax.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import sg.edu.iss.team6.model.Lecturers; 
+import sg.edu.iss.team6.model.Courses;
+import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.repo.*;
 
 @Service
-public abstract class LecturerServiceImpl implements LecturerService{
+public class LecturerServiceImpl implements LecturerService{
 	
 	@Resource
 	private LecturerRepo lecturerRepo;
 	
-	@Override
-	@Transactional
-	public ArrayList <Lecturers> findCoursesByLecturers(String s){
-		return lecturerRepo.findCoursesByLecturers(s);
-	}
+//	@Override
+//	@Transactional
+//	public ArrayList<Courses> findCoursesByLecturers(String lecturerId){
+//		return LecturerRepo.findCoursesByLecturers(lecturerId);
+//	}
 	
 	@Override
 	@Transactional

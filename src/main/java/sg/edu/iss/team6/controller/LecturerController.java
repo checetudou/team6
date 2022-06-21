@@ -70,8 +70,8 @@ public class LecturerController {
 	@RequestMapping(value = "/lectureCanTeach/list/{id}", method = RequestMethod.GET)
 	public ModelAndView lectureCanTeachList(@PathVariable String id ) {
 		ModelAndView mav = new ModelAndView("lecture-can-teach");//"LectureCanTeach-list naming to be confirmed
-		ArrayList<LectureCanTeach> lecturerCanTeach= cService.findCoursesByLecturerId(id); 
-		mav.addObject("lectureCanTeach", lecturerCanTeach);
+		ArrayList<Courses> courses= cService.findCoursesByLecturerId(id);
+		mav.addObject("courses", courses);
 		return mav;
 	}
 	

@@ -13,19 +13,20 @@ import java.util.ArrayList;
 
 public interface StudentRepo extends JpaRepository<Students,String> {
     //@Query
-    ArrayList<Students> findstudentsByStudentId(String studentId);
+//    ArrayList<Students> findstudentsByStudentId(String studentId);
     
     
        
-       @Query("Select c from Courses c WHERE c.StudentAttendCourse.students.studentId != :sid")
-       ArrayList<Courses> findAvailableCoursesByStudentId(String studentId);
-       
-       @Query("Select c.size from Courses c WHERE c.courseId == :cid")
-       int getCourseCapacityById(String courseId);
-       
-       @Query("Select c.actualEnroll from Courses c WHERE c.courseId == :cid")
-       int getActualEnrolledById(String courseId);
-       
-       @Query("Select c from Courses c WHERE c.courseId == :cid")
-       Courses findCourseByCourseId(String courseId);
+       @Query("select c from Courses c where c not in (select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId)")
+       ArrayList<Courses> findAvailableCoursesByStudentId(@Param("sid") String studentId);
+
+
+//       @Query("Select c.size from Courses c WHERE c.courseId = :cid")
+//       int getCourseCapacityById(String courseId);
+//
+//       @Query("Select c.actualEnroll from Courses c WHERE c.courseId = :cid")
+//       int getActualEnrolledById(String courseId);
+//
+//       @Query("Select c from Courses c WHERE c.courseId = :cid")
+//       Courses findCourseByCourseId(String courseId);
 }
