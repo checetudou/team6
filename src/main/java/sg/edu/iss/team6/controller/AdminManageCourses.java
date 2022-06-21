@@ -34,10 +34,10 @@ public class AdminManageCourses {
 	private AdminManageCourses adcserv;
 	
 
-	@RequestMapping("/admin")
-	public String homePage (Model model){
-		return "index";  //index page should contain links to the different functions
-	}
+//	@RequestMapping("/admin")
+//	public String homePage (Model model){
+//		return "index";  //index page should contain links to the different functions
+//	}
 	
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
@@ -46,7 +46,7 @@ public class AdminManageCourses {
 
 	}
 	
-	@RequestMapping("/course")
+	@RequestMapping("/admin/course")
 	public String allCoursesPage (Model model){
 		model.addAttribute("listCourse", adcserv.getAllCourses());
 		return "courseindex";
