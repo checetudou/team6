@@ -57,15 +57,13 @@ public interface CourseRepo extends JpaRepository<Courses,String> {
 	@Query("select c from Courses c where c.courseId like %?1%")
 	List<Courses> findCoursesByCourseId(String courseId);
     
-//	@Query("select c from Courses c where c.courseName like %?1%")
-//    List<Courses> findCoursesByCourseName(String courseName);
 		
 	@Query("select c.size from Courses c where c.courseId like %?1%")
 	Courses getAllowedSize (int count);
 
 	Optional<Courses> findByName(String name);
 
-}
+
 
 //Admin's
 //@Query("select c from Courses c where c.courseId like %?1%")
@@ -75,8 +73,8 @@ public interface CourseRepo extends JpaRepository<Courses,String> {
 //		+ "courses.actualEnroll,courses.description)")
 //void addCourse(Courses courses);
 //
-//@Query("update Courses set(:courses.courseName,courses.size,"
-//		+ "courses.actualEnroll,courses.description) where courses.courseId = courseId")
-//void pp(Courses course); (dummy to resolve override)
-//
+@Query("update Courses set(:courses.courseName,courses.size,"
+		+ "courses.actualEnroll,courses.description) where courses.courseId = courseId")
+void updateCourse(Courses course);
 
+}

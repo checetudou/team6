@@ -8,12 +8,15 @@ import sg.edu.iss.team6.model.Lecturers;
 
 @Service
 public interface AdminLecturer {
-	List<AdminLecturer> getAllLecturer();
-	Lecturers getLecturer (String Name);
-	Lecturers addLecturer (String Name);
+	
+	//Lecturer profile
+	List<Lecturers> getAllLecturer();
+	Lecturers getLecturer (String name);
+	// Lecturers addLecturer (String name); -> in controller
 	void saveLecturer (Lecturers lecturer);
-	void deleteLecturerByName (String Name);
-	void deleteLecturerById (String Id);
-	List<Lecturers> returnLecturerByName (String Name);
+	void deleteLecturerById (String lecturerId);
+	List<Lecturers> returnLecturerById (String name);
+	// update Lecturer -> in controller
+	
 
 }
