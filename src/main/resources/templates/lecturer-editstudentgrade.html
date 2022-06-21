@@ -1,5 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<<<<<<< HEAD
+<<<<<<< HEAD
+<head>
+<head th:replace="fragments/layout.html :: html_head"/>
+<body>
+	<div th:replace="fragments/layout.html :: menu"/>
+	<div th:replace="fragments/layout.html :: header"/> 
+	<h3>Grade Student page</h3>
+
+	<form action="#" th:action="@{/lecturers/student/grade/}+${studentattendcourse.studentId}" th:object="${studentid}"
+		method="post">
+		<table>
+			<tbody>
+				<tr>
+
+					<td><span th:text="#{fieldLabel.studentId}"></span></td>
+					<td>
+						<fieldset> <input type="text" th:field="*{studentId}" readonly="readonly" /></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}"></td>
+
+				</tr>
+				<tr>
+					<td><span th:text="#{fieldLabel.managerInCharge}"></span></td>
+					<td>
+						<fieldset> <select th:field="*{managerInCharge}">
+								<option th:each="manager : ${studentidlist}" th:value="${grade}" th:text="${grade}">List
+								</option> 
+							</select> </fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}"></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Update" class="blcass" /></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+</body>
+
+=======
+=======
+>>>>>>> main
 	<head th:replace="fragments/layout.html :: html_head"/>
 	<body>
 		<div th:replace="fragments/layout.html :: menu"/>
@@ -38,4 +84,8 @@
 			</table>
 		</form>
 	</body>
+<<<<<<< HEAD
+>>>>>>> 924b490 (random commit)
+=======
+>>>>>>> main
 </html>

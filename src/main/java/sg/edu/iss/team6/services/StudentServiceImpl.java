@@ -3,6 +3,7 @@ package sg.edu.iss.team6.services;
 import java.util.ArrayList;
 
 
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -10,15 +11,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.StudentAttendCourse;
+import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.repo.StudentRepo;
 
 @Service
-public abstract class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService{
 	
 	@Resource
 	private StudentRepo StudentRepo;
 	
+	@Override
+	@Transactional
+	public ArrayList<Students> findstudentsByStudentId(String studentId){
+		return StudentRepo.findstudentsByStudentId(studentId);
+	}
 	
+
+	@Transactional
+	public StudentAttendCourse findStudentByStudentId(String studentId){
+		return StudentRepo.findStudentByStudentId(studentId);
+	}
 	
 	@Override
 	@Transactional

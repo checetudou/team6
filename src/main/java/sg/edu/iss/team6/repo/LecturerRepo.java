@@ -4,7 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 import org.springframework.data.repository.query.Param;
+>>>>>>> main
 >>>>>>> main
 
 import sg.edu.iss.team6.model.Lecturers;
@@ -25,5 +28,9 @@ public interface LecturerRepo extends JpaRepository<Lecturers,String> {
 
     @Query("Select l from Lecturers l WHERE l.lecturerId = :xyz")
 	ArrayList<Lecturers> coursesByLecturer(@Param("xyz") String lecturerId);
+<<<<<<< HEAD
+>>>>>>> 924b490 (random commit)
+=======
+>>>>>>> main
 >>>>>>> main
 }
