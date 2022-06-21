@@ -15,8 +15,8 @@ import sg.edu.iss.team6.model.Students;
 public interface UserRepo extends JpaRepository<Lecturers, String> {
 
 	@Query("SELECT s FROM Students s  WHERE s.studentId=:stuid")
-	ArrayList<Students> findStudentBystuID(@Param("stuid") String stuid);
+	Students findStudentBystuID(@Param("stuid") String stuid);
 	
 	@Query("SELECT l FROM Lecturers l  WHERE l.lecturerId=:lecid")
-	ArrayList<Lecturers> findLecturerBylecID(@Param("lecid") String lecid);
+	Lecturers findLecturerBylecID(@Param("lecid") String lecid);
 }

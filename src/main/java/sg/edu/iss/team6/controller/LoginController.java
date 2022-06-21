@@ -1,104 +1,71 @@
-
-
-
 package sg.edu.iss.team6.controller;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.Students;
-import sg.edu.iss.team6.service.UserService;
+import sg.edu.iss.team6.model.User;
+import sg.edu.iss.team6.services.UserService;
+import sg.edu.iss.team6.validators.UserValidator;
 
 @Controller
-
 public class LoginController {
+    
 	@Autowired
 	private UserService uservice;
+
+	@Autowired
+	private UserValidator uVal;
 	
+	@InitBinder("user")
+	private void initDepartmentBinder(WebDataBinder binder) {
+		binder.addValidators(uVal);
+	}
+
 	@RequestMapping(value = "/")
 	public String student(Model model) {
-		model.addAttribute("Student", new Students());
+		model.addAttribute("user", new User());
 		return "login";
 	}
-
-	@RequestMapping(value = "/home")
-	public String lecturer(Model model) {
-		model.addAttribute("Lecturer", new Lecturers());
-		return "login";
-	}
-
-	@RequestMapping(value = "/home")
-	public String Admin(Model model) {
-		model.addAttribute("Admin", new Lecturers());
-		return "login";
-	}
-	@RequestMapping(value = "/home/authenticate")
-	public String authenticate(@ModelAttribute("student") Students student, BindingResult bindingResult, 
-			Model model,HttpSession session) 
-	{
-		UserSession usession = new UserSession();
-		if (bindingResult.hasErrors()) {
-			return "login";
-		}else
-		{
-			Students s = uservice.authenticateStudents(student.getStudentId(), student.getPassword());
-			usession.setStudent(s);
-
-		}
-		session.setAttribute("student", usession);
-		return "null";
-	}
-	
-	@RequestMapping(value = "/home/authenticate")
-	public String authenticate(@ModelAttribute("lecturer")Lecturers lecturer, BindingResult bindingResult,
-			Model model, HttpSession session) {
-		UserSession usession = new UserSession();
-		if(bindingResult.hasErrors()) {
-			return "login";
-		}else
-		{
-			Lecturers l = uservice.authenLecturers(lecturer.getLecturerId(), lecturer.getPassword());
-			usession.setLecturerId(l);
-			
-			Lecturers m = uservice.authenLecturers(lecturer.getLecturerId(), lecturer.getPassword());
-			usession.setAdminId(m);
-			
-		}
-		session.setAttribute("lecturer", usession);
-		return "null";
-	}
-	
-		//if (("nusstu")){
-	//			Students studentFromDatabase = uservice.findStudentBystuID(studentId);
-//				authen(studentfFromDatabase.stuid, student.password) {
-//				if studentFromDatabase.password == student.password {
-//						allow login;
-//					}
-//				}
-				
-	//		}
-//			else contains nusstf && lecturer.adminornot==true
-			
-			
-
-//			usession.setLecturerId(lservice.findLecturerById(usession.getLecturerId().getPassword()));
-//			ArrayList<Lecturers> lecturers = lservice.findAllLecturers(usession.getLecturerId().getLectureCanTeaches());
-//			if (lecturers !=) {
-////				usession.setSubordinates(subordinates);
-////			}
-////			session.setAttribute("usession", usession);
-//			return "null";
-////		}
-
-	//}
 
 	@RequestMapping(value = "/about")
 	public String home() {
 		return "about";
+	}
+    @RequestMapping(value = "/contact")
+	public String contact() {
+		return "contact";
+	}
+
+	@RequestMapping(value = "/home/authenticate")
+	public String authenticate(@ModelAttribute("user") User user, BindingResult bindingResult, Model model, HttpSession session) {
+		if (bindingResult.hasErrors()) {
+			return "login";
+		}
+		else {
+            UserSession usession = new UserSession();
+			if ((user.getUserId().substring(0,8).equals("nusstu/"))) {
+				Students s = uservice.findStudentBystuID(user.getUserId().substring(8));
+                usession.setStudent(s);
+			}
+			if ((user.getUserId().substring(0,8).equals("nusstf/"))) {
+				Lecturers l = uservice.findLecturerBylecID(user.getUserId().substring(8));
+                usession.setLecturer(l);
+                usession.setAdminOrNot(l.isAdminOrNot());        
+			}
+            session.setAttribute("user", usession);
+		}
+		return "home";
 	}
 
 }
