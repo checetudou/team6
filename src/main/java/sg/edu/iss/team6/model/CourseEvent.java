@@ -3,6 +3,7 @@ package sg.edu.iss.team6.model;
 import java.util.Date;
 
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,14 +23,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import sg.edu.iss.team6.helper.CourseEventEnum;
 
-/**
- * CourseEvent class
- *
- * @version $Revision: 1.0
- * @author Suria
- * 
- */
-
 @Entity
 @Table(name = "courseevent")
 @Data
@@ -43,7 +36,7 @@ public class CourseEvent {
 	
 	@Column(name = "timestamp")
 	private Date timeStamp;
-	@Column(name = "eventtype", columnDefinition = "ENUM('5', '4', '3', '2', '1')")
+	@Column(name = "eventtype", columnDefinition = "ENUM('A', 'B', 'C', 'D', 'Pass', 'Fail')")
 	@Enumerated(EnumType.STRING)
 	private CourseEventEnum eventType;
 	@Column(name = "eventby")

@@ -1,6 +1,7 @@
 package sg.edu.iss.team6.model;
 
 import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;

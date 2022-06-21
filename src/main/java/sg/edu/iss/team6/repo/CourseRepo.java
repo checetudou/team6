@@ -15,7 +15,7 @@ public interface CourseRepo extends JpaRepository<Courses,Integer> {
     @Query("Select lc from LectureCanTeach lc WHERE lc.lecturers.lecturerId = :lid")
 	ArrayList<LectureCanTeach> findCoursesByLecturerId(@Param("lid") String lecturerId);
     
-    @Query("Select sc from StudentAttendCourse sc WHERE sc.students.studentId = :sid")
+    @Query("select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId")
 	ArrayList<StudentAttendCourse> findCoursesByStudentId(@Param("sid") String studentId);
     
  
