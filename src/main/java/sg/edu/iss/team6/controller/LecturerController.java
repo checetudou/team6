@@ -1,19 +1,15 @@
 package sg.edu.iss.team6.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
-//import java.util.Calendar;
-//import java.util.HashMap;
-//import java.util.List;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
-//import javax.servlet.http.HttpSession;
-//import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,23 +19,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-/*
-import sg.edu.iss.team6.helper.Approve;
 
+import sg.edu.iss.team6.helper.Grade;
 import sg.edu.iss.team6.model.CourseEvent;
 import sg.edu.iss.team6.helper.CourseEventEnum;
-import sg.edu.iss.team6.exception.CourseNotFound;
-*/
-
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.LectureCanTeach;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.StudentAttendCourse;
-import sg.edu.iss.team6.services.LecturerService;
+
 import sg.edu.iss.team6.services.CourseService;
+
+import sg.edu.iss.team6.services.StudentService;
+import sg.edu.iss.team6.controller.UserSession;
+
 import sg.edu.iss.team6.controller.UserSession;
 
 import sg.edu.iss.team6.repo.LecturerRepo;
+import sg.edu.iss.team6.service.CourseService;
+import sg.edu.iss.team6.service.LecturerService;
 import sg.edu.iss.team6.repo.CourseRepo;
 
 @Controller
@@ -49,23 +47,15 @@ public class LecturerController {
 	@Autowired
 	private CourseService cService;
 	
-	//@Autowired
-	//private LecturerService lService;
-	
-	//@Autowired
-	//private CourseValidator cValidator;
-	
-	//@Autowired
-	//private CourseEventService ceService;
-	
-	//@Autowired
-	//private StudentService sService;
+	@Autowired
+	private StudentService sService;
 
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		
 	}
 	
+
 	/*viewing all courses the lecturer teaches*/
 	@RequestMapping(value = "/lectureCanTeach/list/{id}", method = RequestMethod.GET)
 	public ModelAndView lectureCanTeachList(@PathVariable String id ) {
@@ -75,12 +65,43 @@ public class LecturerController {
 		return mav;
 	}
 	
-	//viewing a student enrolled specific course the lecturer teaches
-	@RequestMapping(value = "/studentAttendCourse/list/{id}", method = RequestMethod.GET)
-	public ModelAndView studentAttendCourse(@PathVariable String id ) {
-		ModelAndView mav = new ModelAndView("student-attend-course");//"StudentAttendCourse-list naming to be confirmed
-		ArrayList<StudentAttendCourse> studentAttendCourse = cService.findCoursesByStudentId(id); 
-		mav.addObject("studentAttendCourse", studentAttendCourse);
+	@RequestMapping(value = "/student/grade/{id}", method = RequestMethod.POST)
+	public ModelAndView gradeStudent(@ModelAttribute("grade") @Valid Grade grade,BindingResult result, @PathVariable Integer id, HttpSession session) {
+		if (result.hasErrors())
+			return new ModelAndView("lecturer-coursestudentlist");
+		String studentid = id.toString();
+		StudentAttendCourse sac = sService.findStudentByStudentId(studentid);
+		CourseEvent ce = new CourseEvent();
+		
+		if (CourseEventEnum.A.toString() != null) {
+			ce.setEventType(CourseEventEnum.A);
+			sac.setGrade(CourseEventEnum.A);
+		} 
+		
+		else if (CourseEventEnum.B.toString() != null) {
+			ce.setEventType(CourseEventEnum.B);
+			sac.setGrade(CourseEventEnum.B);
+		} 
+		else if (CourseEventEnum.C.toString() != null) {
+			ce.setEventType(CourseEventEnum.C);
+			sac.setGrade(CourseEventEnum.C);
+		} 
+		else if (CourseEventEnum.D.toString() != null) {
+			ce.setEventType(CourseEventEnum.D);
+			sac.setGrade(CourseEventEnum.D);
+		} 
+		else if (CourseEventEnum.P.toString() != null) {
+			ce.setEventType(CourseEventEnum.P);
+			sac.setGrade(CourseEventEnum.P);
+		} 			
+		else {
+			ce.setEventType(CourseEventEnum.F);
+			sac.setGrade(CourseEventEnum.F);
+		}
+
+		ModelAndView mav = new ModelAndView("forward:lecturer-coursestudentlist");
+		String message = "Grade has been successfully updated.";
+		System.out.println(message);
 		return mav;
 	}
 	

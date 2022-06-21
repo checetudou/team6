@@ -25,11 +25,13 @@ public interface StudentService {
 //	ArrayList<Students> findAllStudents();
 	ArrayList<Courses> findAvailableCoursesByStudentId(String studentId);
 
+
 //	int getCourseCapacityById(String courseId);
 //
 //	int getActualEnrolledById(String courseId);
 //
 //	Courses findCourseByCourseId(String courseId);
+
 	
 	
 	

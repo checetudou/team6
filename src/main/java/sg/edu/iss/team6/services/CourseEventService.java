@@ -1,4 +1,4 @@
-package sg.edu.iss.team6.services;
+package sg.edu.iss.team6.service;
 
 import java.util.ArrayList;
 

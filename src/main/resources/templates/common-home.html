@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/layout.html :: html_head"/>
+	<body>
+		<div th:replace="fragments/layout.html :: menu"/>
+		<div th:replace="fragments/layout.html :: header"/> 
+		<h1>Welcome!</h1>
+			<img src="../../static/image/cats.gif" width="5%" th:src="@{/image/cats.gif}" />
+		<p>
+			The K-On! animated television series is based on the manga series of the same name written and illustrated by Kakifly.
+			The episodes, produced by the animation studio Kyoto Animation,[1] are directed by Naoko Yamada, written by Reiko Yoshida, 
+			and features character design by Yukiko Horiguchi who based the designs on Kakifly's original concept. 
+
+			The story follows four Japanese high school girls who join their school's light music club to try to save it from being abolished. 
+			However, they are the only four members of the club, one of which has little experience with guitar playing. 
+		</p>
+	</body>
+</html>

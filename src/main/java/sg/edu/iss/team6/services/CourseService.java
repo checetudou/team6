@@ -1,4 +1,4 @@
-package sg.edu.iss.team6.services;
+package sg.edu.iss.team6.service;
 
 import java.util.ArrayList;
 
@@ -16,8 +16,8 @@ public interface CourseService {
 
 	void removeCourse(Courses course);
 
-
 	ArrayList<Courses> findCoursesByLecturerId(String lecturerId);
+
 	
 	ArrayList<StudentAttendCourse> findCoursesByStudentId(String studentId);
 
