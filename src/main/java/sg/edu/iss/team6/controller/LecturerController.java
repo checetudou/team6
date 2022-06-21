@@ -3,13 +3,22 @@ package sg.edu.iss.team6.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+=======
+
+
+//import java.util.Calendar;
+//import java.util.HashMap;
+//import java.util.List;
+
+//import javax.servlet.http.HttpSession;
+//import javax.validation.Valid;
+>>>>>>> e27201f (testing)
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,10 +36,18 @@ import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.LectureCanTeach;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.StudentAttendCourse;
+<<<<<<< HEAD
 import sg.edu.iss.team6.services.CourseService;
 import sg.edu.iss.team6.services.StudentService;
 import sg.edu.iss.team6.controller.UserSession;
 
+=======
+import sg.edu.iss.team6.controller.UserSession;
+
+import sg.edu.iss.team6.repo.LecturerRepo;
+import sg.edu.iss.team6.service.CourseService;
+import sg.edu.iss.team6.service.LecturerService;
+>>>>>>> e27201f (testing)
 import sg.edu.iss.team6.repo.CourseRepo;
 
 @Controller
