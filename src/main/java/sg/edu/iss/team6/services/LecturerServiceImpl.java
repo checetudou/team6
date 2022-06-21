@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.repo.LecturerRepo;
+
+@Service
 public class LecturerServiceImpl implements LecturerService{
 	
 	@Resource

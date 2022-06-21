@@ -1,44 +1,28 @@
 package sg.edu.iss.team6.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import sg.edu.iss.team6.helper.CourseEventEnum;
 import sg.edu.iss.team6.helper.Grade;
 import sg.edu.iss.team6.model.CourseEvent;
-import sg.edu.iss.team6.helper.CourseEventEnum;
 import sg.edu.iss.team6.model.Courses;
-import sg.edu.iss.team6.model.LectureCanTeach;
-import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.StudentAttendCourse;
-
 import sg.edu.iss.team6.services.CourseService;
-
 import sg.edu.iss.team6.services.StudentService;
-import sg.edu.iss.team6.controller.UserSession;
-
-import sg.edu.iss.team6.controller.UserSession;
-
-import sg.edu.iss.team6.repo.LecturerRepo;
-import sg.edu.iss.team6.service.CourseService;
-import sg.edu.iss.team6.service.LecturerService;
-import sg.edu.iss.team6.repo.CourseRepo;
 
 @Controller
 @RequestMapping(value = "/lecturers")
@@ -52,7 +36,7 @@ public class LecturerController {
 
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
-		
+		//TODO
 	}
 	
 
