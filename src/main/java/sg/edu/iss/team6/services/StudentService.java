@@ -32,7 +32,7 @@ public interface StudentService {
 //
 //	int getActualEnrolledById(String courseId);
 //
-//	Courses findCourseByCourseId(String courseId);
+	Courses findCourseByCourseId(String courseId);
 
 	
 	

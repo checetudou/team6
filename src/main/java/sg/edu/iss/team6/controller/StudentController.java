@@ -1,5 +1,7 @@
 package sg.edu.iss.team6.controller;
 
+import java.util.Calendar;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Courses;
+import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.services.CourseService;
+import sg.edu.iss.team6.services.StudentAttendCourseService;
 import sg.edu.iss.team6.services.StudentService;
+import sg.edu.nus.cats.helper.CourseEventEnum;
+import sg.edu.nus.cats.model.CourseEvent;
 
 @Controller
 @RequestMapping(value="/student")
@@ -25,13 +31,15 @@ public class StudentController {
 	@Autowired
 	private CourseService cService;
 	
+	@Autowired
+	private StudentAttendCourseService sacService;
+	
 	@RequestMapping(value = "/grades")
 	public String studentGrades(HttpSession session, Model model) {
 		UserSession usession = (UserSession) session.getAttribute("usession");
-		//ModelAndView mav = new ModelAndView("login");
+		
 		if (usession.getStudent() != null) {
 			
-			//mav = new ModelAndView("student-grades");
 			if (cService.findCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
 				model.addAttribute("cGrades", cService.findCoursesByStudentId(usession.getStudent().getStudentId()));
 			}
@@ -39,20 +47,18 @@ public class StudentController {
 		}
 		return "forward:/home/login";
 	}
-
+	
 	@RequestMapping(value = "/courses")
 	public String studentCourses(HttpSession session, Model model) {
 		UserSession usession = (UserSession) session.getAttribute("usession");
-		//ModelAndView mav = new ModelAndView("login");
 		if (usession.getStudent() != null) {
-
-			//mav = new ModelAndView("staff-course-history");
-			if (cService.findCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
+			
+			if (sService.findAvailableCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
 				model.addAttribute("cCourses", sService.findAvailableCoursesByStudentId(usession.getStudent().getStudentId()));
 			}
 			return "student-available-courses";
 		}
-		return "common-login";
+		return "forward:/home/login";
 	}
 
 	
@@ -60,10 +66,18 @@ public class StudentController {
 	public String enrollCourse(@PathVariable String id, HttpSession session) {
 		
 		UserSession usession = (UserSession) session.getAttribute("usession");
-		Courses course = cService.findCourse(id);
-		if (course.getActualEnroll() < course.getSize()){
+		Courses course = sService.findCourseByCourseId(id);
+		
+		if (course.getActualEnroll() < course.getSize()) {
 			course.setActualEnroll(course.getActualEnroll() + 1);
+			StudentAttendCourse SAC = new StudentAttendCourse();
+			SAC.setStudents(usession.getStudent());
+			SAC.setCourses(course);
+			sacService.createStudentAttendCourse(SAC);
+			cService.changeCourse(course);
+		 
 		}
+		
 		
 		cService.changeCourse(course);
 		return "enrollment-result";
