@@ -1,7 +1,4 @@
-package sg.edu.iss.team6.service;
-
-import java.util.ArrayList;
-
+package sg.edu.iss.team6.services;
 
 import javax.annotation.Resource;
 
@@ -18,34 +15,31 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UserRepo userRepository;
+
 	@Override
-	public ArrayList<Students> findStudentBystuID(String studentId) {
-		// TODO Auto-generated method stub
+	public Students findStudentBystuID(String studentId) {
 		return userRepository.findStudentBystuID(studentId);
 	}
 
 	@Override
-	public ArrayList<Lecturers> findLecturerBylecID(String lecturerId) {
-		// TODO Auto-generated method stub
+	public Lecturers findLecturerBylecID(String lecturerId) {
 		return userRepository.findLecturerBylecID(lecturerId);
 	}
 
 	@Override
 	@Transactional
 	public Students authenticateStudents(String stuid , String pwd) {
-		// TODO Auto-generated method stub
-		ArrayList<Students> s = userRepository.findStudentBystuID(stuid);
-		s.equals(pwd);
-		return null;
+		Students s = userRepository.findStudentBystuID(stuid);
+		if (s.getPassword().equals(pwd)) return s;
+		else return null;
 	}
 
 	@Override
 	@Transactional
-	public Lecturers authenLecturers(String lecid, String pwd) {
-		// TODO Auto-generated method stub
-		ArrayList<Lecturers> l = userRepository.findLecturerBylecID(lecid);
-		l.equals(pwd);
-		return null;
+	public Lecturers authenticateLecturers(String lecid, String pwd) {
+		Lecturers l = userRepository.findLecturerBylecID(lecid);
+		if (l.getPassword().equals(pwd)) return l;
+		else return null;
 	}
 
 }

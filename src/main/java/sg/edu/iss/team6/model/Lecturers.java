@@ -41,7 +41,7 @@ public class Lecturers {
         this.email = email;
         this.photo = photo;
         this.password = password;
-        this.adminOrNot = adminOrNot; true
+        this.adminOrNot = adminOrNot;
     }
 
     public Lecturers(String firstName, String lastName, String email, byte[] photo, String password, boolean adminOrNot) {

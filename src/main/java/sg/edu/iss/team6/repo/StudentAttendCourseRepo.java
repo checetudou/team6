@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.StudentAttendCourse;
-import sg.edu.iss.team6.model.Students;
 
 @Repository
 public interface StudentAttendCourseRepo extends JpaRepository<StudentAttendCourse,String> {
