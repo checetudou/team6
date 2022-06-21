@@ -1,6 +1,5 @@
 package sg.edu.iss.team6.services;
 
-import java.util.ArrayList;
 
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.Students;
