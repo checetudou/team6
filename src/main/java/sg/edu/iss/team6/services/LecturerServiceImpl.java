@@ -1,18 +1,13 @@
-package sg.edu.iss.team6.service;
+package sg.edu.iss.team6.services;
 
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
 
-import javax.annotation.*;
-
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.Lecturers;
-import sg.edu.iss.team6.repo.*;
-
-@Service
+import sg.edu.iss.team6.repo.LecturerRepo;
 public class LecturerServiceImpl implements LecturerService{
 	
 	@Resource
@@ -48,6 +43,7 @@ public class LecturerServiceImpl implements LecturerService{
 	public Lecturers createLecturer(Lecturers lecturer) {
 		return lecturerRepo.saveAndFlush(lecturer);
 	}
+
 	/*
 	@Override
 	@Transactional
