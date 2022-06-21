@@ -14,6 +14,6 @@ public interface LecturerRepo extends JpaRepository<Lecturers,String> {
 
 	ArrayList<Lecturers> findCoursesByLecturers(String s);
 
-    @Query("Select l from Lecturers l WHERE l.lecturerId = :sid")
-	ArrayList<Lecturers> coursesByLecturer(@Param("sid") String lecturerId);
+    @Query("Select l from Lecturers l WHERE l.lecturerId = :xyz")
+	ArrayList<Lecturers> coursesByLecturer(@Param("xyz") String lecturerId);
 }
