@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sg.edu.iss.team6.model.Courses;
 
 @Controller
-public class AdminManageCoursesController {
+public class ToBeDeletedAdminManageCoursesController {
 	
 // 	@Autowired
 // 	private AdminManageCourses adcserv;

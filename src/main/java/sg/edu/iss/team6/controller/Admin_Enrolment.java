@@ -2,6 +2,8 @@ package sg.edu.iss.team6.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
@@ -12,53 +14,67 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.iss.team6.model.Courses;
+import sg.edu.iss.team6.model.StudentAttendCourse;
+import sg.edu.iss.team6.repo.CourseRepo;
+import sg.edu.iss.team6.repo.StudentAttendCourseRepo;
+import sg.edu.iss.team6.services.AdminCourse;
+import sg.edu.iss.team6.services.AdminStudent;
 
-public class AdminManageEnrolment {
+
+public class Admin_Enrolment {
 
 	@Autowired
-	private AdminManageCourses adcserv;
+	private AdminStudent adeserv;
 	
+	@Autowired
+	private StudentAttendCourseRepo SC;
+	
+	@Autowired
+	private CourseRepo cr;
+	
+	@Autowired
+	private AdminCourse adcserv;
 
-	@RequestMapping("/admin")
-	public String homePage (Model model){
-		return "index";  //index page should contain links to the different functions
+// clicking into manage enrolment should return a list of courses
+// it should be the same page as when you click into manage courses	
+
+	@RequestMapping("/managecourse")
+	public String allCoursesPage (Model model){
+		model.addAttribute("listCourse", adcserv.getAllCourses());
+		return "courseindex";
 	}
-	
-//	@RequestMapping("/course")
-//	public String allCoursesPage (Model model){
-//		model.addAttribute("listCourse", adcserv.getAllCourses());
-//		return "courseindex";
-//	}
 	
 	private Object getAllCourses() {
 		// TODO Auto-generated method stub
 		return null;
+	} 
+
+	@GetMapping("/{courseId}/addStudent")
+	public String newStudentinCourse (@PathVariable(value="courseId") String courseId, Model model){
+		StudentAttendCourse student = new StudentAttendCourse();
+		model.addAttribute("studentattendcourse", student);
+		return "updatecourse";
 	}
 
-	@GetMapping("/newCourse")
-	public String newCourse (Model model){
-		Courses course = new Courses();
-		model.addAttribute("course", course);
-		return "newCourse";
-	}
-
-	@PostMapping("/saveCourse")
-	public String saveCourse (@ModelAttribute("course") AdminManageCourses course){
-		adcserv.saveCourse(course);
+	@PostMapping("/saveCourse/{courseId}")
+	public String saveCourse (HttpSession session,Model model,@ModelAtttribute("courseId")){
+		Usersession usession=session.getAttribute(usession);
+		SC.saveCourse(course);
+		
 		return "redirect:/";
 	}
-
-//	@GetMapping("/updateCourse/{id}")
-//	public String updateCourse (@PathVariable(value="courseid") String id, Model model){
-//		Courses course = adcserv.getCourseById(id);
-//		model.addAttribute("course", course);
-//		return "updateCourse";
-//	}
-
-	private Courses getCourseById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	@GetMapping("/{courseId}/deleteStudent")
+	public String deleteStudent(@PathVariable(value="courseId") String courseId, @RequestMapping("id") String id, Model model){
+		adeserv.deleteStudentInCourseById(id); //input from frontend to backend
+		return "updatecourse";
 	}
+
+	private void deleteStudent(String courseId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 

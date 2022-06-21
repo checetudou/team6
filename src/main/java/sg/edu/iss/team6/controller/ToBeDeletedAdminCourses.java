@@ -28,10 +28,10 @@ import org.springframework.web.servlet.ModelAndView;
 import sg.edu.iss.team6.model.Courses;
 
 @Controller
-public class AdminManageCourses {
+public class ToBeDeletedAdminCourses {
 	
 	@Autowired
-	private AdminManageCourses adcserv;
+	private ToBeDeletedAdminCourses adcserv;
 	
 
 //	@RequestMapping("/admin")
@@ -75,7 +75,7 @@ public class AdminManageCourses {
 
 
 	@PostMapping("/saveCourse")
-	public String saveCourse (@ModelAttribute("course") AdminManageCourses course){
+	public String saveCourse (@ModelAttribute("course") ToBeDeletedAdminCourses course){
 		adcserv.saveCourse(course);
 		return "redirect:/";
 	}

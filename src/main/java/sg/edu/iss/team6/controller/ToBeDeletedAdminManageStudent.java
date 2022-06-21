@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sg.edu.iss.team6.model.Students;
 
 @Controller
-public class AdminManageStudent {
+public class ToBeDeletedAdminManageStudent {
 
 	@Autowired
-	private AdminManageStudent adsserv;
+	private ToBeDeletedAdminManageStudent adsserv;
 	
 //	@RequestMapping(“/”)
 //	public String homePage (Model model){
