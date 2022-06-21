@@ -6,6 +6,7 @@ import java.util.Calendar;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+
 //import java.util.Calendar;
 //import java.util.HashMap;
 //import java.util.List;
@@ -15,8 +16,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,9 +38,12 @@ import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.services.LecturerService;
 import sg.edu.iss.team6.model.CourseEvent;
 import sg.edu.iss.team6.services.CourseService;
+
 import sg.edu.iss.team6.controller.UserSession;
 
 import sg.edu.iss.team6.repo.LecturerRepo;
+import sg.edu.iss.team6.service.CourseService;
+import sg.edu.iss.team6.service.LecturerService;
 import sg.edu.iss.team6.repo.CourseRepo;
 
 @Controller
