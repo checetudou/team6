@@ -8,7 +8,7 @@ public interface CourseService {
 
 	ArrayList<Courses> findAllCourses();
 
-	Courses findCourse(Integer ceid);
+	Courses findCourse(String ceid);
 
 	Courses createCourse(Courses course);
 
@@ -16,7 +16,8 @@ public interface CourseService {
 
 	void removeCourse(Courses course);
 
-	ArrayList<LectureCanTeach> findCoursesByLecturerId(String lecturerId);
+	ArrayList<Courses> findCoursesByLecturerId(String lecturerId);
+
 	
 	ArrayList<StudentAttendCourse> findCoursesByStudentId(String studentId);
 

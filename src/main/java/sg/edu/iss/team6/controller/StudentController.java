@@ -38,20 +38,20 @@ public class StudentController {
 		}
 		return "forward:/home/login";
 	}
-	
+
 	@RequestMapping(value = "/courses")
 	public String studentCourses(HttpSession session, Model model) {
 		UserSession usession = (UserSession) session.getAttribute("usession");
 		//ModelAndView mav = new ModelAndView("login");
 		if (usession.getStudent() != null) {
-			
+
 			//mav = new ModelAndView("staff-course-history");
-			if (sService.findAvailableCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
+			if (cService.findCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
 				model.addAttribute("cCourses", sService.findAvailableCoursesByStudentId(usession.getStudent().getStudentId()));
 			}
 			return "student-available-courses";
 		}
-		return "forward:/home/login";
+		return "common-login";
 	}
 
 	
@@ -59,9 +59,8 @@ public class StudentController {
 	public String enrollCourse(@PathVariable String id, HttpSession session) {
 		
 		UserSession usession = (UserSession) session.getAttribute("usession");
-		Courses course = sService.findCourseByCourseId(id);
-		
-		if (course.getActualEnroll() < course.getSize()) {
+		Courses course = cService.findCourse(id);
+		if (course.getActualEnroll() < course.getSize()){
 			course.setActualEnroll(course.getActualEnroll() + 1);
 		}
 		

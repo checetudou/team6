@@ -3,20 +3,10 @@ package sg.edu.iss.team6.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-<<<<<<< HEAD
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-=======
 
-
-
-//import java.util.Calendar;
-//import java.util.HashMap;
-//import java.util.List;
-
-//import javax.servlet.http.HttpSession;
-//import javax.validation.Valid;
->>>>>>> e27201f (testing)
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,25 +27,17 @@ import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.LectureCanTeach;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.StudentAttendCourse;
-<<<<<<< HEAD
+
 import sg.edu.iss.team6.services.CourseService;
-<<<<<<< HEAD
+
 import sg.edu.iss.team6.services.StudentService;
 import sg.edu.iss.team6.controller.UserSession;
 
-=======
-=======
-
->>>>>>> main
 import sg.edu.iss.team6.controller.UserSession;
 
 import sg.edu.iss.team6.repo.LecturerRepo;
 import sg.edu.iss.team6.service.CourseService;
 import sg.edu.iss.team6.service.LecturerService;
-<<<<<<< HEAD
->>>>>>> e27201f (testing)
-=======
->>>>>>> main
 import sg.edu.iss.team6.repo.CourseRepo;
 
 @Controller
@@ -73,17 +55,14 @@ public class LecturerController {
 		
 	}
 	
-	@RequestMapping(value = "/courses")
-	public String lecturerViewCurrentCourses(HttpSession session, Model model) {
-		UserSession usession = (UserSession) session.getAttribute("usession");
-		if (usession.getLecturer() != null) {
-			System.out.println(usession.getLecturer());
-			if (cService.findCoursesByLecturerId(usession.getLecturer().getLecturerId()).size() > 0) {
-				model.addAttribute("chistory", cService.findCoursesByLecturerId(usession.getLecturer().getLecturerId()));
-			}
-			return "lecturer-viewcurrentcourses";
-		}
-		return "forward:/home/login";
+
+	/*viewing all courses the lecturer teaches*/
+	@RequestMapping(value = "/lectureCanTeach/list/{id}", method = RequestMethod.GET)
+	public ModelAndView lectureCanTeachList(@PathVariable String id ) {
+		ModelAndView mav = new ModelAndView("lecture-can-teach");//"LectureCanTeach-list naming to be confirmed
+		ArrayList<Courses> courses= cService.findCoursesByLecturerId(id);
+		mav.addObject("courses", courses);
+		return mav;
 	}
 	
 	@RequestMapping(value = "/student/grade/{id}", method = RequestMethod.POST)

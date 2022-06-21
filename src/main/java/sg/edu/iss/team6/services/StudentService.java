@@ -20,20 +20,17 @@ public interface StudentService {
 	ArrayList<String> findAllCoursesofStudents();
 	
 	ArrayList<String> findAllStudentIDs();*/
-	
-    
-	
+
+
+//	ArrayList<Students> findAllStudents();
 	ArrayList<Courses> findAvailableCoursesByStudentId(String studentId);
 
-	ArrayList<Students> findstudentsByStudentId(String studentId);
-	
-	int getCourseCapacityById(String courseId);
-	
-	int getActualEnrolledById(String courseId);
-	
-	Courses findCourseByCourseId(String courseId);
 
-	StudentAttendCourse findStudentByStudentId(String studentid);
+//	int getCourseCapacityById(String courseId);
+//
+//	int getActualEnrolledById(String courseId);
+//
+//	Courses findCourseByCourseId(String courseId);
 
 	
 	
