@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.repo.StudentAttendCourseRepo;
@@ -57,8 +59,9 @@ public class AdminStudentImpl {
 		}
 		return students;
 	}
-
-	public ArrayList<Students> getStudentsProfileById(String id){
+	
+	@Transactional
+	public List<Students> returnStudentsProfileById(String id){
 		return srepo.findStudentsByStudentId(id);
 	}
 	

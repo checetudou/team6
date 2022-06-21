@@ -3,6 +3,7 @@ package sg.edu.iss.team6.repo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,8 +21,8 @@ public interface StudentRepo extends JpaRepository<Students,String> {
 
 	//@Query("select c from Courses c where c in (select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId)")
 
-    //@Query
-    //ArrayList<Students> findstudentsByStudentId(String studentId);
+//    @Query
+//    ArrayList<Students> findstudentsByStudentId(String studentId);
 
     // @Query("Select c.size from Courses c WHERE c.courseId = :cid")
     // int getCourseCapacityById(String courseId);
@@ -33,7 +34,7 @@ public interface StudentRepo extends JpaRepository<Students,String> {
     // @Query("Select c from Courses c WHERE c.courseId = :cid")
     // Courses findCourseByCourseId(String courseId);
 
-    ArrayList<Students> findstudentsByStudentId(String studentId);
+    ArrayList<Students> findStudentsByStudentId(String studentId);
     
 //<<<<<<< HEAD
 //	@Query("select c from Courses c where c in (select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId)")
@@ -79,5 +80,7 @@ public interface StudentRepo extends JpaRepository<Students,String> {
 	static Students saveAndFlush(String id) {
 		return null;
 	}
+	
+	List<Students> getAllStudentProfile(Pageable pageable);
 }
 

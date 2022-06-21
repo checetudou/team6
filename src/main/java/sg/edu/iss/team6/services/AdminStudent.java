@@ -12,6 +12,7 @@ public interface AdminStudent {
 	
 	//student profile
 	List<Students> getAllStudentProfile();
+	List<Students> returnStudentsProfileById(String id);
 	Students getStudentProfileById(String id);
 	Students updateStudent (String id);
 	Students addStudent (String id);
@@ -24,5 +25,6 @@ public interface AdminStudent {
 	StudentAttendCourse addStudentToCourse (String courseId);
 	void deleteStudentInCourseById (String id);
 	void saveStudentInCourse (StudentAttendCourse student);
+
 
 }

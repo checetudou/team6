@@ -42,18 +42,14 @@ public class Admin_Course {
 		return "courseindex";
 	}
 	
-	private Object getAllCourses() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@PostMapping("/saveCourse")
-	public String saveCourse (@ModelAttribute("course") ToBeDeletedAdminCourses course){
+	public String saveCourse (@ModelAttribute("course") Courses course){
 		adcserv.saveCourse(course);
 		return "redirect:/managecourses";
 	}
 
-	@GetMapping(value = "/create")
+	@GetMapping("/create")
 	public String newCoursePage(Model model) {
 		Courses course = new Courses();
 		model.addAttribute("course", course);
@@ -62,7 +58,7 @@ public class Admin_Course {
 	}
 	
 	@GetMapping("/updateCourse/{courseId}")
-	public String updateCourse (@PathVariable(value="courseId") String id, Model model){
+	public String updateCourse (@PathVariable(value="courseId") String courseId, Model model){
 		Courses course = adcserv.getCourseById(courseId);
 		model.addAttribute("course", course);
 		return "updateCourse";

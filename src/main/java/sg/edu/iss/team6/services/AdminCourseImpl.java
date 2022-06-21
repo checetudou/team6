@@ -41,6 +41,7 @@ public class AdminCourseImpl implements AdminCourse {
 	}
 	
 	@Override
+	@Transactional
 	public List<Courses> returnCourseById(String courseId){
 		return this.crepo.getCourseById(courseId);
 	}
@@ -58,14 +59,14 @@ public class AdminCourseImpl implements AdminCourse {
 	
 	@Override
 	public void addCourse(Courses courses){
-		crepo.addCourse(courses);
+		this.crepo.addCourse(courses);
 	}
 
 
 	@Override
 	public void updateCourse(Courses courses) {
 		// TODO Auto-generated method stub
-		crepo.updateCourse(courses);
+		this.crepo.updateCourse(courses);
 	}
 
 
