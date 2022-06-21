@@ -28,34 +28,34 @@ import org.springframework.web.servlet.ModelAndView;
 import sg.edu.iss.team6.model.Courses;
 
 @Controller
-public class AdminManageCourses {
+public class ToBeDeletedAdminManageCoursesController {
 	
-	@Autowired
-	private AdminManageCourses adcserv;
+// 	@Autowired
+// 	private AdminManageCourses adcserv;
 	
 
-//	@RequestMapping("/admin")
-//	public String homePage (Model model){
-//		return "index";  //index page should contain links to the different functions
-//	}
+// //	@RequestMapping("/admin")
+// //	public String homePage (Model model){
+// //		return "index";  //index page should contain links to the different functions
+// //	}
 	
-	@RequestMapping(value = "/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/home";
+// 	@RequestMapping(value = "/logout")
+// 	public String logout(HttpSession session) {
+// 		session.invalidate();
+// 		return "redirect:/home";
 
-	}
+// 	}
 	
-	@RequestMapping("/admin/course")
-	public String allCoursesPage (Model model){
-		model.addAttribute("listCourse", adcserv.getAllCourses());
-		return "courseindex";
-	}
+// 	@RequestMapping("/admin/course")
+// 	public String allCoursesPage (Model model){
+// 		model.addAttribute("listCourse", adcserv.getAllCourses());
+// 		return "courseindex";
+// 	}
 	
-	private Object getAllCourses() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+// 	private Object getAllCourses() {
+// 		// TODO Auto-generated method stub
+// 		return null;
+// 	}
 
 //	@RequestMapping(value = "/history")
 //	public String employeeCourseHistory(HttpSession session, Model model) {
@@ -74,18 +74,18 @@ public class AdminManageCourses {
 //	}
 
 
-	@PostMapping("/saveCourse")
-	public String saveCourse (@ModelAttribute("course") AdminManageCourses course){
-		adcserv.saveCourse(course);
-		return "redirect:/";
-	}
+	// @PostMapping("/saveCourse")
+	// public String saveCourse (@ModelAttribute("course") AdminManageCourses course){
+	// 	adcserv.saveCourse(course);
+	// 	return "redirect:/";
+	// }
 
-	@RequestMapping(value = "/course/create", method = RequestMethod.GET)
-	public ModelAndView newCoursePage() {
-		ModelAndView mav = new ModelAndView("staff-course-new");
-		mav.addObject("course", new Courses());
-		return mav;
-	}
+	// @RequestMapping(value = "/course/create", method = RequestMethod.GET)
+	// public ModelAndView newCoursePage() {
+	// 	ModelAndView mav = new ModelAndView("staff-course-new");
+	// 	mav.addObject("course", new Courses());
+	// 	return mav;
+	// }
 
 //	@RequestMapping(value = "/course/create", method = RequestMethod.POST)
 //	public ModelAndView createNewCourse(@ModelAttribute @Validated Courses course, BindingResult result,
@@ -110,48 +110,48 @@ public class AdminManageCourses {
 
 	
 	
-	private void createCourse(Courses course) {
-		// TODO Auto-generated method stub
+	// private void createCourse(Courses course) {
+	// 	// TODO Auto-generated method stub
 		
-	}
+	// }
 
-	@Transactional  //not sure what transactional does
-	@GetMapping("/updateCourse/{id}")
-	public String updateCourse (@PathVariable(value="courseid") String id, Model model){
-		Courses course = adcserv.getCourseById(id);
-		model.addAttribute("course", course);
-		return "updateCourse";
-	}
+	// @Transactional  //not sure what transactional does
+	// @GetMapping("/updateCourse/{id}")
+	// public String updateCourse (@PathVariable(value="courseid") String id, Model model){
+	// 	Courses course = adcserv.getCourseById(id);
+	// 	model.addAttribute("course", course);
+	// 	return "updateCourse";
+	// }
 
-	private Courses getCourseById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// private Courses getCourseById(String id) {
+	// 	// TODO Auto-generated method stub
+	// 	return null;
+	// }
 
-	@PostMapping ("/searchCourseid")
-	public String searchCourseById (@Param("id") String id, Model model){
-		List<Courses> listCourse = adcserv.returnCourseById(id);
-		model.addAttribute("listCourse", listCourse);
-		return "courseindex";
-	}
+	// @PostMapping ("/searchCourse")
+	// public String searchCourseById (@Param("id") String id, Model model){
+	// 	List<Courses> listCourse = adcserv.returnCourseById(id);
+	// 	model.addAttribute("listCourse", listCourse);
+	// 	return "courseindex";
+	// }
 
 
-	private List<Courses> returnCourseById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// private List<Courses> returnCourseById(String id) {
+	// 	// TODO Auto-generated method stub
+	// 	return null;
+	// }
 
-	@PostMapping ("/searchCoursename")
-	public String searchCourseByName (@Param("name") String name, Model model){
-		List<Courses> listCourse = adcserv.returnCourseByName(name);
-		model.addAttribute("listCourse", listCourse);
-		return "courseindex";
-	}
+	// @PostMapping ("/searchCourse")
+	// public String searchCourseByName (@Param("name") String name, Model model){
+	// 	List<Courses> listCourse = adcserv.returnCourseByName(name);
+	// 	model.addAttribute("listCourse", listCourse);
+	// 	return "courseindex";
+	// }
 
-	private List<Courses> returnCourseByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// private List<Courses> returnCourseByName(String name) {
+	// 	// TODO Auto-generated method stub
+	// 	return null;
+	// }
 
 	//for pagination
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sg.edu.iss.team6.model.Lecturers;
 
 @Controller
-public class AdminManageLecturer {
+public class ToBeDeletedAdminManageLecturer {
 
 	@Autowired
-	private AdminManageLecturer adlserv;
+	private ToBeDeletedAdminManageLecturer adlserv;
 	
 //	@RequestMapping("/")
 //	public String homePage (Model model){

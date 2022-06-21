@@ -25,6 +25,13 @@ public class AdminStudentImpl {
 		return srepo.findAll();
 	}
 	
+
+//	//student profile
+//	public Students addStudent (String id) {
+//		return StudentRepo.saveAndFlush(id);
+//	}
+//	//not sure how to resolve this...it says its not compatible with string?
+
 	public Students addStudent(String id) {
 		return srepo.saveAndFlush(getStudentProfileById(id));
 	}
@@ -79,12 +86,13 @@ public class AdminStudentImpl {
 		return this.sacrepo.getStudentById(id);
 	}
 
-	//student attend course
-	public StudentAttendCourse addStudentToCourse (String id) {
-		return StudentAttendCourseRepo.saveAndFlush(id);
-	}
+//	//student attend course
+//	public StudentAttendCourse addStudentToCourse (String id) {
+//		return StudentAttendCourseRepo.saveAndFlush(id);
+//	}
 
-	public void saveStudentInCourse  (StudentAttendCourse student){
+	
+	public void saveStudentInCourse (StudentAttendCourse student){
 		this.sacrepo.save(student);
 	}
 

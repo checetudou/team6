@@ -16,7 +16,7 @@ import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.services.AdminCourse;
 
 @Controller
-public class AdminCourseController {
+public class ToBeDeletedAdminCourseController {
 	
 	@Autowired
 	private AdminCourse adcserv;

@@ -10,17 +10,11 @@ import sg.edu.iss.team6.model.Courses;
 public interface AdminCourse {
 	
 		List<Courses> getAllCourses();
-		void saveCourses (Courses courses);
-		Courses getCoursesById (String Id);
-		Courses getCoursesByName (String name);
-		Courses getStudentByName (String name);
-		Courses getCurrentSize (int count);
-		Courses getAllowedSize (int count);
-		void saveAllowedSize (int count);
-		Courses getGrade (String grade);
-		Courses editGrade (String grade);
-		// void saveGrade (Student student/Course course/StudentAttendCourse?)
-		List<Courses> returnCourseById(String Id);
-		List<Courses> returnCourseByName(String name);
+		Courses getCourseById (String courseId);
+		void saveCourse (Courses courses);
+		void deleteCourse (String courseId);
+		List<Courses> returnCourseById(String courseId);
+		void addCourse(Courses courses);
+		void updateCourse(Courses courses);
 
 }
