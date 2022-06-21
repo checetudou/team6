@@ -63,7 +63,6 @@ public class LecturerController {
 	
 	@RequestMapping(value = "/student/grade/{id}", method = RequestMethod.POST)
 	public ModelAndView gradeStudent(@ModelAttribute("grade") @Valid Grade grade,BindingResult result, @PathVariable Integer id, HttpSession session) {
-		UserSession usession = (UserSession) session.getAttribute("usession");
 		if (result.hasErrors())
 			return new ModelAndView("lecturer-coursestudentlist");
 		String studentid = id.toString();

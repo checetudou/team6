@@ -5,30 +5,30 @@
 <body>
 	<div th:replace="fragments/layout.html :: menu"/>
 	<div th:replace="fragments/layout.html :: header"/> 
-	<h3>Edit Department page</h3>
+	<h3>Grade Student page</h3>
 
-	<form action="#" th:action="@{/admin/department/edit/}+${department.departmentId}" th:object="${department}"
+	<form action="#" th:action="@{/lecturers/student/grade/}+${studentattendcourse.studentId}" th:object="${studentid}"
 		method="post">
 		<table>
 			<tbody>
 				<tr>
 
-					<td><span th:text="#{fieldLabel.departmentId}"></span></td>
+					<td><span th:text="#{fieldLabel.studentId}"></span></td>
 					<td>
-						<fieldset> <input type="text" th:field="*{departmentId}" readonly="readonly" /></fieldset>
+						<fieldset> <input type="text" th:field="*{studentId}" readonly="readonly" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('departmentId')}" th:errors="*{departmentId}"></td>
+					<td th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}"></td>
 
 				</tr>
 				<tr>
 					<td><span th:text="#{fieldLabel.managerInCharge}"></span></td>
 					<td>
 						<fieldset> <select th:field="*{managerInCharge}">
-								<option th:each="manager : ${eidlist}" th:value="${manager}" th:text="${manager}">List
-								</option>
+								<option th:each="manager : ${studentidlist}" th:value="${grade}" th:text="${grade}">List
+								</option> 
 							</select> </fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('managerInCharge')}" th:errors="*{managerInCharge}"></td>
+					<td th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}"></td>
 				</tr>
 				<tr>
 					<td><input type="submit" value="Update" class="blcass" /></td>
