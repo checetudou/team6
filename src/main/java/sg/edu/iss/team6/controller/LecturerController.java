@@ -21,6 +21,7 @@ import sg.edu.iss.team6.helper.Grade;
 import sg.edu.iss.team6.model.CourseEvent;
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.StudentAttendCourse;
+import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.services.CourseService;
 import sg.edu.iss.team6.services.StudentService;
 
@@ -54,34 +55,34 @@ public class LecturerController {
 		if (result.hasErrors())
 			return new ModelAndView("lecturer-coursestudentlist");
 		String studentid = id.toString();
-		StudentAttendCourse sac = sService.findStudentByStudentId(studentid);
+		ArrayList<Students> sac = sService.findStudentById(studentid);
 		CourseEvent ce = new CourseEvent();
 		
-		if (CourseEventEnum.A.toString() != null) {
-			ce.setEventType(CourseEventEnum.A);
-			sac.setGrade(CourseEventEnum.A);
-		} 
+		// if (CourseEventEnum.A.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.A);
+		// 	sac.setGrade(CourseEventEnum.A);
+		// } 
 		
-		else if (CourseEventEnum.B.toString() != null) {
-			ce.setEventType(CourseEventEnum.B);
-			sac.setGrade(CourseEventEnum.B);
-		} 
-		else if (CourseEventEnum.C.toString() != null) {
-			ce.setEventType(CourseEventEnum.C);
-			sac.setGrade(CourseEventEnum.C);
-		} 
-		else if (CourseEventEnum.D.toString() != null) {
-			ce.setEventType(CourseEventEnum.D);
-			sac.setGrade(CourseEventEnum.D);
-		} 
-		else if (CourseEventEnum.P.toString() != null) {
-			ce.setEventType(CourseEventEnum.P);
-			sac.setGrade(CourseEventEnum.P);
-		} 			
-		else {
-			ce.setEventType(CourseEventEnum.F);
-			sac.setGrade(CourseEventEnum.F);
-		}
+		// else if (CourseEventEnum.B.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.B);
+		// 	sac.setGrade(CourseEventEnum.B);
+		// } 
+		// else if (CourseEventEnum.C.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.C);
+		// 	sac.setGrade(CourseEventEnum.C);
+		// } 
+		// else if (CourseEventEnum.D.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.D);
+		// 	sac.setGrade(CourseEventEnum.D);
+		// } 
+		// else if (CourseEventEnum.P.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.P);
+		// 	sac.setGrade(CourseEventEnum.P);
+		// } 			
+		// else {
+		// 	ce.setEventType(CourseEventEnum.F);
+		// 	sac.setGrade(CourseEventEnum.F);
+		// }
 
 		ModelAndView mav = new ModelAndView("forward:lecturer-coursestudentlist");
 		String message = "Grade has been successfully updated.";

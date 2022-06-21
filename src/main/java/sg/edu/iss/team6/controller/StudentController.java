@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.services.CourseService;
 import sg.edu.iss.team6.services.StudentService;

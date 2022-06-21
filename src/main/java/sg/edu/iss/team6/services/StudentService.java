@@ -3,13 +3,14 @@ package sg.edu.iss.team6.services;
 import java.util.ArrayList;
 
 import sg.edu.iss.team6.model.Courses;
+import sg.edu.iss.team6.model.Students;
 
 public interface StudentService {
 
 	
 	/*ArrayList<Students> findStudent(String lecturerId);
 	
-	Students findStudentById(String s);
+	
 	
 	ArrayList<Students> findAllStudents();
 	
@@ -21,6 +22,9 @@ public interface StudentService {
 
 
 //	ArrayList<Students> findAllStudents();
+
+	ArrayList<Students> findStudentById(String s);
+	
 	ArrayList<Courses> findAvailableCoursesByStudentId(String studentId);
 
 
