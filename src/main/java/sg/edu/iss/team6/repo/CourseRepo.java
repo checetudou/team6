@@ -66,3 +66,17 @@ public interface CourseRepo extends JpaRepository<Courses,String> {
 	Optional<Courses> findByName(String name);
 
 }
+
+//Admin's
+//@Query("select c from Courses c where c.courseId like %?1%")
+//List<Courses> getCourseById(String courseId);
+//
+//@Query("insert c into Courses c values(:courses.courseId,courses.courseName,courses.size,"
+//		+ "courses.actualEnroll,courses.description)")
+//void addCourse(Courses courses);
+//
+//@Query("update Courses set(:courses.courseName,courses.size,"
+//		+ "courses.actualEnroll,courses.description) where courses.courseId = courseId")
+//void pp(Courses course); (dummy to resolve override)
+//
+

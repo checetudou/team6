@@ -23,3 +23,21 @@ public interface StudentAttendCourseRepo extends JpaRepository<StudentAttendCour
 	
 	List<StudentAttendCourse> getStudentById(String id);
 }
+
+// Admin's 
+//@Query("select COUNT students from StudentAttendCourse sac where sac.courseId like %?1%")
+//StudentAttendCourse getCurrentSize (int count);
+//
+//static StudentAttendCourse saveAndFlush(String id) {
+//	// TODO Auto-generated method stub
+//	return null;
+//}
+//
+//
+//@Query("select s from Students s where s.Id or s.Name like %?1%")
+//StudentAttendCourse getAllowedSize (int count);
+//
+//List<StudentAttendCourse> getStudentById(String id);
+//
+//@Query("Update StudentCanAttend set courseId = :cid")
+//void saveCourse(@Param("cid")String courseId) ;

@@ -93,3 +93,12 @@ public interface StudentRepo extends JpaRepository<Students,String> {
 		
 }
 
+
+//Admin's
+//@Query("select s from Students s where s.Id like %?1%")
+//ArrayList<Students> getStudentProfileById(String id);
+//
+//static Students saveAndFlush(String id) {
+//	// TODO Auto-generated method stub
+//	return null;
+//}
