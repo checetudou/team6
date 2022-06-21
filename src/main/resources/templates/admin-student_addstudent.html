@@ -5,46 +5,35 @@
 <body>
 	<div th:replace="fragments/layout.html :: menu"/>
 	<div th:replace="fragments/layout.html :: header"/> 
-	<h3>New Employee page</h3>
-
+	<h3>Add New Student</h3>
+	<!--form start-->
 	<form action="#" th:action="@{/admin/employee/create}" th:object="${employee}" method="post">
 		<table>
 			<tbody>
-				<tr>
+				<tr> <!--Input student firstname-->
 					<td><span th:text="#{fieldLabel.employeeId}"></span></td>
 					<td>
-						<fieldset>
-							<input type="text" th:field="*{employeeId}" />
-						</fieldset>
+						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
+				</tr>
+				<tr> <!--Input student lastname-->
+					<td><span th:text="#{fieldLabel.employeeId}"></span></td>
+					<td>
+						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
+				</tr>
+				<tr> <!--Input student email-->
+					<td><span th:text="#{fieldLabel.managerId}"></span></td>
+					<td>
+						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
 					</td>
 					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
 				</tr>
 				<tr>
-					<td><span th:text="#{fieldLabel.managerId}"></span></td>
 					<td>
-						<fieldset>
-							<select th:field="*{managerId}">
-								<option th:each="manager : ${eidlist}" th:value="${manager}" th:text="${manager}">List
-								</option>
-							</select>
-						</fieldset>
-					</td>
-					<td th:if="${#fields.hasErrors('managerId')}" th:errors="*{managerId}"></td>
-				</tr>
-				<tr>
-					<td><span th:text="#{fieldLabel.name}"></span></td>
-					<td>
-						<fieldset>
-							<input type="text" th:field="*{name}" />
-						</fieldset>
-					</td>
-					<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
-				</tr>
-				<tr>
-					<td>
-						<fieldset>
-							<input type="submit" value="Create" class="blcass" />
-						</fieldset>
+						<fieldset><input type="submit" value="Create" class="blcass" /></fieldset>
 					</td>
 					<td></td>
 					<td></td>

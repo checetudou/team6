@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: html_head"/>
-
-<body>
-	<div th:replace="fragments/layout.html :: menu"/>
-	<div th:replace="fragments/layout.html :: header"/> 
-	<h3>Department List page</h3>
-	<a th:href="@{/admin/department/create}">Add Department</a>
-	<div th:if="${not #lists.isEmpty(departmentList)}">
-		<table style="border: 1;">
-
-			<tr class="listHeading">
-				<th><span th:text="#{fieldLabel.departmentId}"></span></th>
-				<th><span th:text="#{fieldLabel.managerId}"></span></th>
-				<th><span th:text="#{caption.edit}"></span></th>
-				<th><span th:text="#{caption.delete}"></span></th>
-			</tr>
-			<tr th:each="department : ${departmentList}" class="listRecord">
-				<td align="left" th:text="${department.departmentId}">Id</td>
-				<td align="left" th:text="${department.managerInCharge}">Manager</td>
-
-				<td><a th:href="@{/admin/department/edit/}+${department.departmentId}" class="btn btn-default"><span
-							th:text="#{caption.edit}"></span></a></td>
-				<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span
-							th:text="#{caption.delete}"></span></a></td>
-			</tr>
-		</table>
-	</div>
-</body>
-
+	<head th:replace="fragments/layout.html :: html_head"/>
+	<body>
+		<div th:replace="fragments/layout.html :: menu"/>
+		<div th:replace="fragments/layout.html :: header"/> 
+		<h3>Lecturer List</h3>
+		<a th:href="@{/admin/employee/create}">Add Lecturer</a>
+		<div th:if="${not #lists.isEmpty(departmentList)}">
+			<table style="border: 1;">
+				<tr class="listHeading">
+					<!--headers-->
+					<th><span th:text="#{fieldLabel.courseId}"></span></th>
+					<th><span th:text="#{fieldLabel.courseName}"></span></th>
+					<th><span th:text="#{caption.currentEnrollment}"></span></th>
+					<th><span th:text="#{caption.grade}"></span></th>
+				</tr>
+				<tr th:each="department : ${departmentList}" class="listRecord">
+					<!--Lecturer Id here-->
+					<td align="left" th:text="${department.departmentId}">CourseId</td>
+					<!--Lecturer Name here-->
+					<td align="left" th:text="${department.managerInCharge}">CourseName</td>
+					<!--hyperlink to CURRENT lecturer courses here-->
+					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
+					<!--hyperlink to PAST lecturer courses here-->
+					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
+					<!--hyperlink to delete lecturer here-->
+					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
+				</tr>
+			</table>
+		</div>
+	</body>
 </html>
