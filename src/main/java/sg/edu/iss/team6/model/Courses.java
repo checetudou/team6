@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -91,4 +92,9 @@ public class Courses {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+	public void setTimeStamp(Date time) {
+		// TODO Auto-generated method stub
+		
+	}
 }
