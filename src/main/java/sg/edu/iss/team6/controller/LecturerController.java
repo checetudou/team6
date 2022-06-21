@@ -1,7 +1,10 @@
 package sg.edu.iss.team6.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 
 //import java.util.Calendar;
@@ -22,18 +25,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-/*
-import sg.edu.iss.team6.helper.Approve;
 
+import sg.edu.iss.team6.helper.Approve;
 import sg.edu.iss.team6.model.CourseEvent;
 import sg.edu.iss.team6.helper.CourseEventEnum;
 import sg.edu.iss.team6.exception.CourseNotFound;
-*/
 
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.LectureCanTeach;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.StudentAttendCourse;
+import sg.edu.iss.team6.services.LecturerService;
+import sg.edu.iss.team6.model.CourseEvent;
+import sg.edu.iss.team6.services.CourseService;
+
 import sg.edu.iss.team6.controller.UserSession;
 
 import sg.edu.iss.team6.repo.LecturerRepo;
@@ -74,12 +79,79 @@ public class LecturerController {
 		return mav;
 	}
 	
-	//viewing a student enrolled specific course the lecturer teaches
-	@RequestMapping(value = "/studentAttendCourse/list/{id}", method = RequestMethod.GET)
-	public ModelAndView studentAttendCourse(@PathVariable String id ) {
-		ModelAndView mav = new ModelAndView("student-attend-course");//"StudentAttendCourse-list naming to be confirmed
-		ArrayList<StudentAttendCourse> studentAttendCourse = cService.findCoursesByStudentId(id); 
-		mav.addObject("studentAttendCourse", studentAttendCourse);
+	@RequestMapping(value = "/viewpastcourses")
+	public String lecturerViewPastCourses(HttpSession session, Model model) {
+		UserSession usession = (UserSession) session.getAttribute("usession");
+		if (usession.getLecturer() != null) {
+			System.out.println(usession.getLecturer());
+			if (cService.findCoursesByLecturerId(usession.getLecturer().getLecturerId()).size() > 0) {
+				model.addAttribute("chistory", cService.findCoursesByLecturerId(usession.getLecturer().getLecturerId()));
+			}
+			return "lecturer-viewpastcourses";
+		}
+		return "forward:/home/login";
+
+	}
+	
+	@RequestMapping(value = "/viewcurrentcourses")
+	public String lecturerViewCurrentCourses(HttpSession session, Model model) {
+		UserSession usession = (UserSession) session.getAttribute("usession");
+		if (usession.getLecturer() != null) {
+			System.out.println(usession.getLecturer());
+			if (cService.findCoursesByLecturerId(usession.getLecturer().getLecturerId()).size() > 0) {
+				model.addAttribute("chistory", cService.findCoursesByLecturerId(usession.getLecturer().getLecturerId()));
+			}
+			return "lecturer-viewcurrentcourses";
+		}
+		return "forward:/home/login";
+
+	}
+	
+	@RequestMapping(value = "/student/grade/{id}", method = RequestMethod.POST)
+	public ModelAndView gradeStudent(@ModelAttribute("approve") @Valid Approve approve, BindingResult result,
+			@PathVariable Integer id, HttpSession session) {
+		UserSession usession = (UserSession) session.getAttribute("usession");
+		if (result.hasErrors())
+			return new ModelAndView("manager-course-detail");
+		//change sacService student grade
+		StudentAttendCourse sac = sacService.findCoursesByStudentId(id);
+		CourseEvent ce = new CourseEvent();
+		
+		if (approve.getDecision().trim().equalsIgnoreCase(CourseEventEnum.A.toString())) {
+			ce.setEventType(CourseEventEnum.A);
+			sac.setGrade(CourseEventEnum.A);
+		} 
+		
+		else if (approve.getDecision().trim().equalsIgnoreCase(CourseEventEnum.B.toString())) {
+			ce.setEventType(CourseEventEnum.B);
+			sac.setGrade(CourseEventEnum.B);
+		} 
+		else if (approve.getDecision().trim().equalsIgnoreCase(CourseEventEnum.C.toString())) {
+			ce.setEventType(CourseEventEnum.C);
+			sac.setGrade(CourseEventEnum.C);
+		} 
+		else if (approve.getDecision().trim().equalsIgnoreCase(CourseEventEnum.D.toString())) {
+			ce.setEventType(CourseEventEnum.D);
+			sac.setGrade(CourseEventEnum.D);
+		} 
+		else if (approve.getDecision().trim().equalsIgnoreCase(CourseEventEnum.E.toString())) {
+			ce.setEventType(CourseEventEnum.E);
+			sac.setGrade(CourseEventEnum.E);
+		} 			
+		else {
+			ce.setEventType(CourseEventEnum.F);
+			sac.setGrade(CourseEventEnum.F);
+		}
+		
+		ce.setEventBy(usession.getEmployee().getEmployeeId());
+		ce.setComment(approve.getComment());
+		ce.setTimeStamp(Calendar.getInstance().getTime());
+		ce.setCourse(c);
+		c.addCourseEvent(ce);
+		cService.changeCourse(c);
+		ModelAndView mav = new ModelAndView("forward:/manager/pending");
+		String message = "Course was successfully updated.";
+		System.out.println(message);
 		return mav;
 	}
 	
