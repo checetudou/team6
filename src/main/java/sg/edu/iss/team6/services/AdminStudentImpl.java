@@ -1,5 +1,6 @@
 package sg.edu.iss.team6.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,30 +21,24 @@ public class AdminStudentImpl {
 	@Autowired
 	private StudentAttendCourseRepo sacrepo;
 
-	//student profile
 	public List<Students> getAllStudentProfile(){
-		return  srepo.findAll();
+		return srepo.findAll();
 	}
 	
-	//student profile
-	public Students addStudent (String id) {
-		return StudentRepo.saveAndFlush(id);
+	public Students addStudent(String id) {
+		return srepo.saveAndFlush(getStudentProfileById(id));
 	}
-	//not sure how to resolve this...it says its not compatible with string?
 
-	//student profile
 	public void saveStudentProfile (Students student){
 		this.srepo.save(student);
 	}
 	
-	//student profile
 	public void deleteStudentProfileById (String id){
 		this.srepo.deleteById(id);
 	}
 
-	//student profile
-//	@Override
-	public Students getStudentProfileById (String id){
+	//@Override
+	public Students getStudentProfileById(String id){
 		Optional<Students> optional = srepo.findById(id);
 		Students students = null;
 		
@@ -55,13 +50,11 @@ public class AdminStudentImpl {
 		}
 		return students;
 	}
-	
-	//student profile
-	public List<Students> returnStudentProfileById(String id){
-		return this.srepo.getStudentProfileById(id);
+
+	public ArrayList<Students> getStudentsProfileById(String id){
+		return srepo.findStudentsByStudentId(id);
 	}
-
-
+	
 	//student attend course
 	public List<StudentAttendCourse>  getAllStudentInCourse(){
 		return  sacrepo.findAll();
