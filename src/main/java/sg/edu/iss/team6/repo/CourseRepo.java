@@ -16,8 +16,8 @@ import sg.edu.iss.team6.model.StudentAttendCourse;
 @Repository
 public interface CourseRepo extends JpaRepository<Courses,String> {
     
-//	@Query("select c from Courses c where c.courseName like %?1%")
-//    List<Courses> findCoursesByCourseName(String courseName);
+	@Query("select c from Courses c where c.courseName like %?1%")
+    List<Courses> findCoursesByCourseName(String courseName);
 
 //    @Query("Select lc from LectureCanTeach lc WHERE lc.lecturers.lecturerId = :lid")
 //	ArrayList<LectureCanTeach> findCoursesByLecturerId(@Param("lid") String lecturerId);
