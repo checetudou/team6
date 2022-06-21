@@ -9,6 +9,7 @@ import javax.validation.Valid;
 =======
 
 
+
 //import java.util.Calendar;
 //import java.util.HashMap;
 //import java.util.List;
@@ -38,16 +39,23 @@ import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.StudentAttendCourse;
 <<<<<<< HEAD
 import sg.edu.iss.team6.services.CourseService;
+<<<<<<< HEAD
 import sg.edu.iss.team6.services.StudentService;
 import sg.edu.iss.team6.controller.UserSession;
 
 =======
+=======
+
+>>>>>>> main
 import sg.edu.iss.team6.controller.UserSession;
 
 import sg.edu.iss.team6.repo.LecturerRepo;
 import sg.edu.iss.team6.service.CourseService;
 import sg.edu.iss.team6.service.LecturerService;
+<<<<<<< HEAD
 >>>>>>> e27201f (testing)
+=======
+>>>>>>> main
 import sg.edu.iss.team6.repo.CourseRepo;
 
 @Controller
