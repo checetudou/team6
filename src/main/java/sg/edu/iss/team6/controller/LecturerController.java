@@ -1,44 +1,29 @@
 package sg.edu.iss.team6.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import sg.edu.iss.team6.helper.CourseEventEnum;
 import sg.edu.iss.team6.helper.Grade;
 import sg.edu.iss.team6.model.CourseEvent;
-import sg.edu.iss.team6.helper.CourseEventEnum;
 import sg.edu.iss.team6.model.Courses;
-import sg.edu.iss.team6.model.LectureCanTeach;
-import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.StudentAttendCourse;
-
+import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.services.CourseService;
-
 import sg.edu.iss.team6.services.StudentService;
-import sg.edu.iss.team6.controller.UserSession;
-
-import sg.edu.iss.team6.controller.UserSession;
-
-import sg.edu.iss.team6.repo.LecturerRepo;
-import sg.edu.iss.team6.service.CourseService;
-import sg.edu.iss.team6.service.LecturerService;
-import sg.edu.iss.team6.repo.CourseRepo;
 
 @Controller
 @RequestMapping(value = "/lecturers")
@@ -52,7 +37,7 @@ public class LecturerController {
 
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
-		
+		//TODO
 	}
 	
 
@@ -70,34 +55,34 @@ public class LecturerController {
 		if (result.hasErrors())
 			return new ModelAndView("lecturer-coursestudentlist");
 		String studentid = id.toString();
-		StudentAttendCourse sac = sService.findStudentByStudentId(studentid);
+		ArrayList<Students> sac = sService.findStudentById(studentid);
 		CourseEvent ce = new CourseEvent();
 		
-		if (CourseEventEnum.A.toString() != null) {
-			ce.setEventType(CourseEventEnum.A);
-			sac.setGrade(CourseEventEnum.A);
-		} 
+		// if (CourseEventEnum.A.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.A);
+		// 	sac.setGrade(CourseEventEnum.A);
+		// } 
 		
-		else if (CourseEventEnum.B.toString() != null) {
-			ce.setEventType(CourseEventEnum.B);
-			sac.setGrade(CourseEventEnum.B);
-		} 
-		else if (CourseEventEnum.C.toString() != null) {
-			ce.setEventType(CourseEventEnum.C);
-			sac.setGrade(CourseEventEnum.C);
-		} 
-		else if (CourseEventEnum.D.toString() != null) {
-			ce.setEventType(CourseEventEnum.D);
-			sac.setGrade(CourseEventEnum.D);
-		} 
-		else if (CourseEventEnum.P.toString() != null) {
-			ce.setEventType(CourseEventEnum.P);
-			sac.setGrade(CourseEventEnum.P);
-		} 			
-		else {
-			ce.setEventType(CourseEventEnum.F);
-			sac.setGrade(CourseEventEnum.F);
-		}
+		// else if (CourseEventEnum.B.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.B);
+		// 	sac.setGrade(CourseEventEnum.B);
+		// } 
+		// else if (CourseEventEnum.C.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.C);
+		// 	sac.setGrade(CourseEventEnum.C);
+		// } 
+		// else if (CourseEventEnum.D.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.D);
+		// 	sac.setGrade(CourseEventEnum.D);
+		// } 
+		// else if (CourseEventEnum.P.toString() != null) {
+		// 	ce.setEventType(CourseEventEnum.P);
+		// 	sac.setGrade(CourseEventEnum.P);
+		// } 			
+		// else {
+		// 	ce.setEventType(CourseEventEnum.F);
+		// 	sac.setGrade(CourseEventEnum.F);
+		// }
 
 		ModelAndView mav = new ModelAndView("forward:lecturer-coursestudentlist");
 		String message = "Grade has been successfully updated.";

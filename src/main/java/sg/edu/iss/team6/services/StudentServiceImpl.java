@@ -2,15 +2,12 @@ package sg.edu.iss.team6.services;
 
 import java.util.ArrayList;
 
-
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Courses;
-import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.repo.StudentRepo;
 
@@ -18,12 +15,17 @@ import sg.edu.iss.team6.repo.StudentRepo;
 public class StudentServiceImpl implements StudentService{
 	
 	@Resource
-	private StudentRepo StudentRepo;
+	private StudentRepo studentRepo;
 
 	@Override
 	@Transactional
 	public ArrayList<Courses> findAvailableCoursesByStudentId(String studentId) {
-		return StudentRepo.findAvailableCoursesByStudentId(studentId);
+		return studentRepo.findAvailableCoursesByStudentId(studentId);
+	}
+
+	@Override
+	public ArrayList<Students> findStudentById(String s) {
+		return studentRepo.findstudentsByStudentId(s);
 	}
 	
 //	@Override
