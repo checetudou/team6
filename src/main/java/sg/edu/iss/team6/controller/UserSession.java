@@ -12,8 +12,8 @@ public class UserSession implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	//private User user = null;
-	private Lecturers lecturerId = null;
-	private Students studentId = null;
+	private Lecturers lecturer = null;
+	private Students student = null;
 	private ArrayList<Lecturers> lecturerList = null;
 	private ArrayList<Students> studentList = null;
 	
@@ -25,22 +25,23 @@ public class UserSession implements Serializable {
 		super();
 		//this.sessionId = sessionId;
 		//this.user = user;
-		this.lecturerId = lecturer;
-		this.studentId = student;
+		this.lecturer = lecturer;
+		this.student = student;
 		this.lecturerList = lecturerList;
 		this.studentList = studentList;
 	}
-	public Lecturers getLecturerId() {
-		return lecturerId;
+
+	public Lecturers getLecturer() {
+		return lecturer;
 	}
 	public void setLecturerId(Lecturers lecturer) {
-		this.lecturerId = lecturer;
+		this.lecturer = lecturer;
 	}
 	public Students getStudent() {
-		return studentId;
+		return student;
 	}
 	public void setStudent(Students student) {
-		this.studentId = student;
+		this.student = student;
 	}
 	public ArrayList<Lecturers> getLecturerList() {
 		return lecturerList;
