@@ -1,10 +1,10 @@
 package sg.edu.iss.team6.controller;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 
 import sg.edu.iss.team6.model.Students;
-import sg.edu.iss.team6.model.User;
 import sg.edu.iss.team6.model.Lecturers;
 
 
@@ -13,12 +13,16 @@ public class UserSession implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//private User user = null;
 	private Lecturers lecturer = null;
 	private Students student = null;
 =======
 	private User user = null;
+=======
+>>>>>>> 387dcd5 (edit logincontroller)
 	private Lecturers lecturerId = null;
+	private Lecturers adminId = null;
 	private Students studentId = null;
 >>>>>>> e27201f (testing)
 	private ArrayList<Lecturers> lecturerList = null;
@@ -27,9 +31,10 @@ public class UserSession implements Serializable {
 	public UserSession() {
 		super();
 	}
-  // String sessionId,
-	public UserSession( User user, Lecturers lecturer, Students student, ArrayList<Lecturers> lecturerList, ArrayList<Students> studentList) {
+ 
+	public UserSession(Lecturers lecturer, Students student, ArrayList<Lecturers> lecturerList, ArrayList<Students> studentList) {
 		super();
+<<<<<<< HEAD
 		//this.sessionId = sessionId;
 <<<<<<< HEAD
 		//this.user = user;
@@ -43,17 +48,15 @@ public class UserSession implements Serializable {
 		return lecturer;
 =======
 		this.user = user;
+=======
+
+>>>>>>> 387dcd5 (edit logincontroller)
 		this.lecturerId = lecturer;
 		this.studentId = student;
 		this.lecturerList = lecturerList;
 		this.studentList = studentList;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+	
 	public Lecturers getLecturerId() {
 		return lecturerId;
 >>>>>>> e27201f (testing)
@@ -79,33 +82,13 @@ public class UserSession implements Serializable {
 	public void setStudentList(ArrayList<Students> studentList) {
 		this.studentList = studentList;
 	}
-
-	/*	
- 	public User getUser() {
-		return user;
+	public Lecturers getAdminId() {
+		return adminId;
+	}
+	public void setAdminId(Lecturers adminId) {
+		this.adminId = adminId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	public ArrayList<Employee> getSubordinates() {
-		return subordinates;
-	}
-
-	public void setSubordinates(ArrayList<Employee> subordinates) {
-		this.subordinates = subordinates;
-	}
-	*/
-	
 
 
 
