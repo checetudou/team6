@@ -20,12 +20,10 @@ public class AdminCourseImpl implements AdminCourse {
 	@Autowired
 	private StudentAttendCourseRepo sacrepo;
 
-
 	@Override
 	public List<Courses> getAllCourses(){
 		return crepo.findAll();
 	}
-
 
 	public Courses getCourseById (String courseId){
 		Optional<Courses> optional = crepo.findById(courseId);
