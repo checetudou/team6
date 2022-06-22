@@ -30,12 +30,12 @@ public interface CourseRepo extends JpaRepository<Courses,String> {
 	@Query("select c.size from Courses c where c.courseId like %?1%")
 	int getAllowedSize (String courseId);
 
-	Optional<Courses> findByName(String name);
+	// Optional<Courses> findByName(String name);
 
-    @Query("insert c into Courses c values(:courses.courseId,courses.courseName,courses.size," + "courses.actualEnroll,courses.description)")
-    void addCourse(Courses courses);
+    // @Query("insert c into Courses c values(:courses.courseId,courses.courseName,courses.size," + "courses.actualEnroll,courses.description)")
+    // void addCourse(Courses courses);
 
-    @Query("update Courses set(:courses.courseName,courses.size," + "courses.actualEnroll,courses.description) where courses.courseId = courseId")
-    void updateCourse(Courses course);
+    // @Query("update Courses set(:courses.courseName,courses.size," + "courses.actualEnroll,courses.description) where courses.courseId = courseId")
+    // void updateCourse(Courses course);
 
 }

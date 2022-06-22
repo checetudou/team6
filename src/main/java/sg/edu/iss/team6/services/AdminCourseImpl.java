@@ -48,16 +48,16 @@ public class AdminCourseImpl implements AdminCourse {
 		this.crepo.save(courses);
 	}
 	
-	@Override
-	public void addCourse(Courses courses){
-		crepo.addCourse(courses);
-	}
+	// @Override
+	// public void addCourse(Courses courses){
+	// 	crepo.addCourse(courses);
+	// }
 
 
-	@Override
-	public void updateCourse(Courses courses) {
-		crepo.updateCourse(courses);
-	}
+	// @Override
+	// public void updateCourse(Courses courses) {
+	// 	crepo.updateCourse(courses);
+	// }
 
 }
 

@@ -12,7 +12,7 @@ import sg.edu.iss.team6.model.Lecturers;
 @Repository
 public interface LecturerRepo extends JpaRepository<Lecturers,String> {
 
-    ArrayList<Lecturers> findLecturersByLectureId(String lectureId);
+    ArrayList<Lecturers> findLecturersByLecturerId(String lectureId);
 
     //@Query("select c from LectureCanTeach lct,Courses c where lct = :lid and lct.courses.courseId=c.courseId")
     

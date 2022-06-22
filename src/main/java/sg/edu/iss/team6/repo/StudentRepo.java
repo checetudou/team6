@@ -16,8 +16,8 @@ public interface StudentRepo extends JpaRepository<Students,String> {
    @Query("select c from Courses c where c not in (select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId)")
    ArrayList<Courses> findAvailableCoursesByStudentId(@Param("sid") String studentId);
 
-    @Query("select c from Courses c where c in (select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId)")
-    ArrayList<Students> findstudentsByStudentId(String studentId);
+    @Query("select c from Courses c where c in (select c from StudentAttendCourse sac,Courses c where sac.students.studentId = :sid and sac.courses.courseId=c.courseId)")
+    ArrayList<Students> findstudentsByStudentId(@Param("sid") String studentId);
 
     @Query("Select c.size from Courses c WHERE c.courseId = :cid")
     int getCourseCapacityById(String courseId);
@@ -28,14 +28,14 @@ public interface StudentRepo extends JpaRepository<Students,String> {
     @Query("Select c from Courses c WHERE c.courseId = :cid")
     Courses findCourseByCourseId(String courseId);
     
-    @Query("select c from Courses c where c in (select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId)")
-    ArrayList<Courses> findStudentByStudentId(String studentId);
+    @Query("select c from Courses c where c in (select c from StudentAttendCourse sac,Courses c where sac.students.studentId = :sid and sac.courses.courseId=c.courseId)")
+    ArrayList<Courses> findStudentByStudentId(@Param("sid") String studentId);
     
     @Query("select s from Students s where s.Id or s.Name like %?1%")
     Courses getCurrentSize (int count);
 
-    @Query("select s from Students s where s.Id like %?1%")
-    ArrayList<Students> getStudentProfileById(String id);
+    // @Query("select s from Students s where s.Id like %?1%")
+    // ArrayList<Students> getStudentProfileById(String id);         
 
     static Students saveAndFlush(String id) {
         return null;

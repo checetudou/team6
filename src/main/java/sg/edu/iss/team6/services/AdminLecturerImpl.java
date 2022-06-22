@@ -46,7 +46,7 @@ public class AdminLecturerImpl implements AdminLecturer{
 	
 	@Override
 	public List<Lecturers> returnLecturerById (String lecturerId){
-		return this.lrepo.findLecturersByLectureId(lecturerId);
+		return this.lrepo.findLecturersByLecturerId(lecturerId);
 	}
 
 	@Override
