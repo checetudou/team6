@@ -11,16 +11,16 @@ public interface AdminCourse {
 	
 	List<Courses> getAllCourses();
 
-	Courses getCourseById (String courseId);
+	Courses getCourseById(String courseId);
 
-	void saveCourse (Courses courses);
+	void saveCourse(Courses courses);
 
-	void deleteCourse (String courseId);
+	void deleteCourse(String courseId);
 
 	List<Courses> returnCourseById(String courseId);
 
 	void addCourse(Courses courses);
-	
+
 	void updateCourse(Courses courses);
 
 }

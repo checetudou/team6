@@ -13,7 +13,7 @@ import sg.edu.iss.team6.repo.StudentAttendCourseRepo;
 import sg.edu.iss.team6.repo.StudentRepo;
 
 @Service
-public class AdminStudentImpl {
+public class AdminStudentImpl implements AdminStudent{
 
 	@Autowired
 	private StudentRepo srepo;
@@ -21,30 +21,27 @@ public class AdminStudentImpl {
 	@Autowired
 	private StudentAttendCourseRepo sacrepo;
 
+	@Override
 	public List<Students> getAllStudentProfile(){
 		return srepo.findAll();
 	}
 	
-
-//	//student profile
-//	public Students addStudent (String id) {
-//		return StudentRepo.saveAndFlush(id);
-//	}
-//	//not sure how to resolve this...it says its not compatible with string?
-
-	public Students addStudent(String id) {
-		return srepo.saveAndFlush(getStudentProfileById(id));
+	@Override
+	public void addStudent(Students student) {
+		srepo.saveAndFlush(student);
 	}
 
+	@Override
 	public void saveStudentProfile (Students student){
 		this.srepo.save(student);
 	}
 	
+	@Override
 	public void deleteStudentProfileById (String id){
 		this.srepo.deleteById(id);
 	}
 
-	//@Override
+	@Override
 	public Students getStudentProfileById(String id){
 		Optional<Students> optional = srepo.findById(id);
 		Students students = null;
@@ -59,7 +56,7 @@ public class AdminStudentImpl {
 	}
 
 	public ArrayList<Students> getStudentsProfileById(String id){
-		return srepo.findStudentsByStudentId(id);
+		return srepo.findstudentsByStudentId(id);
 	}
 	
 	//student attend course
@@ -85,12 +82,6 @@ public class AdminStudentImpl {
 	public List<StudentAttendCourse> returnStudentById(String id){
 		return this.sacrepo.getStudentById(id);
 	}
-
-//	//student attend course
-//	public StudentAttendCourse addStudentToCourse (String id) {
-//		return StudentAttendCourseRepo.saveAndFlush(id);
-//	}
-
 	
 	public void saveStudentInCourse (StudentAttendCourse student){
 		this.sacrepo.save(student);
@@ -98,6 +89,19 @@ public class AdminStudentImpl {
 
 	public void deleteStudentInCourseById (String id){
 		this.sacrepo.deleteById(id);
+	}
+
+	@Override
+	public void updateStudent(Students student) {
+		// TODO Auto-generated method stub
+		// no need return anything if just adding to table right
+	}
+
+	@Override
+	public StudentAttendCourse addStudentToCourse(String courseId) {
+		// TODO 
+		// no need return anything if just adding to table right
+		return null;
 	}
 }
 

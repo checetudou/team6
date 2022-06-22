@@ -5,20 +5,15 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.repo.CourseRepo;
-import sg.edu.iss.team6.repo.StudentAttendCourseRepo;
 
 @Service
 public class AdminCourseImpl implements AdminCourse {
 	
 	@Autowired
 	private CourseRepo crepo;
-	
-	@Autowired
-	private StudentAttendCourseRepo sacrepo;
 
 	@Override
 	public List<Courses> getAllCourses(){
@@ -40,14 +35,13 @@ public class AdminCourseImpl implements AdminCourse {
 	
 	@Override
 	public List<Courses> returnCourseById(String courseId){
-		return this.crepo.getCourseById(courseId);
+		return this.crepo.findCoursesByCourseId(courseId);
 	}
 
 	@Override
 	public void deleteCourse (String courseId){
 		this.crepo.deleteById(courseId);
 	}
-
 	
 	@Override
 	public void saveCourse(Courses courses){
@@ -62,10 +56,8 @@ public class AdminCourseImpl implements AdminCourse {
 
 	@Override
 	public void updateCourse(Courses courses) {
-		// TODO Auto-generated method stub
 		crepo.updateCourse(courses);
 	}
-
 
 }
 

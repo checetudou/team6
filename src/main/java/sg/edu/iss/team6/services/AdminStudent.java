@@ -12,17 +12,26 @@ public interface AdminStudent {
 	
 	//student profile
 	List<Students> getAllStudentProfile();
+
 	Students getStudentProfileById(String id);
-	Students updateStudent (String id);
-	Students addStudent (String id);
-	void deleteStudentProfileById (String id);
-	void saveStudentProfile (Students student);
+
+	void updateStudent(Students student);
+
+	void addStudent(Students student);
+
+	void deleteStudentProfileById(String id);
+
+	void saveStudentProfile(Students student);
 
 	//student attend course
-	List<StudentAttendCourse>  getAllStudentInCourse();
-	StudentAttendCourse getStudentById (String id);
-	StudentAttendCourse addStudentToCourse (String courseId);
-	void deleteStudentInCourseById (String id);
-	void saveStudentInCourse (StudentAttendCourse student);
+	List<StudentAttendCourse> getAllStudentInCourse();
+
+	StudentAttendCourse getStudentById(String id);
+
+	StudentAttendCourse addStudentToCourse(String courseId);
+
+	void deleteStudentInCourseById(String id);
+
+	void saveStudentInCourse(StudentAttendCourse student);
 
 }

@@ -11,12 +11,17 @@ public interface AdminLecturer {
 	
 	//Lecturer profile
 	List<Lecturers> getAllLecturer();
-	Lecturers getLecturer (String name);
-	// Lecturers addLecturer (String name); -> in controller
-	void saveLecturer (Lecturers lecturer);
-	void deleteLecturerById (String lecturerId);
-	List<Lecturers> returnLecturerById (String name);
-	// update Lecturer -> in controller
-	
+
+	Lecturers getLecturer(String name);
+
+	//TODO Lecturers addLecturer (String name); -> in controller
+	void saveLecturer(Lecturers lecturer);
+
+	void deleteLecturerById(String lecturerId);
+
+	List<Lecturers> returnLecturerById(String name);
+
+	//TODO update Lecturer -> in controller
+	Lecturers getLecturerById(String lecturerId);
 
 }
