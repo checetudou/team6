@@ -1,38 +1,54 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/layout.html :: html_head"/>
+<head th:replace="fragments/layout.html :: html_head"></head>
+
 	<body>
-		<div th:replace="fragments/layout.html :: menu"/>
-		<div th:replace="fragments/layout.html :: header"/> 
+		<div th:replace="fragments/layout.html :: menu"></div>
+		<div th:replace="fragments/layout.html :: header"></div> 
 		<h3>Course List</h3>
-		<a th:href="@{/admin/employee/create}">Add Course</a>
-		<div th:if="${not #lists.isEmpty(departmentList)}">
-			<table style="border: 1;">
-				<tr class="listHeading">
-					<!--headers-->
-					<th><span th:text="#{fieldLabel.courseId}"></span></th>
-					<th><span th:text="#{fieldLabel.courseName}"></span></th>
-					<th><span th:text="#{caption.currentEnrollment}"></span></th>
-					<th><span th:text="#{caption.lecturerlist}"></span></th>
-					<th><span th:text="#{caption.editcourseEnrollmentnumber}"></span></th>
-					<th><span th:text="#{caption.deletecourse}"></span></th>
-				</tr>
-				<tr th:each="department : ${departmentList}" class="listRecord">
+		<a th:href="@{/admin/employee/managecourses}"></a>
+		<div th:if="${not #lists.isEmpty(listCourse)}">
+		<table style="border: 1;"><table class="table table-striped table-responsive-md">
+		<thead>
+			<tr>
+				<th>CourseId</th>
+				<th>CourseName</th>
+				<th>Allowed enrollment size</th>
+				<th>Actual enrollment</th>
+				<th>Course Description</th>
+				<th>Lecturer</th>
+				<th>Class List</th>
+				<th colspan="2" align="left">Actions</th>
+
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="courses : ${courses}" th:each="lectureCanTeach : ${lecturerList}" class="listRecord">
+				<!--
+					use ${var_name.attribute} to access the attributes of the object
+				-->
 					<!--Course Id here-->
-					<td align="left" th:text="${department.departmentId}">CourseId</td>
+					<td align="left" th:text="${courses.courseId}"></td>
 					<!--Course Name here-->
-					<td align="left" th:text="${department.managerInCharge}">CourseName</td>
-					<!--hyperlink to student list of course here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
-					<!--hyperlink to list of lecturers teaching this course here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
-					<!--hyperlink to edit course enrollment number here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
+					<td align="left" th:text="${courses.courseName}"></td>
+					<!--Allowed enrollment size here-->
+					<td align="left" th:text="${courses.size}"></td>
+					<!--Course Name here-->
+					<td align="left" th:text="${courses.actualEnroll}"></td>
+					<!--Course Id here-->
+					<td align="left" th:text="${courses.description}"></td>
+					<!--Lecturer name here-->
+					<td align="left" th:text="${lectureCanTeach.courseId.lecturerId}"></td>
+					<!--Class List here-->
+					<td align="left" th:href="@__need to add hyperlink to class list__"></td>
+					<!--hyperlink to edit course here-->
+					<td><a th:href="@{/admin/updateCourse/}+${course.courseId" class="btn btn-primary">Update</a></td>
 					<!--hyperlink to delete course here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
-				</tr>
-			</table>
+					<td><a th:href="@{/admin/deleteCourse/}+${course.courseId}" class="btn btn-danger">Delete</a></td>
+			</tr>
+		</tbody>
+		</table>
 		</div>
 	</body>
 </html>
