@@ -16,39 +16,26 @@ import sg.edu.iss.team6.model.StudentAttendCourse;
 @Repository
 public interface CourseRepo extends JpaRepository<Courses,String> {
     
-	@Query("select c from Courses c where c.courseName like %?1%")
     List<Courses> findCoursesByCourseName(String courseName);
 
-//    @Query("Select lc from LectureCanTeach lc WHERE lc.lecturers.lecturerId = :lid")
-//	ArrayList<LectureCanTeach> findCoursesByLecturerId(@Param("lid") String lecturerId);
-    
+    @Query("select c from Courses c where c.courseId like %?1%")
+	List<Courses> findCoursesByCourseId(String courseId);
+  
     @Query("select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId")
 	ArrayList<StudentAttendCourse> findCoursesByStudentId(@Param("sid") String studentId);
 
     @Query("select c from LectureCanTeach sac,Courses c where sac.lecturers.lecturerId = :lid and sac.courses.courseId=c.courseId")
     ArrayList<Courses> findCoursesByLecturerId(@Param("lid") String lecturerId);
-    
-	@Query("select c from Courses c where c.courseId like %?1%")
-	List<Courses> findCoursesByCourseId(String courseId);
-    
-		
+     
 	@Query("select c.size from Courses c where c.courseId like %?1%")
-	Courses getAllowedSize (int count);
+	int getAllowedSize (String courseId);
 
-	Optional<Courses> findByName(String name);
+	// Optional<Courses> findByName(String name);
 
+    // @Query("insert c into Courses c values(:courses.courseId,courses.courseName,courses.size," + "courses.actualEnroll,courses.description)")
+    // void addCourse(Courses courses);
 
-
-//Admin's
-//@Query("select c from Courses c where c.courseId like %?1%")
-//List<Courses> getCourseById(String courseId);
-//
-//@Query("insert c into Courses c values(:courses.courseId,courses.courseName,courses.size,"
-//		+ "courses.actualEnroll,courses.description)")
-//void addCourse(Courses courses);
-//
-@Query("update Courses set(:courses.courseName,courses.size,"
-		+ "courses.actualEnroll,courses.description) where courses.courseId = courseId")
-void updateCourse(Courses course);
+    // @Query("update Courses set(:courses.courseName,courses.size," + "courses.actualEnroll,courses.description) where courses.courseId = courseId")
+    // void updateCourse(Courses course);
 
 }

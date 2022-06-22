@@ -1,26 +1,27 @@
-package sg.edu.iss.team6.service;
+package sg.edu.iss.team6.services;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import sg.edu.iss.team6.model.Lecturers;
-import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.repo.LecturerRepo;
 
-public class AdminLecturerImpl {
+@Service
+public class AdminLecturerImpl implements AdminLecturer{
 
 	@Autowired
 	private LecturerRepo lrepo;
 	
 	@Override
 	public List<Lecturers> getAllLecturer(){
-		return  lrepo.findAll();
+		return lrepo.findAll();
 	}
 	
 	@Override
-	public Lecturers getLecturerById (String lecturerId) {
+	public Lecturers getLecturerById(String lecturerId) {
 		Optional<Lecturers> optional = lrepo.findById(lecturerId);
 		Lecturers lecturers = null;
 		
@@ -44,10 +45,14 @@ public class AdminLecturerImpl {
 	}
 	
 	@Override
-	List<Lecturers> returnLecturerById (String lecturerId){
-		return this.lrepo.getLecturerById(lecturerId);
+	public List<Lecturers> returnLecturerById (String lecturerId){
+		return this.lrepo.findLecturersByLecturerId(lecturerId);
 	}
 
-
+	@Override
+	public Lecturers getLecturer(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

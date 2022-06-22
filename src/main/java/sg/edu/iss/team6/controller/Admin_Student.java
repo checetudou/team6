@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.services.AdminStudent;
 
@@ -26,7 +25,7 @@ public class Admin_Student {
 	// upon clicking manage students, I should see a list of students
 	@RequestMapping("/managestudents")
 	public String getAllStudentProfile (Model model){
-		model.addAttribute("listStudent", adsserv.getAllStudents());
+		model.addAttribute("listStudent", adsserv.getAllStudentProfile());
 		return "studentindex";  
 	}
 
@@ -69,7 +68,7 @@ public class Admin_Student {
 
 	@PostMapping("/search")
 	public String searchStudent(@Param("id")String id, Model model) {
-		List<Students> student = adsserv.returnStudentProfileById(id);
+		Students student = adsserv.getStudentProfileById(id);
 		model.addAttribute("student", student);
 		return "managestudents";
 	}
@@ -81,7 +80,7 @@ public class Admin_Student {
 
 	@PostMapping("/saveStudent")
 	public String saveStudent (@ModelAttribute("student") Students student){
-		adsserv.saveStudent (student);
+		adsserv.saveStudentProfile(student);
 		return "redirect:/managestudents";
 	}
 }
