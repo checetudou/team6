@@ -30,6 +30,7 @@ import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.services.AdminCourse;
 
 @Controller
+//TODO write a class level RequestMapping here
 public class Admin_Course {
 	
 	@Autowired
@@ -48,9 +49,9 @@ public class Admin_Course {
 	}
 
 	@PostMapping("/saveCourse")
-	public String saveCourse (@ModelAttribute("course") ToBeDeletedAdminCourses course){
+	public String saveCourse (@ModelAttribute("course") Courses course){
 		adcserv.saveCourse(course);
-		return "redirect:/managecourses";
+		return "forward:/managecourses";
 	}
 
 	@GetMapping(value = "/create")
@@ -63,7 +64,7 @@ public class Admin_Course {
 	
 	@GetMapping("/updateCourse/{courseId}")
 	public String updateCourse (@PathVariable(value="courseId") String id, Model model){
-		Courses course = adcserv.getCourseById(courseId);
+		Courses course = adcserv.getCourseById(id);
 		model.addAttribute("course", course);
 		return "updateCourse";
 	}

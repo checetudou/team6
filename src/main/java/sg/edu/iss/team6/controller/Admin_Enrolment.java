@@ -1,5 +1,6 @@
 package sg.edu.iss.team6.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.repo.CourseRepo;
@@ -57,26 +59,22 @@ public class Admin_Enrolment {
 	}
 
 	@PostMapping("/saveCourse/{courseId}")
-	public String saveCourse (HttpSession session,Model model,@ModelAtttribute("courseId")){
-		Usersession usession=session.getAttribute(usession);
-		SC.saveCourse(course);
-		
+	public String saveCourse (HttpSession session, Model model, @ModelAttribute("courseId") String id){
+		//TODO Proper implementation
+		// session = session.getAttribute(usession);
+		// ArrayList<Courses> c = cr.findCoursesByCourseId(id);
+		// SC.saveAllAndFlush(course);	
 		return "redirect:/";
 	}
 	
-	@GetMapping("/{courseId}/deleteStudent")
-	public String deleteStudent(@PathVariable(value="courseId") String courseId, @RequestMapping("id") String id, Model model){
-		adeserv.deleteStudentInCourseById(id); //input from frontend to backend
-		return "updatecourse";
-	}
+	// @GetMapping("/{courseId}/deleteStudent")
+	// public String deleteStudent(@PathVariable(value="courseId") String courseId, @RequestMapping("id") String id, Model model){
+	// 	adeserv.deleteStudentInCourseById(id); //input from frontend to backend
+	// 	return "updatecourse";
+	// }
 
 	private void deleteStudent(String courseId) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
-
-
-
-
 
 }
