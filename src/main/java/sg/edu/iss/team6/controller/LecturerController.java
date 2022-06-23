@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import sg.edu.iss.team6.helper.CourseEventEnum;
 import sg.edu.iss.team6.helper.Grade;
 import sg.edu.iss.team6.model.CourseEvent;
 import sg.edu.iss.team6.model.Courses;
-import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.services.CourseService;
+import sg.edu.iss.team6.services.LecturerService;
 import sg.edu.iss.team6.services.StudentService;
 
 @Controller
@@ -34,6 +33,9 @@ public class LecturerController {
 	
 	@Autowired
 	private StudentService sService;
+
+	@Autowired
+	private LecturerService 
 
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
