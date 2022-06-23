@@ -22,8 +22,8 @@ public class StudentAttendCourseServiceImpl implements StudentAttendCourseServic
 	
 	@Override
 	@Transactional
-	public StudentAttendCourse createStudentAttendCourse(StudentAttendCourse SAC) {
-		return sacRepo.saveAndFlush(SAC);
+	public void createStudentAttendCourse(StudentAttendCourse SAC) {
+		 sacRepo.saveAndFlush(SAC);
 	}
 
 	@Override

@@ -7,8 +7,8 @@ import sg.edu.iss.team6.model.StudentAttendCourse;
 public interface StudentAttendCourseService {
 
 	ArrayList<StudentAttendCourse> findStudentAttendCourseByStudentId(String StudentId);
-	
-	StudentAttendCourse createStudentAttendCourse(StudentAttendCourse SAC);
+
+	void createStudentAttendCourse(StudentAttendCourse SAC);
 
 	void saveAllAndFlush(ArrayList<StudentAttendCourse> sacList);
 

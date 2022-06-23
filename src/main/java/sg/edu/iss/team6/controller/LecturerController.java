@@ -39,7 +39,13 @@ public class LecturerController {
 	private void initBinder(WebDataBinder binder) {
 		//TODO if got time
 	}
-	
+
+	@RequestMapping(value = "/studentAttendCourse/{id}", method = RequestMethod.POST)
+	public ModelAndView gradeStudent(@PathVariable int id) {
+		Courses course = cService.findCourse(id);
+		ModelAndView mav = new ModelAndView("manager-course-detail", "course", course);
+		mav.addObject("approve", new Approve());
+    
 	@RequestMapping(value = "/courselist", method = RequestMethod.GET)
 	public ModelAndView lectureCanTeachList(HttpSession session) {
 		//TODO Use HttpSession to check if the User entering this page is ONLY an authorised person that can see his courses(lecturers/admin)
@@ -57,6 +63,7 @@ public class LecturerController {
 		ModelAndView mav = new ModelAndView("lecture-can-teach"); //TODO insert proper html page name
 		ArrayList<StudentAttendCourse> sacList = sacService.findStudentAttendCourseByCourseId(courseId);
 		mav.addObject("studentattendcourselist", sacList);
+
 		return mav;
 	}
 
@@ -78,5 +85,6 @@ public class LecturerController {
 		ModelAndView mav = new ModelAndView("gradeStudents"); // TODO insert proper html page name
 		return mav;
 	}
+
 	
-}
+}*/
