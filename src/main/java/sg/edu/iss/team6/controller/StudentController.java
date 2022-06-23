@@ -42,7 +42,7 @@ public class StudentController {
 	public String studentGrades(HttpSession session, Model model) {
 		UserSession usession = (UserSession) session.getAttribute("usession");
 		
-		if (usession.getStudent() != null) {
+    if (usession.getStudent() != null) {
 			
 			if (sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId()).size() > 0) {
 				model.addAttribute("cStudentAttendCourses", sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId()));
@@ -74,7 +74,7 @@ public class StudentController {
 		
 			return "student-grades";
 		}
-		return "forward:/home/login";
+		return "common-login";
 	}
 	
 	@RequestMapping(value = "/courses")
@@ -93,7 +93,7 @@ public class StudentController {
 
 	
 	@RequestMapping(value = "/enroll/{id}", method = RequestMethod.GET)
-	public String enrollCourse(@PathVariable String id, HttpSession session) {
+	public String enrollCourse(@PathVariable String id, HttpSession session, Model model) {
 		
 		UserSession usession = (UserSession) session.getAttribute("usession");
 		Courses course = sService.findCourseByCourseId(id);
@@ -105,11 +105,12 @@ public class StudentController {
 			SAC.setCourses(course);
 			sacService.createStudentAttendCourse(SAC);
 			cService.updateCourse(course);
-		 
+			//model.addAttribute("status","success");
 		}
 		
-		
-		cService.updateCourse(course);
+		//else {
+			//model.addAttribute("status","unsucessful")
+		//}
 		return "enrollment-result";
 	}
 			

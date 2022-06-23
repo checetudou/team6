@@ -35,7 +35,7 @@ public class LoginController {
 	@RequestMapping(value = "/")
 	public String student(Model model) {
 		model.addAttribute("user", new User());
-		return "login";
+		return "common-login";
 	}
 
 	@RequestMapping(value = "/about")
@@ -50,7 +50,7 @@ public class LoginController {
 	@RequestMapping(value = "/home/authenticate")
 	public String authenticate(@ModelAttribute("user") User user, BindingResult bindingResult, Model model, HttpSession session) {
 		if (bindingResult.hasErrors()) {
-			return "login";
+			return "common-login";
 		}
 		else {
             UserSession usession = new UserSession();

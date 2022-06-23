@@ -42,7 +42,7 @@ public class LecturerController {
 	
 
 	/*viewing all courses the lecturer teaches*/
-	@RequestMapping(value = "/lectureCanTeach/list/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/lectureCanTeach/list/{id}", method = RequestMethod.GET)
 	public ModelAndView lectureCanTeachList(@PathVariable String id) {
 		ModelAndView mav = new ModelAndView("lecture-can-teach");//"LectureCanTeach-list naming to be confirmed
 		ArrayList<Courses> courses= cService.findCoursesByLecturerId(id);
@@ -58,7 +58,7 @@ public class LecturerController {
 	// 	return mav;
 	// }
 	
-	@RequestMapping(value = "/student/grade/{id}", method = RequestMethod.POST)
+/*	@RequestMapping(value = "/student/grade/{id}", method = RequestMethod.POST)
 	public ModelAndView gradeStudent(@ModelAttribute("grade") @Valid Grade grade,BindingResult result, @PathVariable Integer id, HttpSession session) {
 		if (result.hasErrors())
 			return new ModelAndView("lecturer-coursestudentlist");
@@ -156,8 +156,8 @@ public class LecturerController {
 		course.addCourseEvent(ce);
 		cService.changeCourse(course);
 		return mav;
-	}*/
+	}
 
 	
 	
-}
+}*/
