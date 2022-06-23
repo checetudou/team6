@@ -1,7 +1,6 @@
 package sg.edu.iss.team6.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Courses;
@@ -21,8 +19,6 @@ import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.services.CourseService;
 import sg.edu.iss.team6.services.StudentAttendCourseService;
 import sg.edu.iss.team6.services.StudentService;
-import sg.edu.iss.team6.helper.CourseEventEnum;
-import sg.edu.iss.team6.model.CourseEvent;
 
 @Controller
 @RequestMapping(value="/student")

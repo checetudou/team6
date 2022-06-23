@@ -39,12 +39,6 @@ public class LecturerController {
 	private void initBinder(WebDataBinder binder) {
 		//TODO if got time
 	}
-
-	@RequestMapping(value = "/studentAttendCourse/{id}", method = RequestMethod.POST)
-	public ModelAndView gradeStudent(@PathVariable int id) {
-		Courses course = cService.findCourse(id);
-		ModelAndView mav = new ModelAndView("manager-course-detail", "course", course);
-		mav.addObject("approve", new Approve());
     
 	@RequestMapping(value = "/courselist", method = RequestMethod.GET)
 	public ModelAndView lectureCanTeachList(HttpSession session) {
@@ -87,4 +81,4 @@ public class LecturerController {
 	}
 
 	
-}*/
+}
