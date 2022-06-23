@@ -1,6 +1,9 @@
 package sg.edu.iss.team6.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,8 +21,8 @@ import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.services.CourseService;
 import sg.edu.iss.team6.services.StudentAttendCourseService;
 import sg.edu.iss.team6.services.StudentService;
-import sg.edu.nus.cats.helper.CourseEventEnum;
-import sg.edu.nus.cats.model.CourseEvent;
+import sg.edu.iss.team6.helper.CourseEventEnum;
+import sg.edu.iss.team6.model.CourseEvent;
 
 @Controller
 @RequestMapping(value="/student")
@@ -40,9 +43,34 @@ public class StudentController {
 		
 		if (usession.getStudent() != null) {
 			
-			if (cService.findCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
-				model.addAttribute("cGrades", cService.findCoursesByStudentId(usession.getStudent().getStudentId()));
+			if (sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId()).size() > 0) {
+				model.addAttribute("cStudentAttendCourses", sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId()));
+				
 			}
+			
+		ArrayList<StudentAttendCourse> courses = sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId());
+		double totalMarks = 0;
+		double gpa = 0;
+		Map<String, Double> gradeMap = new HashMap<String, Double>()
+		{
+			{
+				put("A",5.0);
+				put("B",4.0);
+				put("C",3.0);
+				put("D",2.5);
+				put("Pass",2.0);
+				put("Fail",0.0);
+			}
+		};
+		
+		for (StudentAttendCourse course : courses)
+		{
+			totalMarks += gradeMap.get(course.getGrade());
+		}
+		
+		gpa = totalMarks / 4 * courses.size();
+		model.addAttribute("gpa",gpa);
+		
 			return "student-grades";
 		}
 		return "forward:/home/login";
@@ -55,6 +83,7 @@ public class StudentController {
 			
 			if (sService.findAvailableCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
 				model.addAttribute("cCourses", sService.findAvailableCoursesByStudentId(usession.getStudent().getStudentId()));
+				
 			}
 			return "student-available-courses";
 		}

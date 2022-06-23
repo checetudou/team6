@@ -4,8 +4,8 @@
 <body>
 	<div th:replace="fragments/layout.html :: menu"/>
 	<div th:replace="fragments/layout.html :: header"/> 
-	<h2>Available Courses</h2>
-	<div th:if="${not #lists.isEmpty(cCourses)}">
+	<h2>Grades and GPA</h2>
+	<div th:if="${not #lists.isEmpty(cStudentAttendCourse)}">
 		<table style=" border: 1;">
 			<tr class="listHeading">
 				<th>Course Id</th>
@@ -17,13 +17,11 @@
 				<td align="left" th:text="${course.courses.courseId}">Course Id</td>
 				<td align="left" th:text="${course.courses.courseName}">Course Name</td>
 				<td align="left" th:text="4">Credit</td>
-				<td>
-					<div
-						<a th:href="@{/student/enroll/}+${course.courses.courseId}">Enroll</a>
-					</div>
-				</td>
+				<td align="left" th:text="${course.grade">Grade</td>
 			</tr>
 		</table>
+		
+		<p th:text="Gpa: ${gpa}"
 	</div>
 </body>
 
