@@ -5,59 +5,74 @@ import java.util.ArrayList;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.StudentAttendCourse;
+import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.repo.CourseRepo;
+import sg.edu.iss.team6.repo.LecturerRepo;
+import sg.edu.iss.team6.repo.StudentAttendCourseRepo;
+import sg.edu.iss.team6.repo.StudentRepo;
 
 @Service
 public class CourseServiceImpl implements CourseService {
-	
+
 	@Resource
-	private CourseRepo courseRepo;
-	
+	private CourseRepo crepo;
+
+	@Resource
+	private StudentRepo srepo;
+
+	@Resource
+	private LecturerRepo lrepo;
+
+	@Resource
+	private StudentAttendCourseRepo sacRepo;
+
 	@Override
-	@Transactional
 	public ArrayList<Courses> findAllCourses() {
-		ArrayList<Courses> l = (ArrayList<Courses>) courseRepo.findAll();
-		return l;
+		return (ArrayList<Courses>) crepo.findAll();
 	}
 
 	@Override
-	@Transactional
-	public Courses findCourse(String courseId) {
-		return courseRepo.findById(courseId).orElse(null);
-
+	public Courses findCourse(String ceid) {
+		return crepo.findCourseByCourseId(ceid);
 	}
 
 	@Override
-	@Transactional
-	public Courses createCourse(Courses course) {
-		return courseRepo.saveAndFlush(course);
+	public void addCourse(Courses course) {
+		crepo.saveAndFlush(course);
 	}
 
 	@Override
-	@Transactional
-	public Courses changeCourse(Courses course) {
-		return courseRepo.saveAndFlush(course);
+	public void updateCourse(Courses course) {
+		crepo.saveAndFlush(course);	
 	}
 
 	@Override
-	@Transactional
 	public void removeCourse(Courses course) {
-		courseRepo.delete(course);
+		crepo.delete(course);	
 	}
 
 	@Override
-	@Transactional
-	public ArrayList<Courses> findCoursesByLecturerId(String lecturerId) {
-		return courseRepo.findCoursesByLecturerId(lecturerId);
+	public ArrayList<Courses> findCoursesByStudentId(String studentId) {
+		ArrayList<Courses> studentCourses = new ArrayList<Courses>();
+		Students s = srepo.findStudentByStudentId(studentId);
+		for (StudentAttendCourse ballsac : s.getStudentAttendCourses()) {
+			studentCourses.add(ballsac.getCourses());
+		}
+		return studentCourses;
+	}
+
+	@Override
+	public int getCourseCapacityById(String courseId) {
+		return crepo.getAllowedSize(courseId);
+	}
+
+	@Override
+	public int getActualEnrolledById(String courseId) {
+		Courses c = crepo.findCourseByCourseId(courseId);
+		return c.getActualEnroll();
 	}
 	
-	@Override
-	@Transactional
-	public ArrayList<StudentAttendCourse> findCoursesByStudentId(String studentId) {
-		return courseRepo.findCoursesByStudentId(studentId);
-	}
 }

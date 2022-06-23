@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.Lecturers;
 
-public interface LecturerService {
-	
+public interface LecturerService {	
 	
 	ArrayList<Courses> coursesByLecturer(String lecturerId);
 	

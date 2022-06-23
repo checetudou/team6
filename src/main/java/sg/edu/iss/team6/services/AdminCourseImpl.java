@@ -1,11 +1,10 @@
 package sg.edu.iss.team6.services;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.repo.CourseRepo;
@@ -13,60 +12,33 @@ import sg.edu.iss.team6.repo.CourseRepo;
 @Service
 public class AdminCourseImpl implements AdminCourse {
 	
-	@Autowired
+	@Resource
 	private CourseRepo crepo;
 
 	@Override
-	public List<Courses> getAllCourses(){
-		return crepo.findAll();
-	}
-
-	public Courses getCourseById (String courseId){
-		Optional<Courses> optional = crepo.findById(courseId);
-		Courses courses = null;
-		
-		if(optional.isPresent()){
-			courses = optional.get();
-		}
-		else{
-			throw new RuntimeException("Course is not found!");
-		}
-		return courses;
-	}
-	
-	@Override
-	@Transactional
-	public List<Courses> returnCourseById(String courseId){
-		return this.crepo.findCoursesByCourseId(courseId);
+	public ArrayList<Courses> getAllCourses() {
+		return (ArrayList<Courses>) crepo.findAll();
 	}
 
 	@Override
-	public void deleteCourse (String courseId){
-		this.crepo.deleteById(courseId);
-	}
-	
-	@Override
-	public void saveCourse(Courses courses){
-		this.crepo.save(courses);
-	}
-	
-
-	@Override
-	public void addCourse(Courses courses){
-		this.crepo.addCourse(courses);
+	public Courses getCourseById(String courseId) {
+		return crepo.findCourseByCourseId(courseId);
 	}
 
+	@Override
+	public void addCourse(Courses courses) {
+		crepo.saveAndFlush(courses);	
+	}
 
 	@Override
 	public void updateCourse(Courses courses) {
-		// TODO Auto-generated method stub
-		this.crepo.updateCourse(courses);
+		crepo.saveAndFlush(courses);	
 	}
 
-	// @Override
-	// public void updateCourse(Courses courses) {
-	// 	crepo.updateCourse(courses);
-	// }
-
+	@Override
+	public void deleteCourse(Courses courses) {
+		crepo.delete(courses);
+	}
+	
 }
 

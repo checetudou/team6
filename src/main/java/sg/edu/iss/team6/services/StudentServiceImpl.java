@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.Students;
@@ -13,37 +12,30 @@ import sg.edu.iss.team6.repo.StudentRepo;
 
 @Service
 public class StudentServiceImpl implements StudentService{
-	
+
 	@Resource
-	private StudentRepo studentRepo;
+	private StudentRepo srepo;
 
 	@Override
-	@Transactional
-	public ArrayList<Courses> findAvailableCoursesByStudentId(String studentId) {
-		return studentRepo.findAvailableCoursesByStudentId(studentId);
+	public ArrayList<Students> findAllStudents() {
+		return (ArrayList<Students>) srepo.findAll();
 	}
 
 	@Override
-	public ArrayList<Students> findStudentById(String s) {
-		return studentRepo.findstudentsByStudentId(s);
+	public ArrayList<Students> findStudentsById(String studentId) {
+		return srepo.findStudentsByStudentId(studentId);
+	}
+
+	@Override
+	public Students findStudentById(String studentId) {
+		return srepo.findStudentByStudentId(studentId);
+	}
+
+	@Override
+	public ArrayList<Courses> findAvailableCoursesByStudentId(String studentId) {
+		return srepo.findAvailableCoursesByStudentId(studentId);
 	}
 	
-//	@Override
-//	@Transactional
-//	public int getCourseCapacityById(String courseId) {
-//		return StudentRepo.getCourseCapacityById(courseId);
-//	}
-//
-//	@Override
-//	@Transactional
-//	public int getActualEnrolledById(String courseId) {
-//		return StudentRepo.getActualEnrolledById(courseId);
-//	}
-//
-	@Override
-	@Transactional
-	public Courses findCourseByCourseId(String courseId) {
-		return studentRepo.findCourseByCourseId(courseId);
-	}
+
 
 }
