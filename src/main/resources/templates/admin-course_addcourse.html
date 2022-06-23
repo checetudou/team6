@@ -39,7 +39,7 @@
 					<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
 				</tr>
 				<tr><!-- Dropdown menu to assign initial lecturer-->
-					<td><span th:text="#{fieldLabel.newgrade}"></span></td>
+					<td><span th:text="#{fieldLabel.lecturer}"></span></td>
 					<td>
 						<fieldset> 
 							<select th:field="*{lecturer}">
