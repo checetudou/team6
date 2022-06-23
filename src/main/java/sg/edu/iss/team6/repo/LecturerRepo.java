@@ -7,21 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.Lecturers;
 
 @Repository
 public interface LecturerRepo extends JpaRepository<Lecturers,String> {
 
-    ArrayList<Lecturers> findLecturersByLecturerId(String lectureId);
+    @Query("SELECT l FROM Lecturers l WHERE l.lectureId LIKE :lid")
+    ArrayList<Lecturers> findLecturersByLecturerId(@Param("lid") String lecturerid);
 
-    //@Query("select c from LectureCanTeach lct,Courses c where lct = :lid and lct.courses.courseId=c.courseId")
+    @Query("SELECT lct.courses FROM LectureCanTeach lct WHERE lct.lecturers.lectureId=:lid")
+    ArrayList<Courses> findCoursesByLecturer(@Param("lid") String lecturerid);
     
-    //@Query("select courseId from LectureCanTeach lct where lct.lecturers.lecturerId = :lid")
-    
-    //ArrayList<Courses> findCoursesByLecturers(@Param("lid") String s);
-  
-    @Query("Select l from Lecturers l WHERE l.lecturerId = :xyz")
-	ArrayList<Lecturers> coursesByLecturer(@Param("xyz") String lecturerId);
-
 }
 
