@@ -7,33 +7,59 @@
 	<div th:replace="fragments/layout.html :: header"/> 
 	<h3>Add New Student</h3>
 	<!--form start-->
-	<form action="#" th:action="@{/admin/employee/create}" th:object="${employee}" method="post">
+	<form action="#" th:action="@{/admin/managestudents/newStudent}" th:object="${admin}" method="post">
 		<table>
 			<tbody>
+				<tr> <!--Input student id-->
+					<td><b>Student Id</b><span th:text="#{fieldLabel.studentId}"></span></td>
+					<td>
+						<fieldset><input type="text" th:field="*{studentId}" /></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}"></td>
+				</tr>
+				
+				
 				<tr> <!--Input student firstname-->
-					<td><span th:text="#{fieldLabel.employeeId}"></span></td>
+					<td><b>First name</b><span th:text="#{fieldLabel.firstName}"></span></td>
 					<td>
-						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
+						<fieldset><input type="text" th:field="*{firstName}" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
+					<td th:if="${#fields.hasErrors('firstName')}" th:errors="*{studentId}"></td>
 				</tr>
+				
+				
+				
 				<tr> <!--Input student lastname-->
-					<td><span th:text="#{fieldLabel.employeeId}"></span></td>
+					<td><b>Last name</b><span th:text="#{fieldLabel.lastName}"></span></td>
 					<td>
-						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
+						<fieldset><input type="text" th:field="*{lastName}" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
+					<td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></td>
 				</tr>
+				
+				
 				<tr> <!--Input student email-->
-					<td><span th:text="#{fieldLabel.managerId}"></span></td>
+					<td><b>Email</b><span th:text="#{fieldLabel.email}"></span></td>
 					<td>
-						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
+						<fieldset><input type="text" th:field="*{email}" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
+					<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
 				</tr>
+				
+				
+				<tr> <!--Input lecturer email-->
+					<td><b>Photo Id</b><span th:text="#{fieldLabel.photo}"></></td>
+					<td>
+						<fieldset><input type="file" id="myFile" name="filename"th:field="*{photo}" /></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"></td>
+				</tr>
+				
+				
+				
 				<tr>
 					<td>
-						<fieldset><input type="submit" value="Create" class="blcass" /></fieldset>
+						<input type="submit" value="Create student" class="blcass" /></fieldset>
 					</td>
 					<td></td>
 					<td></td>
