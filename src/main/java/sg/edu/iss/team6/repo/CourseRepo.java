@@ -29,9 +29,6 @@ public interface CourseRepo extends JpaRepository<Courses,String> {
     @Query("select c from LectureCanTeach sac,Courses c where sac.lecturers.lecturerId = :lid and sac.courses.courseId=c.courseId")
 
     ArrayList<Courses> findCoursesByLecturerId(@Param("lid") String lecturerId, Pageable pageable);
-    
-	@Query("select c from Courses c where c.courseId like %?1%")
-	List<Courses> findCoursesByCourseId(String courseId);
 
 	@Query("select c.size from Courses c where c.courseId like %?1%")
 	int getAllowedSize (String courseId);
