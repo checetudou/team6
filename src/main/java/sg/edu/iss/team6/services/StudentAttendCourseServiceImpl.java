@@ -22,5 +22,15 @@ public class StudentAttendCourseServiceImpl implements StudentAttendCourseServic
 		return (ArrayList<StudentAttendCourse>) sacRepo.getStudentAttendCourseListByStudentId(studentId);
 	}
 
+	@Override
+	public void saveAllAndFlush(ArrayList<StudentAttendCourse> sacList) {
+		sacRepo.saveAllAndFlush(sacList);
+	}
+
+	@Override
+	public ArrayList<StudentAttendCourse> findStudentAttendCourseByCourseId(String courseId) {
+		return (ArrayList<StudentAttendCourse>) sacRepo.getStudentAttendCourseListByCourseId(courseId);
+	}
+
 }
 
