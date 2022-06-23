@@ -1,33 +1,44 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="fragments/layout.html :: html_head"/>
 	<body>
 		<div th:replace="fragments/layout.html :: menu"/>
 		<div th:replace="fragments/layout.html :: header"/> 
 		<h3>Student List</h3>
-		<a th:href="@{/admin/employee/create}">Add Student</a>
-		<div th:if="${not #lists.isEmpty(departmentList)}">
+		<a th:href="@{/admin/managestudents}"></a>
+		<div th:if="${not #lists.isEmpty(studentList)}">
 			<table style="border: 1;">
 				<tr class="listHeading">
 					<!--headers-->
-					<th><span th:text="#{fieldLabel.courseId}"></span></th>
-					<th><span th:text="#{fieldLabel.courseName}"></span></th>
-					<th><span th:text="#{caption.currentEnrollment}"></span></th>
-					<th><span th:text="#{caption.grade}"></span></th>
+
+		<thead>
+				<th>Student Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Enrollment date</th>
+				<th>Email</th>
+				<th colspan="2" align="left">Actions</th>
 				</tr>
-				<tr th:each="department : ${departmentList}" class="listRecord">
+				
+				
+				<th:each="student : ${studentList}" class="listRecord">
 					<!--Student Id here-->
-					<td align="left" th:text="${department.departmentId}">CourseId</td>
-					<!--Student Name here-->
-					<td align="left" th:text="${department.managerInCharge}">CourseName</td>
-					<!--hyperlink to student courses here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
-					<!--hyperlink to edit particulars here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
-					<!--hyperlink to delete here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
-				</tr>
+					<td align="left" th:text="${students.studentId}"></td>
+					<!--First Name here-->
+					<td align="left" th:text="${students.firstName}"></td>
+					<!--Last Name here-->
+					<td align="left" th:text="${students.lastName}"></td>
+					<!--Enrollment Date here-->
+					<td align="left" th:text="${students.enrollmentDate}"></td>
+					<!--Email here-->
+					<td align="left" th:text="${students.email}"></td>
+					<!--Student courselist here-->
+					<td align="left" th:href="@__need to add hyperlink to class list__"></td>
+					<!--hyperlink to edit course here-->
+					<td><a th:href="@{/admin/updateStudent/}+${students.studentId" class="btn btn-primary">Update</a></td>
+					<!--hyperlink to delete course here-->
+					<td><a th:href="@{/admin/deleteStudent/}+${students.studentId}" class="btn btn-danger">Delete</a></td>
+			</tr>
 			</table>
 		</div>
 	</body>

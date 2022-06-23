@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="fragments/layout.html :: html_head"/>
 	<body>
 		<div th:replace="fragments/layout.html :: menu"/>
 		<div th:replace="fragments/layout.html :: header"/> 
 		<h3>Lecturer List</h3>
-		<a th:href="@{/admin/employee/create}">Add Lecturer</a>
+		<a th:href="@{/admin/employee/create}"></a>
 		<div th:if="${not #lists.isEmpty(departmentList)}">
 			<table style="border: 1;">
 				<tr class="listHeading">
 					<!--headers-->
-					<th><span th:text="#{fieldLabel.courseId}"></span></th>
-					<th><span th:text="#{fieldLabel.courseName}"></span></th>
-					<th><span th:text="#{caption.currentEnrollment}"></span></th>
-					<th><span th:text="#{caption.grade}"></span></th>
+				<th>Lecturer Id</th>
+				<th>Name</th>
+				<th>Class List</th> 
+				<th colspan="2" align="left">Actions</th>
 				</tr>
 				<tr th:each="department : ${departmentList}" class="listRecord">
 					<!--Lecturer Id here-->
-					<td align="left" th:text="${department.departmentId}">CourseId</td>
+					<td align="left" th:if="${lecturers.adminOrNot == 'Yes'" th:text="${lecturers.lecturerId}"}"></td>
 					<!--Lecturer Name here-->
-					<td align="left" th:text="${department.managerInCharge}">CourseName</td>
+					<td align="left" th:text="${lecturers.firstName} + ${lecturers.lastName}"></td>
 					<!--hyperlink to CURRENT lecturer courses here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
-					<!--hyperlink to PAST lecturer courses here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
+					<td><a th:href="@{/lectureCanTeach/list/}+${lecturer.lecturerId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
+					<!--hyperlink to update lecturer here-->
+					<td><a th:href="@{/admin/updatelecturer}+${lecturers.lecturerId}" class="btn btn-primary">Update</a></td>
 					<!--hyperlink to delete lecturer here-->
-					<td><a th:href="@{/admin/department/delete/}+${department.departmentId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
+					<td><a th:href="@{/admin/deletelecturer/}+${lecturers.lecturerId}" class="btn btn-danger">Delete</span></a></td>
 				</tr>
 			</table>
 		</div>
