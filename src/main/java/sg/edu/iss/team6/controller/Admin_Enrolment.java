@@ -37,7 +37,7 @@ public class Admin_Enrolment {
 	@Autowired
 	private AdminCourse adcserv;
 
-// clicking into manage enrolment should return a list of courses
+// clicking into manage enrollment should return a list of courses
 // it should be the same page as when you click into manage courses	
 
 	@RequestMapping("/managecourse")

@@ -28,11 +28,7 @@ public class Admin_Student {
 		model.addAttribute("listStudent", adsserv.getAllStudentProfile());
 		return "studentindex";  
 	}
-
-	private Object getAllStudents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 // creating a new Lecturer, this should return a form to add in details.
 // After which, it should return the list of lecturers with the new addition.	
@@ -50,10 +46,6 @@ public class Admin_Student {
 		return "updateStudent";
 	}
 
-	private Students getStudentProfileById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@GetMapping("/deleteStudent/{id}")
 	public String deleteStudent(@PathVariable(value="id") String id, Model model){
@@ -61,26 +53,17 @@ public class Admin_Student {
 		return "redirect:/managestudents";
 	}
 
-	private void deleteStudentProfileById(String id) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@PostMapping("/search")
 	public String searchStudent(@Param("id")String id, Model model) {
-		Students student = adsserv.getStudentProfileById(id);
+		List<Students> student = adsserv.returnStudentsProfileById(id);
 		model.addAttribute("student", student);
 		return "managestudents";
 	}
 
-	private List<Students> returnStudentProfileById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@PostMapping("/saveStudent")
 	public String saveStudent (@ModelAttribute("student") Students student){
-		adsserv.saveStudentProfile(student);
+		adsserv.saveStudentProfile (student);
 		return "redirect:/managestudents";
 	}
 }

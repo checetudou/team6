@@ -34,6 +34,7 @@ public class AdminCourseImpl implements AdminCourse {
 	}
 	
 	@Override
+	@Transactional
 	public List<Courses> returnCourseById(String courseId){
 		return this.crepo.findCoursesByCourseId(courseId);
 	}
@@ -48,11 +49,18 @@ public class AdminCourseImpl implements AdminCourse {
 		this.crepo.save(courses);
 	}
 	
-	// @Override
-	// public void addCourse(Courses courses){
-	// 	crepo.addCourse(courses);
-	// }
 
+	@Override
+	public void addCourse(Courses courses){
+		this.crepo.addCourse(courses);
+	}
+
+
+	@Override
+	public void updateCourse(Courses courses) {
+		// TODO Auto-generated method stub
+		this.crepo.updateCourse(courses);
+	}
 
 	// @Override
 	// public void updateCourse(Courses courses) {

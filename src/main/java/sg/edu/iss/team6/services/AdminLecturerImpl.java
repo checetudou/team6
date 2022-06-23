@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.repo.LecturerRepo;
@@ -16,12 +16,14 @@ public class AdminLecturerImpl implements AdminLecturer{
 	private LecturerRepo lrepo;
 	
 	@Override
+	@Transactional
 	public List<Lecturers> getAllLecturer(){
 		return lrepo.findAll();
 	}
 	
 	@Override
-	public Lecturers getLecturerById(String lecturerId) {
+	@Transactional
+	public Lecturers getLecturerById (String lecturerId) {
 		Optional<Lecturers> optional = lrepo.findById(lecturerId);
 		Lecturers lecturers = null;
 		
@@ -35,24 +37,20 @@ public class AdminLecturerImpl implements AdminLecturer{
 	}
 	
 	@Override
+	@Transactional
 	public void saveLecturer (Lecturers lecturer) {
 		this.lrepo.save(lecturer);
 	}
 	
 	@Override
+	@Transactional
 	public void deleteLecturerById (String lecturerId) {
 		this.lrepo.deleteById(lecturerId);
 	}
 	
 	@Override
-	public List<Lecturers> returnLecturerById (String lecturerId){
-		return this.lrepo.findLecturersByLecturerId(lecturerId);
+	@Transactional
+	List<Lecturers> returnLecturerById (String lecturerId){
+		return this.lrepo.getLecturerById(lecturerId);
 	}
-
-	@Override
-	public Lecturers getLecturer(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }
