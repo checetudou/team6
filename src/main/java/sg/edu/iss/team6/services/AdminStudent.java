@@ -1,19 +1,14 @@
 package sg.edu.iss.team6.services;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import org.springframework.stereotype.Service;
-
-import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.model.Students;
 
-@Service
 public interface AdminStudent {
-	
-	//student profile
-	List<Students> getAllStudentProfile();
+
+	ArrayList<Students> getAllStudentProfile();
   
-	List<Students> returnStudentsProfileById(String id);
+	ArrayList<Students> returnStudentsProfileById(String id);
   
 	Students getStudentProfileById(String id);
 
@@ -23,18 +18,10 @@ public interface AdminStudent {
 
 	void deleteStudentProfileById(String id);
 
-	void saveStudentProfile(Students student);
+	ArrayList<Students> getAllStudentsInCourse(String courseId);
 
-	//student attend course
-	List<StudentAttendCourse> getAllStudentInCourse();
+	void addStudentToCourse(String courseId, String studentId);
 
-	StudentAttendCourse getStudentById(String id);
-
-	StudentAttendCourse addStudentToCourse(String courseId);
-
-	void deleteStudentInCourseById(String id);
-
-	void saveStudentInCourse(StudentAttendCourse student);
-
+	void deleteStudentInCourseById(String courseId, String studentId);
 
 }

@@ -66,4 +66,5 @@ public class Admin_Student {
 		adsserv.saveStudentProfile (student);
 		return "redirect:/managestudents";
 	}
+
 }

@@ -43,12 +43,20 @@ public class LecturerController {
 
 	/*viewing all courses the lecturer teaches*/
 	@RequestMapping(value = "/lectureCanTeach/list/{id}", method = RequestMethod.GET)
-	public ModelAndView lectureCanTeachList(@PathVariable String id ) {
+	public ModelAndView lectureCanTeachList(@PathVariable String id) {
 		ModelAndView mav = new ModelAndView("lecture-can-teach");//"LectureCanTeach-list naming to be confirmed
 		ArrayList<Courses> courses= cService.findCoursesByLecturerId(id);
 		mav.addObject("courses", courses);
 		return mav;
 	}
+
+	// TODO make a GET page to retrieve initial grades and courses for the student
+	// @RequestMapping(value = "/student/grade/{id}", method = RequestMethod.GET)
+	// public ModelAndView gradeStudent(@PathVariable String id, HttpSession session) {
+	// 	//TODO Use HttpSession to check if the User entering this page is ONLY an authorised person that can change grades(lecturers/admin)
+	// 	ArrayList<Courses> studentCourses = sService.
+	// 	return mav;
+	// }
 	
 	@RequestMapping(value = "/student/grade/{id}", method = RequestMethod.POST)
 	public ModelAndView gradeStudent(@ModelAttribute("grade") @Valid Grade grade,BindingResult result, @PathVariable Integer id, HttpSession session) {

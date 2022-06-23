@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.repo.LecturerRepo;
 
@@ -14,46 +14,36 @@ import sg.edu.iss.team6.repo.LecturerRepo;
 public class LecturerServiceImpl implements LecturerService{
 	
 	@Resource
-	private LecturerRepo lecturerRepo;
-	
-//	@Override
-//	@Transactional
-//	public ArrayList<Courses> findCoursesByLecturers(String lecturerId){
-//		return LecturerRepo.findCoursesByLecturers(lecturerId);
-//	}
-	
+	private LecturerRepo lecRepo;
+
 	@Override
-	@Transactional
-	public ArrayList <Lecturers> coursesByLecturer(String lecturerId){
-		return lecturerRepo.coursesByLecturer(lecturerId);
-	}
-	
-	@Override
-	@Transactional
-	public ArrayList<Lecturers> findAllLecturers(){
-		ArrayList <Lecturers> l = (ArrayList<Lecturers>) lecturerRepo.findAll();
-		return l;
-	}
-	
-	@Override
-	@Transactional
-	public Lecturers findLecturer(String lecturerId) {
-		return lecturerRepo.findById(lecturerId).orElse(null);
-	}
-	
-	@Override
-	@Transactional
-	public Lecturers createLecturer(Lecturers lecturer) {
-		return lecturerRepo.saveAndFlush(lecturer);
+	public ArrayList<Courses> coursesByLecturer(String lecturerid) {
+		return lecRepo.findCoursesByLecturer(lecturerid);
 	}
 
-	/*
 	@Override
-	@Transactional
-	public Lecturers removeLecturer(Lecturers lecturer) {
-		return lecturerRepo.delete(lecturer);
+	public ArrayList<Lecturers> findAllLecturers() {
+		return (ArrayList<Lecturers>) lecRepo.findAll();
 	}
-	
-	*/
+
+	@Override
+	public Lecturers findLecturer(String lecturerId) {
+		return lecRepo.findLecturerByLecturerId(lecturerId);
+	}
+
+	@Override
+	public void createLecturer(Lecturers lecturer) {
+		lecRepo.saveAndFlush(lecturer);		
+	}
+
+	@Override
+	public void removeLecturer(Lecturers lecturer) {
+		lecRepo.delete(lecturer);
+	}
+
+	@Override
+	public void updateLecturer(Lecturers lecturer) {
+		lecRepo.saveAndFlush(lecturer);	
+	}	
 
 }

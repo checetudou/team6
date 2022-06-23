@@ -36,7 +36,8 @@ public class StudentController {
 	
 	@Autowired
 	private StudentAttendCourseService sacService;
-	
+
+
 	@RequestMapping(value = "/grades")
 	public String studentGrades(HttpSession session, Model model) {
 		UserSession usession = (UserSession) session.getAttribute("usession");

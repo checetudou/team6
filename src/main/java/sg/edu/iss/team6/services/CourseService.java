@@ -10,14 +10,16 @@ public interface CourseService {
 
 	Courses findCourse(String ceid);
 
-	Courses createCourse(Courses course);
+	void addCourse(Courses course);
 
-	Courses changeCourse(Courses course);
+	void updateCourse(Courses course);
 
 	void removeCourse(Courses course);
 
-	ArrayList<Courses> findCoursesByLecturerId(String lecturerId);
+	ArrayList<Courses> findCoursesByStudentId(String studentId);
 
-	ArrayList<StudentAttendCourse> findCoursesByStudentId(String studentId);
+	int getCourseCapacityById(String courseId);
+
+	int getActualEnrolledById(String courseId);
 
 }

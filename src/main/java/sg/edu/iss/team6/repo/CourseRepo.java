@@ -3,7 +3,6 @@ package sg.edu.iss.team6.repo;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,12 +19,12 @@ public interface CourseRepo extends JpaRepository<Courses,String> {
 
     @Query("SELECT c FROM Courses c WHERE c.courseId LIKE :cid")
 	List<Courses> findCoursesByCourseId(@Param("cid") String id);
+
+	@Query("SELECT c FROM Courses c WHERE c.courseId = :cid")
+	Courses findCourseByCourseId(@Param("cid") String id);
   
     @Query("SELECT sac.courses FROM StudentAttendCourse sac WHERE sac.students.studentId = :sid")
-	ArrayList<Courses> findCoursesByStudentId(@Param("sid") String studentId, Pageable pageable);
-
-    @Query("SELECT lct.courses FROM LectureCanTeach lct WHERE sac.lecturers.lecturerId = :lid")
-    ArrayList<Courses> findCoursesByLecturerId(@Param("lid") String lecturerId, Pageable pageable);
+	ArrayList<Courses> findCoursesByStudentId(@Param("sid") String studentId);
 
 	@Query("SELECT c.size FROM Courses c where c.courseId = :cid")
 	int getAllowedSize (@Param("cid") String courseId);
@@ -39,7 +38,7 @@ public interface CourseRepo extends JpaRepository<Courses,String> {
 	// 	+ "courses.actualEnroll,courses.description) where courses.courseId = courseId")
 	// void updateCourse(Courses course);
 
-	List<Courses> getAllCourses(Pageable pageable);
+	//List<Courses> getAllCourses(Pageable pageable);
 	
 	//Pageable firstPageWithTenElements = PageRequest.of(0, 10);
 	//https://www.baeldung.com/spring-data-jpa-pagination-sorting
