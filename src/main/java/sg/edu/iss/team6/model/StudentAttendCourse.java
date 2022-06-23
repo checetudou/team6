@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Table(name = "student_attend_course")
 @Data
 @NoArgsConstructor
+@IdClass(StudentAttendCourseId.class)
 public class StudentAttendCourse implements Serializable {
     @Id
     @ManyToOne
