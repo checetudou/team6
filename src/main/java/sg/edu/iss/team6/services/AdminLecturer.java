@@ -18,6 +18,5 @@ public interface AdminLecturer {
 	void deleteLecturerById (String lecturerId);
 	List<Lecturers> returnLecturerById (String name);
 	// update Lecturer -> in controller
-	
 
 }

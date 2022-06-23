@@ -40,10 +40,10 @@ public class StudentServiceImpl implements StudentService{
 //		return StudentRepo.getActualEnrolledById(courseId);
 //	}
 //
-//	@Override
-//	@Transactional
-//	public Courses findCourseByCourseId(String courseId) {
-//		return StudentRepo.findCourseByCourseId(courseId);
-//	}
+	@Override
+	@Transactional
+	public Courses findCourseByCourseId(String courseId) {
+		return studentRepo.findCourseByCourseId(courseId);
+	}
 
 }

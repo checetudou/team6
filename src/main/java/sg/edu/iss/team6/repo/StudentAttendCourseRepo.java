@@ -22,6 +22,7 @@ public interface StudentAttendCourseRepo extends JpaRepository<StudentAttendCour
 		return null;
 	}
 	
+
 	List<StudentAttendCourse> getStudentById(String id, Pageable pageable);
 }
 
@@ -33,3 +34,4 @@ public interface StudentAttendCourseRepo extends JpaRepository<StudentAttendCour
 //
 //@Query("Update StudentCanAttend set courseId = :cid")
 //void saveCourse(@Param("cid")String courseId) ;
+

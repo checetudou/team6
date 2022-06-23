@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.services.AdminStudent;
 

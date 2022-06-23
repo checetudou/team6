@@ -18,26 +18,23 @@ import sg.edu.iss.team6.model.StudentAttendCourse;
 @Repository
 public interface CourseRepo extends JpaRepository<Courses,String> {
     
-	@Query("select c from Courses c where c.courseName like %?1%")
     List<Courses> findCoursesByCourseName(String courseName);
 
-//    @Query("Select lc from LectureCanTeach lc WHERE lc.lecturers.lecturerId = :lid")
-//	ArrayList<LectureCanTeach> findCoursesByLecturerId(@Param("lid") String lecturerId);
-    
+    @Query("select c from Courses c where c.courseId like %?1%")
+	List<Courses> findCoursesByCourseId(String courseId);
+  
     @Query("select c from StudentAttendCourse sac,Courses c where sac.students = :sid and sac.courses.courseId=c.courseId")
 	ArrayList<StudentAttendCourse> findCoursesByStudentId(@Param("sid") String studentId, Pageable pageable);
 
     @Query("select c from LectureCanTeach sac,Courses c where sac.lecturers.lecturerId = :lid and sac.courses.courseId=c.courseId")
+
     ArrayList<Courses> findCoursesByLecturerId(@Param("lid") String lecturerId, Pageable pageable);
     
 	@Query("select c from Courses c where c.courseId like %?1%")
 	List<Courses> findCoursesByCourseId(String courseId);
-    
-		
-	@Query("select c.size from Courses c where c.courseId like %?1%")
-	Courses getAllowedSize (int count);
 
-	Optional<Courses> findByName(String name);
+	@Query("select c.size from Courses c where c.courseId like %?1%")
+	int getAllowedSize (String courseId);
 
 	@Query("select c from Courses c where c.courseId like %?1%")
 	List<Courses> getCourseById(String courseId);

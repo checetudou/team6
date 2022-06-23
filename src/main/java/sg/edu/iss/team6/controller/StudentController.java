@@ -1,5 +1,10 @@
 package sg.edu.iss.team6.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Courses;
+import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.services.CourseService;
+import sg.edu.iss.team6.services.StudentAttendCourseService;
 import sg.edu.iss.team6.services.StudentService;
+import sg.edu.iss.team6.helper.CourseEventEnum;
+import sg.edu.iss.team6.model.CourseEvent;
 
 @Controller
 @RequestMapping(value="/student")
@@ -25,34 +34,60 @@ public class StudentController {
 	@Autowired
 	private CourseService cService;
 	
+	@Autowired
+	private StudentAttendCourseService sacService;
+	
 	@RequestMapping(value = "/grades")
 	public String studentGrades(HttpSession session, Model model) {
 		UserSession usession = (UserSession) session.getAttribute("usession");
-		//ModelAndView mav = new ModelAndView("login");
+		
 		if (usession.getStudent() != null) {
 			
-			//mav = new ModelAndView("student-grades");
-			if (cService.findCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
-				model.addAttribute("cGrades", cService.findCoursesByStudentId(usession.getStudent().getStudentId()));
+			if (sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId()).size() > 0) {
+				model.addAttribute("cStudentAttendCourses", sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId()));
+				
 			}
+			
+		ArrayList<StudentAttendCourse> courses = sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId());
+		double totalMarks = 0;
+		double gpa = 0;
+		Map<String, Double> gradeMap = new HashMap<String, Double>()
+		{
+			{
+				put("A",5.0);
+				put("B",4.0);
+				put("C",3.0);
+				put("D",2.5);
+				put("Pass",2.0);
+				put("Fail",0.0);
+			}
+		};
+		
+		for (StudentAttendCourse course : courses)
+		{
+			totalMarks += gradeMap.get(course.getGrade());
+		}
+		
+		gpa = totalMarks / 4 * courses.size();
+		model.addAttribute("gpa",gpa);
+		
 			return "student-grades";
 		}
 		return "forward:/home/login";
 	}
-
+	
 	@RequestMapping(value = "/courses")
 	public String studentCourses(HttpSession session, Model model) {
 		UserSession usession = (UserSession) session.getAttribute("usession");
-		//ModelAndView mav = new ModelAndView("login");
 		if (usession.getStudent() != null) {
-
-			//mav = new ModelAndView("staff-course-history");
-			if (cService.findCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
+			
+			if (sService.findAvailableCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
 				model.addAttribute("cCourses", sService.findAvailableCoursesByStudentId(usession.getStudent().getStudentId()));
+				
 			}
 			return "student-available-courses";
 		}
-		return "common-login";
+		return "forward:/home/login";
 	}
 
 	
@@ -60,10 +95,18 @@ public class StudentController {
 	public String enrollCourse(@PathVariable String id, HttpSession session) {
 		
 		UserSession usession = (UserSession) session.getAttribute("usession");
-		Courses course = cService.findCourse(id);
-		if (course.getActualEnroll() < course.getSize()){
+		Courses course = sService.findCourseByCourseId(id);
+		
+		if (course.getActualEnroll() < course.getSize()) {
 			course.setActualEnroll(course.getActualEnroll() + 1);
+			StudentAttendCourse SAC = new StudentAttendCourse();
+			SAC.setStudents(usession.getStudent());
+			SAC.setCourses(course);
+			sacService.createStudentAttendCourse(SAC);
+			cService.changeCourse(course);
+		 
 		}
+		
 		
 		cService.changeCourse(course);
 		return "enrollment-result";

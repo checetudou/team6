@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Lecturers;
-import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.repo.LecturerRepo;
 
-public class AdminLecturerImpl {
+@Service
+public class AdminLecturerImpl implements AdminLecturer{
 
 	@Autowired
 	private LecturerRepo lrepo;
@@ -18,7 +18,7 @@ public class AdminLecturerImpl {
 	@Override
 	@Transactional
 	public List<Lecturers> getAllLecturer(){
-		return  lrepo.findAll();
+		return lrepo.findAll();
 	}
 	
 	@Override
@@ -53,5 +53,4 @@ public class AdminLecturerImpl {
 	List<Lecturers> returnLecturerById (String lecturerId){
 		return this.lrepo.getLecturerById(lecturerId);
 	}
-
 }
