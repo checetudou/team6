@@ -2,7 +2,7 @@ package sg.edu.iss.team6.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sg.edu.iss.team6.helper.CourseEventEnum;
+import sg.edu.iss.team6.helper.GradeEnum;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,33 +23,9 @@ public class StudentAttendCourse implements Serializable {
     @JoinColumn(name = "courseId")
     private Courses courses;
 
-    private CourseEventEnum grade;
+    private GradeEnum grade;
 
-    public Students getStudents() {
-        return students;
-    }
-
-    public void setStudents(Students students) {
-        this.students = students;
-    }
-
-    public Courses getCourses() {
-        return courses;
-    }
-
-    public void setCourses(Courses courses) {
-        this.courses = courses;
-    }
-
-    public CourseEventEnum getGrade() {
-        return grade;
-    }
-
-    public void setGrade(CourseEventEnum grade) {
-        this.grade = grade;
-    }
-
-    public StudentAttendCourse(Students students, Courses courses, CourseEventEnum grade) {
+    public StudentAttendCourse(Students students, Courses courses, GradeEnum grade) {
         this.students = students;
         this.courses = courses;
         this.grade = grade;
