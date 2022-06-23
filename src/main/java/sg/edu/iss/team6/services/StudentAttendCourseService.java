@@ -13,4 +13,6 @@ public interface StudentAttendCourseService {
 	void saveAllAndFlush(ArrayList<StudentAttendCourse> sacList);
 
 	ArrayList<StudentAttendCourse> findStudentAttendCourseByCourseId(String courseId);
+
+	StudentAttendCourse findStudentAttendCourseByCourseIdAndStudentId(String studentId, String courseId);
 }

@@ -18,7 +18,6 @@ import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.model.Students;
-import sg.edu.iss.team6.services.CourseService;
 import sg.edu.iss.team6.services.LecturerService;
 import sg.edu.iss.team6.services.StudentAttendCourseService;
 import sg.edu.iss.team6.services.StudentService;
@@ -26,15 +25,12 @@ import sg.edu.iss.team6.services.StudentService;
 @Controller
 @RequestMapping(value = "/lecturers")
 public class LecturerController {
-	
+
 	@Autowired
 	private StudentService sService;
 
 	@Autowired
 	private LecturerService lService;
-
-	@Autowired
-	private CourseService cService;
 
 	@Autowired
 	private StudentAttendCourseService sacService;
@@ -44,13 +40,6 @@ public class LecturerController {
 		//TODO if got time
 	}
 
-	@RequestMapping(value = "/studentAttendCourse/{id}", method = RequestMethod.POST)
-	public ModelAndView gradeStudent(@PathVariable String id) {
-		Courses course = cService.findCourse(id);
-		ModelAndView mav = new ModelAndView("manager-course-detail", "course", course);
-		mav.addObject("approve", new Approve());
-	}
-    
 	@RequestMapping(value = "/courselist", method = RequestMethod.GET)
 	public ModelAndView lectureCanTeachList(HttpSession session) {
 		//TODO Use HttpSession to check if the User entering this page is ONLY an authorised person that can see his courses(lecturers/admin)
@@ -82,7 +71,7 @@ public class LecturerController {
 		mav.addObject("student", s);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/gradestudent/{id}", method = RequestMethod.POST)
 	public ModelAndView gradeStudent(@ModelAttribute("studentattendcourselist") ArrayList<StudentAttendCourse> sacList, @PathVariable Integer id, HttpSession session) {
 		// TODO Use HttpSession to check if the User entering this page is ONLY an authorised person that can change grades(lecturers/admin)
@@ -91,5 +80,5 @@ public class LecturerController {
 		return mav;
 	}
 
-	
+
 }

@@ -15,8 +15,6 @@ import sg.edu.iss.team6.repo.StudentAttendCourseRepo;
 @Service
 public class StudentAttendCourseServiceImpl implements StudentAttendCourseService {
 	
-	
-
 	@Resource
 	private StudentAttendCourseRepo sacRepo;
 	
@@ -39,6 +37,11 @@ public class StudentAttendCourseServiceImpl implements StudentAttendCourseServic
 	@Override
 	public ArrayList<StudentAttendCourse> findStudentAttendCourseByCourseId(String courseId) {
 		return (ArrayList<StudentAttendCourse>) sacRepo.getStudentAttendCourseListByCourseId(courseId);
+	}
+
+	@Override
+	public StudentAttendCourse findStudentAttendCourseByCourseIdAndStudentId(String studentId, String courseId) {
+		return sacRepo.getStudentAttendCourseByStudentIdAndCourseId(courseId, studentId);
 	}
 
 }

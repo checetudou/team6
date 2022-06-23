@@ -8,6 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import org.thymeleaf.util.StringUtils;
 import sg.edu.iss.team6.helper.UserSession;
@@ -31,23 +35,23 @@ public class LoginController {
 		binder.addValidators(uVal);
 	}
 
-	@RequestMapping(value = "/")
+	@GetMapping(value = "/")
 	public String student(Model model) {
 		model.addAttribute("user", new User());
 		return "common-login";
 	}
 
-	@RequestMapping(value = "/about")
+	@GetMapping(value = "/about")
 	public String home() {
 		return "about";
 	}
 
-	@RequestMapping(value = "/contact")
+    @GetMapping(value = "/contact")
 	public String contact() {
 		return "contact";
 	}
 
-	@RequestMapping(value = "/home/authenticate")
+	@RequestMapping(value = "/authenticate")
 	public String authenticate(@ModelAttribute("user") User user, BindingResult bindingResult, Model model, HttpSession session) {
 		if (bindingResult.hasErrors()) {
 			return "common-login";

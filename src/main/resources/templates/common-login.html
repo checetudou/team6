@@ -34,7 +34,7 @@
 		<h3>National University of Singapore</h3>
 	</div>
 	<div>
-		<form action="#" th:object="${user}" th:action="@{/home/authenticate}" method="get">
+		<form action="#" th:object="${user}" th:action="@{/authenticate}" method="get">
 			<div class="form-item">
 				<label>Sign in with your organizational account:</label><br>
 				<input style="margin-left: 5px;margin-right: 1px;width: 95%; height: 30px;" type="text" name="userId" autocomplete="off" th:field="*{userId}">
