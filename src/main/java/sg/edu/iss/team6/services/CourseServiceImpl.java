@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.StudentAttendCourse;
@@ -43,7 +44,7 @@ public class CourseServiceImpl implements CourseService {
 	public void addCourse(Courses course) {
 		crepo.saveAndFlush(course);
 	}
-
+    
 	@Override
 	public void updateCourse(Courses course) {
 		crepo.saveAndFlush(course);	
@@ -52,6 +53,12 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public void removeCourse(Courses course) {
 		crepo.delete(course);	
+	}
+	
+	@Override
+	@Transactional
+	public Courses changeCourse(Courses course) {
+		return crepo.saveAndFlush(course);
 	}
 
 	@Override

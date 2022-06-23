@@ -15,6 +15,8 @@ public interface CourseService {
 	void updateCourse(Courses course);
 
 	void removeCourse(Courses course);
+	
+	Courses changeCourse(Courses course);
 
 	ArrayList<Courses> findCoursesByStudentId(String studentId);
 

@@ -14,5 +14,7 @@ public interface StudentService {
 	Students findStudentById(String s);
 
 	ArrayList<Courses> findAvailableCoursesByStudentId(String studentId);
+	
+	Courses findCourseByCourseId(String courseId);
 
 }
