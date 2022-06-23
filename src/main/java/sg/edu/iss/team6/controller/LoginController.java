@@ -7,10 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import org.thymeleaf.util.StringUtils;
 import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.Students;
@@ -20,13 +19,13 @@ import sg.edu.iss.team6.validators.UserValidator;
 
 @Controller
 public class LoginController {
-    
+
 	@Autowired
 	private UserService uservice;
 
 	@Autowired
 	private UserValidator uVal;
-	
+
 	@InitBinder("user")
 	private void initDepartmentBinder(WebDataBinder binder) {
 		binder.addValidators(uVal);
@@ -42,7 +41,8 @@ public class LoginController {
 	public String home() {
 		return "about";
 	}
-    @RequestMapping(value = "/contact")
+
+	@RequestMapping(value = "/contact")
 	public String contact() {
 		return "contact";
 	}
@@ -51,21 +51,20 @@ public class LoginController {
 	public String authenticate(@ModelAttribute("user") User user, BindingResult bindingResult, Model model, HttpSession session) {
 		if (bindingResult.hasErrors()) {
 			return "common-login";
-		}
-		else {
-            UserSession usession = new UserSession();
-			if ((user.getUserId().substring(0,8).equals("nusstu/"))) {
-				Students s = uservice.findStudentBystuID(user.getUserId().substring(8));
-                usession.setStudent(s);
+		} else {
+			UserSession usession = new UserSession();
+			if ((user.getUserId().substring(0, 7).equals("nusstu/"))) {
+				Students s = uservice.findStudentBystuID(user.getUserId().substring(7));
+				usession.setStudent(s);
 			}
-			if ((user.getUserId().substring(0,8).equals("nusstf/"))) {
-				Lecturers l = uservice.findLecturerBylecID(user.getUserId().substring(8));
-                usession.setLecturer(l);
-                usession.setAdminOrNot(l.isAdminOrNot());        
+			if ((user.getUserId().substring(0, 7).equals("nusstf/"))) {
+				Lecturers l = uservice.findLecturerBylecID(user.getUserId().substring(7));
+				usession.setLecturer(l);
+				usession.setAdminOrNot(l.isAdminOrNot());
 			}
-            session.setAttribute("user", usession);
+			session.setAttribute("user", usession);
 		}
-		return "home";
+		return "common-home";
 	}
 
 }

@@ -1,63 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/defaults.html :: html_head"/>
-<body>
-<!--	<div th:replace="fragments/defaults.html :: menu"/>-->
-<!--	<div th:replace="fragments/defaults.html :: header"/>-->
-<!--	<form action="#" th:object="${studentId}" th:action="@{'/home/authenticate'}">-->
-<!--		<table class="framed">-->
-<!--			<tr>-->
-<!--				<td><span th:text="#{fieldLabel.username}">Username</span></td>-->
-<!--				<td colspan="3">-->
-<!--					<fieldset>-->
-<!--						<input type="text" th:field="*{name}">-->
-<!--						<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">-->
-<!--					</fieldset>-->
-<!--				</td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td><span th:text="#{fieldLabel.password}">Password</span></td>-->
-<!--				<td colspan="3">-->
-<!--					<fieldset> <input type="password" th:field="*{password}">-->
-<!--						<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">-->
-<!--					</fieldset>-->
-<!--				</td>-->
-
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td colspan="4">&nbsp;</td>-->
-<!--			</tr>-->
-<!--			<tr>-->
-<!--				<td>&nbsp;</td>-->
-<!--				<td>-->
-<!--					<input type="submit" />-->
-<!--				</td>-->
-<!--				<td>-->
-<!--					<input type="reset" />-->
-<!--				</td>-->
-<!--			</tr>-->
-<!--		</table>-->
-<!--	</form>-->
-<!--	</div>-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<style type="text/css">
+		h3{
+			text-align: center;
+		}
+		#body{
+			background-color: white;
+			border: 2px solid black;
+			width: 350px;
+			height: 350px;
+			text-align: left;
+			position:absolute;
+			left:50%;
+			top:30%;
+			margin-left:-150px;
+			margin-top:-100px;
+		}
+		body{
+			background-color: #80bdff;
+		}
+	</style>
+	<title>nus.edu.sg</title>
+</head>
+<body >
+<div id="body">
+	<div>
+		<h3>National University of Singapore</h3>
+	</div>
+	<div>
+		<form action="#" th:object="${user}" th:action="@{/home/authenticate}" method="get">
+			<div class="form-item">
+				<label>Sign in with your organizational account:</label><br>
+				<input style="margin-left: 5px;margin-right: 1px;width: 95%; height: 30px;" type="text" name="userId" autocomplete="off" th:field="*{userId}">
+				<p  style="color: red; font-size: 12px;margin-top: 0px;" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></p>
+			</div>
+			<div class="form-item" style="margin-top: 10px;">
+				<label>Password:</label><br>
+				<input style="margin-left: 5px;margin-right: 1px;width: 95%; height: 30px;" type="password" name="password" th:field="*{password}">
+				<p  style="color: red; font-size: 12px; margin-top: 0px;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+			</div>
+			<div style="margin-top: 10px;">
+				<input style="margin-left: 5px; width: 95%; height: 30px; background-color: springgreen" type="submit"  value="Sign in">
+			</div>
+		</form>
+	</div>
+</div>
 
 </body>
-
-				</tr>
-				<tr>
-					<td colspan="4">&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>
-						<input type="submit" />
-					</td>
-					<td>
-						<input type="reset" />
-					</td>
-				</tr>
-			</table>
-		</form>
-		</div>
-	</body>
 </html>
