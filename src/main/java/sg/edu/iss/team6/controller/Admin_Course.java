@@ -1,108 +1,161 @@
 package sg.edu.iss.team6.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import sg.edu.iss.team6.model.Courses;
-import sg.edu.iss.team6.model.Lecturers;
+import sg.edu.iss.team6.model.StudentAttendCourse;
+import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.services.AdminCourse;
+import sg.edu.iss.team6.services.AdminStudent;
+import sg.edu.iss.team6.services.StudentAttendCourseService;
 
 @Controller
-//TODO write a class level RequestMapping here
+@RequestMapping(value = "/admin/courses/")
 public class Admin_Course {
 	
 	@Autowired
 	private AdminCourse adcserv;
+
+	@Autowired
+	private AdminStudent adsserv;
+
+	@Autowired
+	private StudentAttendCourseService sacserv;
+
+	@InitBinder("admin")
+	private void initUserBinder(WebDataBinder binder) {
+		// TODO Validator for admin (if required)
+	}
 	
-// upon clicking manage courses, I should see a list of courses
-	@RequestMapping("/managecourse")
+	@GetMapping("/allCourses")
 	public String allCoursesPage (Model model){
 		model.addAttribute("listCourse", adcserv.getAllCourses());
-		return "courseindex";
-	}
-	
-
-	@PostMapping("/saveCourse")
-	public String saveCourse (@ModelAttribute("course") Courses course){
-		adcserv.saveCourse(course);
-		return "forward:/managecourses";
+		return "courseindex"; // TODO use the correct html page
 	}
 
-	@GetMapping("/create")
+	@GetMapping("/createCourse")
 	public String newCoursePage(Model model) {
 		Courses course = new Courses();
 		model.addAttribute("course", course);
-		return "newCourse"; //redirecting html page
-	
+		return "newCourse"; // TODO use the correct html page
+	}	
+
+	@PostMapping("/saveCourse")
+	public String saveCourse (@ModelAttribute("course") @Valid Courses course, BindingResult result){
+		if (result.hasErrors()) {
+			return "newCourse"; // TODO use the correct html page
+		}
+		adcserv.addCourse(course);
+		return "forward:/managecourses"; // TODO use the correct html page
 	}
-	
+
 	@GetMapping("/updateCourse/{courseId}")
 	public String updateCourse (@PathVariable(value="courseId") String courseId, Model model){
 		Courses course = adcserv.getCourseById(courseId);
 		model.addAttribute("course", course);
-		return "updateCourse";
+		return "updateCourse"; // TODO use the correct html page
 	}
 
+	@PostMapping("/updateCourse/{courseId}")
+	public String updatedCourse (@PathVariable(value="courseId") String courseId, @ModelAttribute @Valid Courses course, BindingResult result, Model model){
+		if (result.hasErrors()) {
+			return "updateCourse"; // TODO use the correct html page
+		}
+		adcserv.updateCourse(course);
+		return "forward:/managecourses"; // TODO use the correct html page
+	}
 
 	@PostMapping ("/searchCourse")
-	public String searchCourseById (@Param("courseId") String courseId, Model model){
-		List<Courses> listCourse = adcserv.returnCourseById(courseId);
+	public String searchedCourse(@Param("courseId") String courseId, Model model){
+		List<Courses> listCourse = adcserv.getCoursesById(courseId);
 		model.addAttribute("listCourse", listCourse);
-		return "courseindex";
+		return "courseindex"; // TODO use the correct html page
 	}
 
-
-	private List<Courses> returnCourseById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@GetMapping("/deleteCourse/{courseId}")
+	@PostMapping("/deleteCourse/{courseId}")
 	public String deleteCourse(@PathVariable(value="courseId") String courseId, Model model){
-		adcserv.deleteCourse(courseId);
-		return "redirect:/managecourses";
+		adcserv.deleteCourse(adcserv.getCourseById(courseId));
+		return "forward:/managecourses"; // TODO use the correct html page
 	}
 
-	private void deleteCourse(String courseId) {
-		// TODO Auto-generated method stub
-		
+	@GetMapping("/addStudentToCourse/{id}")
+	public String newStudentinCourse (@PathVariable(value="courseId") String courseId, Model model){
+		Courses c = adcserv.getCourseById(courseId);
+		ArrayList<Students> studentList = adsserv.getAllStudentProfile();
+		Students stu = new Students();
+		model.addAttribute("studentlist", studentList);
+		model.addAttribute("student", stu);
+		model.addAttribute("Course", c);
+		return "addstudenttocourse"; // TODO use the correct html page
+	}
+	
+	//TODO if have time: searching for student to add to course
+	// @PostMapping("/addStudentToCourse/{id}")
+	// public String searchingStudentinCourse (@Param(value="searchStudent") String searchString, @PathVariable(value="courseId") String courseId, Model model){
+	// 	ArrayList<Students> studentList = adsserv.returnStudentsProfileById(searchString);
+	// 	model.addAttribute("studentlist", studentList);
+	// 	return "addstudenttocourse"; // TODO use the correct html page
+	// }
+
+	@PostMapping("/adding")
+	public String newStudentaddedinCourse (@ModelAttribute Students student, @ModelAttribute Courses c, Model model){
+		// TODO proper custom validator
+		if (c.getActualEnroll() >= c.getSize()) {
+			return "courseindex"; // TODO use the correct html page
+		}
+		else {
+			StudentAttendCourse ballsac = new StudentAttendCourse(student, c, null);
+			sacserv.createStudentAttendCourse(ballsac);
+			student.getStudentAttendCourses().add(ballsac);
+			c.getStudentAttendCourses().add(ballsac);
+			c.setActualEnroll(c.getActualEnroll()+1);
+		}
+		return "courseindex"; //TODO proper html page
+	}
+
+	@GetMapping("delete/{courseid}/{studentid}")
+	private String deleteStudent(@PathVariable(value="courseid") String courseid, @PathVariable(value="studentid") String studentid, Model model) {
+		Courses c = adcserv.getCourseById(courseid);
+		Students s = adsserv.getStudentProfileById(studentid);
+
+		StudentAttendCourse sac = sacserv.findStudentAttendCourseByCourseIdAndStudentId(studentid, courseid);
+		s.getStudentAttendCourses().remove(sac);
+		c.getStudentAttendCourses().remove(sac);
+		c.setActualEnroll(c.getActualEnroll()-1);
+		return "courseindex"; //TODO set proper html page
 	}
 
 
-	//for pagination
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("text/html");
-//		PrintWriter printWriterOut=response.getWriter();
-//		String stringPageNumber=request.getParameter("page");
-//		int paginationPageID=Integer.parseInt(stringPageNumber);
-//		int toalCount=pageNumbers;
-//		if(paginationPageID==1){}
-//		else{
-//		paginationPageID=paginationPageID-1;
-//		paginationPageID=paginationPageID*toalCount+1;
-//		}
-//		}
+	// TODO Pagination
+	// protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	// 	response.setContentType("text/html");
+	// 	PrintWriter printWriterOut=response.getWriter();
+	// 	String stringPageNumber=request.getParameter("page");
+	// 	int paginationPageID=Integer.parseInt(stringPageNumber);
+	// 	int toalCount=pageNumbers;
+	// 	if(paginationPageID==1){
+
+	// 	}
+	// 	else{
+	// 		paginationPageID=paginationPageID-1;
+	// 		paginationPageID=paginationPageID*toalCount+1;
+	// 	}
+	// }
 
 }

@@ -1,11 +1,9 @@
 package sg.edu.iss.team6.services;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.stereotype.Service;
 
 import sg.edu.iss.team6.model.Lecturers;
@@ -18,7 +16,7 @@ public class AdminLecturerImpl implements AdminLecturer{
 	private LecturerRepo lrepo;
 	
 	@Override
-	public ArrayList<Lecturers> getAllLecturers(Pageable pageable) {
+	public ArrayList<Lecturers> getAllLecturers() {
 		return (ArrayList<Lecturers>) lrepo.findAll();
 	}
 
@@ -44,7 +42,7 @@ public class AdminLecturerImpl implements AdminLecturer{
 	}
 
 	@Override
-	public List<Lecturers> getLecturersById(String lecturerid) {
+	public ArrayList<Lecturers> getLecturersById(String lecturerid) {
 		return getLecturersById(lecturerid);
 	}
 

@@ -10,6 +10,8 @@ public interface AdminCourse {
 
 	Courses getCourseById(String courseId);
 
+	ArrayList<Courses> getCoursesById(String courseId);
+
 	void addCourse(Courses courses);
 
 	void updateCourse(Courses courses);

@@ -26,6 +26,11 @@ public class AdminCourseImpl implements AdminCourse {
 	}
 
 	@Override
+	public ArrayList<Courses> getCoursesById(String courseId) {
+		return (ArrayList<Courses>) crepo.findCoursesByCourseId(courseId);
+	}
+
+	@Override
 	public void addCourse(Courses courses) {
 		crepo.saveAndFlush(courses);	
 	}

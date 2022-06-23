@@ -1,19 +1,16 @@
 package sg.edu.iss.team6.services;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 
 import sg.edu.iss.team6.model.Lecturers;
 
 public interface AdminLecturer {
 	
-	ArrayList<Lecturers> getAllLecturers(Pageable pageable);
+	ArrayList<Lecturers> getAllLecturers();
 
 	Lecturers getLecturer(String id);
 
-	List<Lecturers> getLecturersById (String lecturerid);
+	ArrayList<Lecturers> getLecturersById (String lecturerid);
 
 	void addLecturer(Lecturers lecturer);
 
