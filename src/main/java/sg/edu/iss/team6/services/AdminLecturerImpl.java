@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team6.model.Lecturers;
@@ -17,7 +19,7 @@ public class AdminLecturerImpl implements AdminLecturer{
 	
 	@Override
 	@Transactional
-	public List<Lecturers> getAllLecturer(){
+	public List<Lecturers> getAllLecturer(Pageable pageable){
 		return lrepo.findAll();
 	}
 	

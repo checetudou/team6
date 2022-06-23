@@ -12,11 +12,16 @@ public interface AdminLecturer {
 	
 	//Lecturer profile
 	List<Lecturers> getAllLecturer(Pageable pageable);
-	Lecturers getLecturer (String name);
+
+	Lecturers getLecturer(String name);
+
 	// Lecturers addLecturer (String name); -> in controller
 	void saveLecturer (Lecturers lecturer);
+
 	void deleteLecturerById (String lecturerId);
+
 	List<Lecturers> returnLecturerById (String name);
+
 	// update Lecturer -> in controller
 
 }

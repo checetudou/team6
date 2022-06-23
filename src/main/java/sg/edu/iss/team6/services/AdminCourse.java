@@ -19,8 +19,8 @@ public interface AdminCourse {
 
 	List<Courses> returnCourseById(String courseId);
 
-	// void addCourse(Courses courses);
+	void addCourse(Courses courses);
 
-	// void updateCourse(Courses courses);
+	void updateCourse(Courses courses);
 
 }
