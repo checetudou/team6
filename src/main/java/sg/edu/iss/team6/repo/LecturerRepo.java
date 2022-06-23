@@ -13,13 +13,13 @@ import sg.edu.iss.team6.model.Lecturers;
 @Repository
 public interface LecturerRepo extends JpaRepository<Lecturers,String> {
 
-    @Query("SELECT l FROM Lecturers l WHERE l.lectureId LIKE :lid")
+    @Query("SELECT l FROM Lecturers l WHERE l.lecturerId LIKE :lid")
     ArrayList<Lecturers> findLecturersByLecturerId(@Param("lid") String lecturerid);
 
-    @Query("SELECT l FROM Lecturers l WHERE l.lectureId = :lid")
+    @Query("SELECT l FROM Lecturers l WHERE l.lecturerId = :lid")
     Lecturers findLecturerByLecturerId(@Param("lid") String lecturerid);
 
-    @Query("SELECT lct.courses FROM LectureCanTeach lct WHERE lct.lecturers.lectureId=:lid")
+    @Query("SELECT lct.courses FROM LectureCanTeach lct WHERE lct.lecturers.lecturerId=:lid")
     ArrayList<Courses> findCoursesByLecturer(@Param("lid") String lecturerid);
     
 }
