@@ -14,11 +14,11 @@ public interface LecturerService {
 	
 	Lecturers findLecturer(String lecturerId);
 	
-	Lecturers createLecturer(Lecturers lecturer);
+	void createLecturer(Lecturers lecturer);
 	
-	Lecturers removeLecturer(Lecturers lecturer);
+	void removeLecturer(Lecturers lecturer);
 
-	Lecturers updateLecturer(Lecturers lecturer);
+	void updateLecturer(Lecturers lecturer);
 	
 	
 	
