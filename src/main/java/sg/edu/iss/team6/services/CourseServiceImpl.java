@@ -55,11 +55,7 @@ public class CourseServiceImpl implements CourseService {
 		crepo.delete(course);	
 	}
 	
-	@Override
-	@Transactional
-	public Courses changeCourse(Courses course) {
-		return crepo.saveAndFlush(course);
-	}
+
 
 	@Override
 	public ArrayList<Courses> findCoursesByStudentId(String studentId) {
