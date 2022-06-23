@@ -39,11 +39,11 @@
 					<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
 				</tr>
 				<tr><!-- Dropdown menu to assign initial lecturer-->
-					<td><span th:text="#{fieldLabel.newgrade}"></span></td>
+					<td><span th:text="#{fieldLabel.lecturer}"></span></td>
 					<td>
 						<fieldset> 
 							<select th:field="*{lecturer}">
-							<option th:each="lecturer : ${session.usession.user.lecturerId}" th:if="${lecturers.adminOrNot == 'No'}" th:value="${lecturer}" th:text="${lecturer}">Lecturer</option>
+							<option th:each="lecturer : ${session.usession.user.lecturerId}" th:if="${lecturers.adminOrNot == 'No'}" th:value="${lecturer}" th:text="${lecturer}">Select Lecturer</option>
 							</select>
 						</fieldset>
 					</td>

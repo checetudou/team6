@@ -4,20 +4,49 @@
 	<body>
 		<div th:replace="fragments/layout.html :: menu"/>
 		<div th:replace="fragments/layout.html :: header"/> 
-		<h3>Edit course enrollment</h3>
-		<form action="#" th:action="@{/admin/department/edit/}+${department.departmentId}" th:object="${department}" method="post">
+		<h3>Edit course</h3>
+		<form action="#" th:action="@{/admin/updateCourse/}+${course.courseId}" th:object="${course}" method="post">
 			<table>
 				<tbody>
-					<tr><!-- Read-only field showing which course is being updated-->
-						<td><span th:text="#{fieldLabel.departmentId}"></span></td>
-						<td><fieldset> <input type="text" th:field="*{departmentId}" readonly="readonly" /></fieldset></td>
-						<td th:if="${#fields.hasErrors('departmentId')}" th:errors="*{departmentId}"></td>
-					</tr>
-					<tr><!--input new enrollment number here -->
-						<td><span th:text="#{fieldLabel.departmentId}"></span></td>
-						<td><fieldset> <input type="text" th:field="*{departmentId}" /></fieldset></td>
-						<td th:if="${#fields.hasErrors('departmentId')}" th:errors="*{departmentId}"></td>
-					</tr>
+				
+				<tr> <!--Input Course Id-->
+					<td><b>Course Id</b><span th:text="#{fieldLabel.courseId}"></span></td>
+					<td>
+						<fieldset><input type="text" readonly class = "form-control" id = "*{courseId}" value = "*{course.courseId}"></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('courseId')}" th:errors="*{courseId}"></td>
+				</tr>
+				<tr> <!--Input Course name-->
+					<td><b>Course Name</b><span th:text="#{fieldLabel.courseName}"></span></td>
+					<td>
+						<fieldset><input type="text" readonly class = "form-control" id="*{courseName}"value = "*{course.courseName}" /></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('courseName')}" th:errors="*{courseName}"></td>
+				</tr>
+				<tr> <!--Input allowed enrollment size-->
+					<td><b>Allowed enrollment size</b><span th:text="#{fieldLabel.size}"></span></td>
+					<td>
+						<fieldset><input type="number" th:field="*{size}" class="form-control mb-4 col-4"/></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('size')}" th:errors="*{size}"></td>
+				</tr>
+				<tr> <!--Input Course description-->
+					<td><b>Course Description</b><span th:text="#{fieldLabel.description}"></span></td>
+					<td>
+						<fieldset><input type="text" readonly class = "form-control" id="*{description}"value = "*{course.description}"/></fieldset>
+					</td>
+					<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+				</tr>
+				<tr><!-- Dropdown menu to assign initial lecturer-->
+					<td><b>Lecturer</b><span th:text="#{fieldLabel.newgrade}"></span></td>
+					<td>
+						<fieldset> 
+							<select th:field="*{lecturer}">
+							<option th:each="lecturer : ${session.usession.user.lecturerId}" th:if="${lecturers.adminOrNot == 'No'}" th:value="${lecturer}" th:text="${lecturer}"> Select Lecturer</option>
+							</select>
+						</fieldset>
+					</td>
+
 					<tr><!-- Submit button,-->
 						<td><input type="submit" value="Update" class="blcass" /></td>
 						<td></td>
