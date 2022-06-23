@@ -104,12 +104,12 @@ public class StudentController {
 			SAC.setStudents(usession.getStudent());
 			SAC.setCourses(course);
 			sacService.createStudentAttendCourse(SAC);
-			cService.changeCourse(course);
+			cService.updateCourse(course);
 		 
 		}
 		
 		
-		cService.changeCourse(course);
+		cService.updateCourse(course);
 		return "enrollment-result";
 	}
 			
