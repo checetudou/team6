@@ -1,5 +1,5 @@
 package sg.edu.iss.team6.helper;
 
-public enum CourseEventEnum {
+public enum GradeEnum {
 	A, B, C, D, P, F
 }
