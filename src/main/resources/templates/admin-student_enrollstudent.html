@@ -5,27 +5,29 @@
 		<div th:replace="fragments/layout.html :: menu"/>
 		<div th:replace="fragments/layout.html :: header"/> 
 		<h3>Enroll Student into Course</h3>
-		<form action="#" th:action="@{/admin/department/edit/}+${department.departmentId}" th:object="${department}" method="post">
+		<form action="#" th:action="@{/admin/managecourses}+${department.departmentId}+@{/addStudent}" th:object="${courses}" method="post">
 			<table>
 				<tbody>
-					<tr><!-- Read-only field showing which student name-->
-						<td><span th:text="#{fieldLabel.departmentId}"></span></td>
-						<td><fieldset> <input type="text" th:field="*{departmentId}" readonly="readonly" /></fieldset></td>
-						<td th:if="${#fields.hasErrors('departmentId')}" th:errors="*{departmentId}"></td>
-					</tr>
+					<tr><!-- Read-only field showing which student id-->
+						<td><b>Student Id</b><span th:text="#{fieldLabel.studentId}"></span></td>
+						<td><fieldset> <input type="text" th:field="*{studentId}" readonly="readonly" /></fieldset></td>
+						<td th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}"></td>
+					</tr>				
+					
 					<tr><!-- Dropdown menu of courses available-->
-						<td><span th:text="#{fieldLabel.newgrade}"></span></td>
+						<td><b>List of courses available</b><span th:text="#{fieldLabel._______}"></span></td>
 						<td>
 							<fieldset> 
-								<select th:field="*{managerInCharge}">
-								<option th:each="manager : ${eidlist}" th:value="${manager}" th:text="${manager}">List</option>
+								<select th:field="*{studentCourse}">
+								<option th:each="course : ${courselist}" th:value="${courses}" th:text="${courseList}">Courses</option>
 								</select>
 							</fieldset>
 						</td>
-						<td th:if="${#fields.hasErrors('managerInCharge')}" th:errors="*{managerInCharge}"></td>
+						<td th:if="${#fields.hasErrors('studentCourses')}" th:errors="*{managerInCharge}"></td>
 					</tr>
+					
 					<tr><!-- Submit button,-->
-						<td><input type="submit" value="Update" class="blcass" /></td>
+						<td><input type="submit" value="Enroll student" class="blcass" /></td>
 						<td></td>
 						<td></td>
 					</tr>
