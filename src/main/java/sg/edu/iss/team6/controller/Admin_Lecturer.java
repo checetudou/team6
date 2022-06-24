@@ -19,7 +19,7 @@ import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.services.AdminLecturer;
 
 @Controller
-@RequestMapping(value = "/admin/lecturers")
+@RequestMapping(value ="/admin/lecturers")
 public class Admin_Lecturer {
 
 	@Autowired

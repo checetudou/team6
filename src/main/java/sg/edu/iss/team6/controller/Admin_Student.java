@@ -57,10 +57,12 @@ public class Admin_Student {
 	 
 	 
 
-	@GetMapping("/updateStudent/{id}")
-	public String updateStudent(@PathVariable(value = "id") String id, Model model) {
-		Students student = adsserv.getStudentProfileById(id);
+	@RequestMapping("/updateStudent/{id}")
+	public String updateStudent(@PathVariable(value = "id") String id,@ModelAttribute("student") Students student,BindingResult result, Model model) {
+		 student = adsserv.getStudentProfileById(id);
+		adsserv.updateStudent(student);
 		model.addAttribute("student", student);
+		model.addAttribute("listStudent", adsserv.getAllStudentProfile());
 		return "updateStudent";
 	}
 

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: html_head"/>
+<head th:replace="fragments/defaults.html :: html_head"/>
 
 <body>
-	<div th:replace="fragments/layout.html :: menu"/>
-	<div th:replace="fragments/layout.html :: header"/> 
+	<div th:replace="fragments/defaults.html :: menu"/>
+	<div th:replace="fragments/defaults.html :: header"/> 
 	<h3>Add New Course</h3>
 	<!--form start-->
-	<form action="#" th:action="@{/admin/employee/create}" th:object="${employee}" method="post">
+	<form action="#" th:action="@{/admin/courses/createCourse}" th:object="${courses}" method="post">
 		<table>
 			<tbody>
 				<tr> <!--Input Course Id-->

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: html_head"></head>
+<head th:replace="fragments/defaults.html :: html_head"></head>
 
 	<body>
-		<div th:replace="fragments/layout.html :: menu"></div>
-		<div th:replace="fragments/layout.html :: header"></div> 
+		<div th:replace="fragments/defaults.html :: menu"></div>
+		<div th:replace="fragments/defaults.html :: header"></div> 
 		<h3>Course List</h3>
-		<a th:href="@{/admin/employee/managecourses}"></a>
+		<a th:href="@{/admin/courses/managecourses}"></a>
 		<div th:if="${not #lists.isEmpty(listCourse)}">
 		<table style="border: 1;"><table class="table table-striped table-responsive-md">
 		<thead>
