@@ -5,27 +5,32 @@
 		<div th:replace="fragments/layout.html :: menu"/>
 		<div th:replace="fragments/layout.html :: header"/> 
 		<h3>Lecturer List</h3>
-		<a th:href="@{/admin/employee/create}"></a>
-		<div th:if="${not #lists.isEmpty(departmentList)}">
+		<a th:href="@{/admin/lecturers/managelecturers}"></a>
+		<div th:if="${not #lists.isEmpty(listLecturer)}">
+		
+			<!--calling the seachEmployee method-->
+			<form action="#" th:action="@{/search}" method="POST">
+			
+		
 			<table style="border: 1;">
 				<tr class="listHeading">
 					<!--headers-->
-				<th>Lecturer Id</th>
+				<th style="width:20%">Lecturer Id</th>
 				<th>Name</th>
 				<th>Class List</th> 
 				<th colspan="2" align="left">Actions</th>
 				</tr>
-				<tr th:each="department : ${departmentList}" class="listRecord">
+				<tr th:each="listLecturer : ${lecturer}" class="listRecord">
 					<!--Lecturer Id here-->
-					<td align="left" th:if="${lecturers.adminOrNot == 'Yes'" th:text="${lecturers.lecturerId}"}"></td>
+					<td align="left" th:if="${lecturer.adminOrNot == 'No'" th:text="${lecturer.lecturerId}"}"></td>
 					<!--Lecturer Name here-->
-					<td align="left" th:text="${lecturers.firstName} + ${lecturers.lastName}"></td>
+					<td align="left" th:if="${lecturer.adminOrNot == 'No'}" th:text="${lecturer.firstName} + ${lecturer.lastName}"></td>
 					<!--hyperlink to CURRENT lecturer courses here-->
-					<td><a th:href="@{/lectureCanTeach/list/}+${lecturer.lecturerId}" class="btn btn-default"><span th:text="#{caption.grade}"></span></a></td>
+					<td><a th:href="admin-lecturer_lecturercurrentcourselist.html" class="btn btn-default"></a></td>
 					<!--hyperlink to update lecturer here-->
-					<td><a th:href="@{/admin/updatelecturer}+${lecturers.lecturerId}" class="btn btn-primary">Update</a></td>
+					<td><a th:href="@{/admin/lecturers/updateLecturer/}+${lecturers.lecturerId}" class="btn btn-primary">Update</a></td>
 					<!--hyperlink to delete lecturer here-->
-					<td><a th:href="@{/admin/deletelecturer/}+${lecturers.lecturerId}" class="btn btn-danger">Delete</span></a></td>
+					<td><a th:href="@{/admin/lecturers/deleteLecturer/}+${lecturers.lecturerId}" class="btn btn-danger">Delete</a></td>
 				</tr>
 			</table>
 		</div>
