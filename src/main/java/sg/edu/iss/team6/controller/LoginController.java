@@ -1,19 +1,17 @@
 package sg.edu.iss.team6.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import org.thymeleaf.util.StringUtils;
 import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.Students;
@@ -41,8 +39,13 @@ public class LoginController {
 		return "common-login";
 	}
 
-	@GetMapping(value = "/about")
+	@GetMapping(value = "/home")
 	public String home() {
+		return "common-home";
+	}
+
+	@GetMapping(value = "/about")
+	public String about() {
 		return "about";
 	}
 
@@ -51,8 +54,8 @@ public class LoginController {
 		return "contact";
 	}
 
-	@RequestMapping(value = "/authenticate")
-	public String authenticate(@ModelAttribute("user") User user, BindingResult bindingResult, Model model, HttpSession session) {
+	@GetMapping(value = "/authenticate")
+	public String authenticate(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model, HttpSession session) {
 		if (bindingResult.hasErrors()) {
 			return "common-login";
 		} else {
@@ -68,7 +71,7 @@ public class LoginController {
 			}
 			session.setAttribute("user", usession);
 		}
-		return "common-home";
+		return "forward:/home";
 	}
 
 }

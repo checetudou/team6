@@ -23,22 +23,33 @@ public class UserValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		User u = (User) target;
-        if (!(u.getUserId().substring(0,8).equals("nusstu/")) || !(u.getUserId().substring(0,8).equals("nusstf/"))) {
-            errors.reject("userId", "Invalid Format");
-        }
-        if ((u.getUserId().substring(0,8).equals("nusstu/"))) {
-            String actualUser = u.getUserId().substring(8);
-            if (uService.authenticateStudents(actualUser, u.getPassword())==null) {
-                errors.reject("userId", "Wrong Password");
+        if(u.getUserId().length() > 7) {
+            if (!(u.getUserId().substring(0,7).equals("nusstu/")) && !(u.getUserId().substring(0,7).equals("nusstf/"))) {
+                errors.rejectValue("userId", "error.invalidUserId", "Invalid Format");
+            }
+            if ((u.getUserId().substring(0,7).equals("nusstu/"))) {
+                String actualUser = u.getUserId().substring(8);
+                if (uService.findStudentBystuID(actualUser)==null) {
+                    errors.rejectValue("userId", "error.invalidUserId", "User doesn't exist");
+                } else {
+                    if (uService.authenticateStudents(actualUser, u.getPassword())==null) {
+                        errors.rejectValue("userId", "error.invalidUserId", "Wrong Username Or Password");
+                    }
+                }
+            }
+            if ((u.getUserId().substring(0,7).equals("nusstf/"))) {
+                String actualUser = u.getUserId().substring(8);
+                if (uService.findStudentBystuID(actualUser)==null) {
+                    errors.rejectValue("userId", "error.invalidUserId", "User doesn't exist"); 
+                } else {
+                    if (uService.authenticateLecturers(actualUser, u.getPassword())==null) {
+                        errors.rejectValue("userId", "error.invalidUserId", "Wrong Username Or Password");
+                    }
+                }
             }
         }
-        if ((u.getUserId().substring(0,8).equals("nusstf/"))) {
-            String actualUser = u.getUserId().substring(8);
-            if (uService.authenticateLecturers(actualUser, u.getPassword())==null) {
-                errors.reject("userId", "Wrong Password");
-            }
+        if (u.getUserId().length() < 8 && u.getUserId().length() > 0)  {
+            errors.rejectValue("userId", "error.invalidUserId", "Invalid Format");
         }
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userId", "error.user.name.empty");
-		ValidationUtils.rejectIfEmpty(errors, "password", "error.user.password.empty");
 	}
 }
