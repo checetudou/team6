@@ -11,6 +11,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Lecturers;
@@ -54,7 +55,7 @@ public class LoginController {
 		return "contact";
 	}
 
-	@GetMapping(value = "/authenticate")
+	@RequestMapping(value = "/authenticate")
 	public String authenticate(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model, HttpSession session) {
 		if (bindingResult.hasErrors()) {
 			return "common-login";

@@ -23,9 +23,9 @@ public class StudentAttendCourse implements Serializable {
     @JoinColumn(name = "courseId")
     private Courses courses;
 
-    private GradeEnum grade;
+    private String grade;
 
-    public StudentAttendCourse(Students students, Courses courses, GradeEnum grade) {
+    public StudentAttendCourse(Students students, Courses courses, String grade) {
         this.students = students;
         this.courses = courses;
         this.grade = grade;

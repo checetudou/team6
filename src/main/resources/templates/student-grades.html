@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: html_head"/>
+<head th:replace="fragments/defaults.html :: html_head"/>
 <body>
-	<div th:replace="fragments/layout.html :: menu"/>
-	<div th:replace="fragments/layout.html :: header"/> 
+	<!--<div th:replace="fragments/defaults.html :: menu"/>-->
+	<div th:replace="fragments/defaults.html :: header"/> 
 	<h2>Grades and GPA</h2>
-	<div th:if="${not #lists.isEmpty(cStudentAttendCourse)}">
+	<div th:if="${not #lists.isEmpty(cStudentAttendCourses)}">
 		<table style=" border: 1;">
 			<tr class="listHeading">
 				<th>Course Id</th>
@@ -13,15 +13,17 @@
 				<th>Credit</th>
 				<th>Grade</th>
 			</tr>
-			<tr th:each="course : ${cStudentAttendCourse}" class="listRecord">
+			<tr th:each="course : ${cStudentAttendCourses}" class="listRecord">
 				<td align="left" th:text="${course.courses.courseId}">Course Id</td>
 				<td align="left" th:text="${course.courses.courseName}">Course Name</td>
 				<td align="left" th:text="4">Credit</td>
-				<td align="left" th:text="${course.grade">Grade</td>
+				<td align="left" th:text="${course.grade}">Grade</td>
+			</tr>
+			<tr>
+			    <td align="left" th:text="GPA"</td>
+			    <td align="left" th:text="${gpa}">
 			</tr>
 		</table>
-		
-		<p th:text="Gpa: ${gpa}"
 	</div>
 </body>
 

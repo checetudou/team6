@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: html_head"/>
+<head th:replace="fragments/defaults.html :: html_head"/>
 <body>
-	<div th:replace="fragments/layout.html :: menu"/>
-	<div th:replace="fragments/layout.html :: header"/> 
+	<!----><div th:replace="fragments/defaults.html :: menu"/>
+	<div th:replace="fragments/defaults.html :: header"/> 
 	<h2>Available Courses</h2>
 	<div th:if="${not #lists.isEmpty(cCourses)}">
 		<table style=" border: 1;">
@@ -13,13 +13,13 @@
 				<th>Credit</th>
 				<th>Grade</th>
 			</tr>
-			<tr th:each="course : ${cStudentAttendCourse}" class="listRecord">
-				<td align="left" th:text="${course.courses.courseId}">Course Id</td>
-				<td align="left" th:text="${course.courses.courseName}">Course Name</td>
+			<tr th:each="course : ${cCourses}" class="listRecord">
+				<td align="left" th:text="${course.courseId}">Course Id</td>
+				<td align="left" th:text="${course.courseName}">Course Name</td>
 				<td align="left" th:text="4">Credit</td>
 				<td>
-					<div
-						<a th:href="@{/student/enroll/}+${course.courses.courseId}">Enroll</a>
+					<div>
+						<a th:href="@{/student/enroll/}+${course.courseId}">Enroll</a>
 					</div>
 				</td>
 			</tr>

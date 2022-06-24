@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Courses;
 import sg.edu.iss.team6.model.StudentAttendCourse;
+import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.services.CourseService;
 import sg.edu.iss.team6.services.StudentAttendCourseService;
 import sg.edu.iss.team6.services.StudentService;
@@ -36,7 +37,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/grades")
 	public String studentGrades(HttpSession session, Model model) {
-		UserSession usession = (UserSession) session.getAttribute("usession");
+		UserSession usession = (UserSession) session.getAttribute("user");
 		
     if (usession.getStudent() != null) {
 			
@@ -65,7 +66,7 @@ public class StudentController {
 			totalMarks += gradeMap.get(course.getGrade());
 		}
 		
-		gpa = totalMarks / 4 * courses.size();
+		gpa = totalMarks / (courses.size());
 		model.addAttribute("gpa",gpa);
 		
 			return "student-grades";
@@ -75,7 +76,7 @@ public class StudentController {
 	
 	@RequestMapping(value = "/courses")
 	public String studentCourses(HttpSession session, Model model) {
-		UserSession usession = (UserSession) session.getAttribute("usession");
+		UserSession usession = (UserSession) session.getAttribute("user");
 		if (usession.getStudent() != null) {
 			
 			if (sService.findAvailableCoursesByStudentId(usession.getStudent().getStudentId()).size() > 0) {
@@ -91,21 +92,22 @@ public class StudentController {
 	@RequestMapping(value = "/enroll/{id}", method = RequestMethod.GET)
 	public String enrollCourse(@PathVariable String id, HttpSession session, Model model) {
 		
-		UserSession usession = (UserSession) session.getAttribute("usession");
+		UserSession usession = (UserSession) session.getAttribute("user");
 		Courses course = sService.findCourseByCourseId(id);
+		Students student = sService.findStudentById(usession.getStudent().getStudentId());
 		
 		if (course.getActualEnroll() < course.getSize()) {
 			course.setActualEnroll(course.getActualEnroll() + 1);
 			StudentAttendCourse SAC = new StudentAttendCourse();
-			SAC.setStudents(usession.getStudent());
+			SAC.setStudents(student);
 			SAC.setCourses(course);
 			sacService.createStudentAttendCourse(SAC);
 			cService.updateCourse(course);
-			//model.addAttribute("status","success");
+			model.addAttribute("status","success");
 		}
 		
 		//else {
-			//model.addAttribute("status","unsucessful")
+			model.addAttribute("status","unsucessful");
 		//}
 		return "enrollment-result";
 	}
