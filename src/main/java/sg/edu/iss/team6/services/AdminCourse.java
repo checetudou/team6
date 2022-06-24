@@ -17,8 +17,6 @@ public interface AdminCourse {
 
 	void updateCourse(Courses courses);
 
-	void AsignCourse(LectureCanTeach lectureCanTeach);
-
 	void deleteCourse(Courses courses);
 
 }
