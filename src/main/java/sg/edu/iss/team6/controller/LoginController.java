@@ -1,6 +1,7 @@
 package sg.edu.iss.team6.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,8 +42,13 @@ public class LoginController {
 		return "common-login";
 	}
 
-	@GetMapping(value = "/about")
+	@GetMapping(value = "/home")
 	public String home() {
+		return "common-home";
+	}
+
+	@GetMapping(value = "/about")
+	public String about() {
 		return "about";
 	}
 
@@ -51,24 +57,24 @@ public class LoginController {
 		return "contact";
 	}
 
-	@RequestMapping(value = "/authenticate")
-	public String authenticate(@ModelAttribute("user") User user, BindingResult bindingResult, Model model, HttpSession session) {
+	@GetMapping(value = "/authenticate")
+	public String authenticate(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model, HttpSession session) {
 		if (bindingResult.hasErrors()) {
 			return "common-login";
 		} else {
 			UserSession usession = new UserSession();
-			if ((user.getUserId().substring(0, 7).equals("nusstu/"))) {
+			if ((user.getUserId().substring(0, 8).equals("nusstu/"))) {
 				Students s = uservice.findStudentBystuID(user.getUserId().substring(7));
 				usession.setStudent(s);
 			}
-			if ((user.getUserId().substring(0, 7).equals("nusstf/"))) {
+			if ((user.getUserId().substring(0, 8).equals("nusstf/"))) {
 				Lecturers l = uservice.findLecturerBylecID(user.getUserId().substring(7));
 				usession.setLecturer(l);
 				usession.setAdminOrNot(l.isAdminOrNot());
 			}
 			session.setAttribute("user", usession);
 		}
-		return "common-home";
+		return "forward:/home";
 	}
 
 }
