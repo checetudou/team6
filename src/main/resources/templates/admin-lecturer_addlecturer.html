@@ -11,11 +11,11 @@
 		<table>
 			<tbody>
 				<tr> <!--Input lecturer id-->
-					<td><b>Lecturer Id</b><span th:text="#{fieldLabel.employeeId}"></span></td>
+					<td><b>Lecturer Id</b><span th:text="#{fieldLabel.lecturerId}"></span></td>
 					<td>
-						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
+						<fieldset><input type="text" th:field="*{lecturerId}" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
+					<td th:if="${#fields.hasErrors('lecturerId')}" th:errors="*{lecturerId}"></td>
 				</tr>
 				
 				
@@ -60,11 +60,14 @@
 					<td><b>Admin or not</b><span th:text="#{fieldLabel.lecturerId}"></span></td>
 					<td>
 						<fieldset>
-							<select th:field="*{lecturerId}">
-							<option th:each="lecturer: ${lidlist}" th:value="${admin)" th:text="${Admin}">Select</option></select>
+							<select th:field="*{adminOrNot}">
+							<option input type="radio" th:each="lecturer: ${lecturer}" 
+							th:value="${admin)" th:text="${Admin}">Yes</option>
+							<option input type="radio" th:each="lecturer: ${lecturer}" 
+							th:value="${admin)" th:text="${Admin}">No</option></select>
 					</fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('lecturerId')}" th:errors="*{lecturerId}"></td>
+					<td th:if="${#fields.hasErrors('adminOrNot')}" th:errors="*{adminOrNot}"></td>
 				</tr>
 				
 				
