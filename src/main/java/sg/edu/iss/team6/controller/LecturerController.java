@@ -44,7 +44,7 @@ public class LecturerController {
 	public ModelAndView lectureCanTeachList(HttpSession session) {
 		//TODO Use HttpSession to check if the User entering this page is ONLY an authorised person that can see his courses(lecturers/admin)
 		Lecturers l = (Lecturers) session.getAttribute("user");
-		ModelAndView mav = new ModelAndView("lecture-can-teach"); //TODO insert proper html page name
+		ModelAndView mav = new ModelAndView("lecturer-viewcurrentcourses"); //TODO insert proper html page name
 		ArrayList<Courses> courses = lService.coursesByLecturer(l.getLecturerId());
 		mav.addObject("courseslist", courses);
 		mav.addObject("lecturer", l);

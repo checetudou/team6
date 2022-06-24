@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import sg.edu.iss.team6.model.Courses;
+import sg.edu.iss.team6.model.LectureCanTeach;
 import sg.edu.iss.team6.repo.CourseRepo;
 
 @Service
@@ -14,6 +15,7 @@ public class AdminCourseImpl implements AdminCourse {
 	
 	@Resource
 	private CourseRepo crepo;
+
 
 	@Override
 	public ArrayList<Courses> getAllCourses() {
@@ -37,7 +39,7 @@ public class AdminCourseImpl implements AdminCourse {
 
 	@Override
 	public void updateCourse(Courses courses) {
-		crepo.saveAndFlush(courses);	
+		crepo.saveAndFlush(courses);
 	}
 
 	@Override

@@ -39,7 +39,7 @@ public class UserValidator implements Validator{
             }
             if ((u.getUserId().substring(0,7).equals("nusstf/"))) {
                 String actualUser = u.getUserId().substring(7);
-                if (uService.findStudentBystuID(actualUser)==null) {
+                if (uService.findLecturerBylecID(actualUser)==null) {
                     errors.rejectValue("userId", "error.invalidUserId", "User doesn't exist"); 
                 } else {
                     if (uService.authenticateLecturers(actualUser, u.getPassword())==null) {
