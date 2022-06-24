@@ -1,54 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: html_head"/>
+<head th:replace="fragments/defaults.html :: html_head"/>
 
 <body>
-	<div th:replace="fragments/layout.html :: menu"/>
-	<div th:replace="fragments/layout.html :: header"/> 
+	<div th:replace="fragments/defaults.html :: menu"/>
+	<div th:replace="fragments/defaults.html :: header"/> 
 	<h3>Add New Course</h3>
 	<!--form start-->
-	<form action="#" th:action="@{/admin/employee/create}" th:object="${employee}" method="post">
+	<form action="#" th:action="@{/admin/courses/saveCourse}" th:object="${course}" method="post">
 		<table>
 			<tbody>
 				<tr> <!--Input Course Id-->
-					<td><b>Course Id</b><span th:text="#{fieldLabel.courseId}"></span></td>
+					<td><b>Course Id</b></td>
 					<td>
 						<fieldset><input type="text" th:field="*{courseId}" /></fieldset>
 					</td>
 					<td th:if="${#fields.hasErrors('courseId')}" th:errors="*{courseId}"></td>
 				</tr>
 				<tr> <!--Input Course name-->
-					<td><b>Course Name</b><span th:text="#{fieldLabel.courseName}"></span></td>
+					<td><b>Course Name</b></td>
 					<td>
-						<fieldset><input type="text" th:field="*{courseName}" /></fieldset>
+						<fieldset><input type="text" th:field="*{courseName}"></fieldset>
 					</td>
 					<td th:if="${#fields.hasErrors('courseName')}" th:errors="*{courseName}"></td>
 				</tr>
 				<tr> <!--Input allowed enrollment size-->
-					<td><b>Allowed enrollment size</b><span th:text="#{fieldLabel.size}"></span></td>
+					<td><b>Class Capacity</b></td>
 					<td>
-						<fieldset><input type="number" th:field="*{size}" /></fieldset>
+						<fieldset><input type="number" th:field="*{actualEnroll}" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('size')}" th:errors="*{size}"></td>
+					<td th:if="${#fields.hasErrors('actualEnroll')}" th:errors="*{actualEnroll}"></td>
 				</tr>
 				<tr> <!--Input Course description-->
-					<td><b>Course Description</b><span th:text="#{fieldLabel.description}"></span></td>
+					<td><b>Course Description</b></td>
 					<td>
 						<fieldset><input type="text" th:field="*{description}" /></fieldset>
 					</td>
 					<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
 				</tr>
 				<tr><!-- Dropdown menu to assign initial lecturer-->
-					<td><span th:text="#{fieldLabel.lecturer}"></span></td>
+					<td><b>Lecturer</b></td>
 					<td>
 						<fieldset> 
-							<select th:field="*{lecturer}">
-							<option th:each="lecturer : ${session.usession.user.lecturerId}" th:if="${lecturers.adminOrNot == 'No'}" th:value="${lecturer}" th:text="${lecturer}">Select Lecturer</option>
+							<select id="*{lect}">
+							<option th:each="lecturer : ${lecturerList}" th:value="${lecturer}" th:text="${lecturer.firstName}+' '+${lecturer.lastName}">Select Lecturer</option>
 							</select>
 						</fieldset>
 					</td>
-					<fieldset><input type="hidden" th:field="*{employeeId}" /></fieldset>
-					<td th:if="${#fields.hasErrors('employeeId')}" th:errors="*{employeeId}"></td>
 				</tr>
 				<tr>
 					<td>

@@ -55,17 +55,19 @@ public class Admin_Course {
 		return "admin-courses_courselist";
 	}
 
-	@GetMapping("/createCourse")
+	@GetMapping("/addCourse")
 	public String newCoursePage(Model model) {
 		Courses course = new Courses();
+		ArrayList<Lecturers> lecturerList = lServ.findAllLecturers();
 		model.addAttribute("course", course);
-		return "newCourse"; // TODO use the correct html page
+		model.addAttribute("lecturerList", lecturerList);
+		return "admin-course_addcourse"; // TODO use the correct html page
 	}	
 
 	@PostMapping("/saveCourse")
 	public String saveCourse (@ModelAttribute("course") @Valid Courses course, BindingResult result){
 		if (result.hasErrors()) {
-			return "newCourse"; // TODO use the correct html page
+			return "admin-course_addcourse"; // TODO use the correct html page
 		}
 		adcserv.addCourse(course);
 		return "forward:/managecourses"; // TODO use the correct html page
@@ -89,12 +91,13 @@ public class Admin_Course {
 		return "redirect:/admin/courses/allCourses";
 	}
 
-	@PostMapping ("/searchCourse")
-	public String searchedCourse(@Param("courseId") String courseId, Model model){
-		List<Courses> listCourse = adcserv.getCoursesById(courseId);
-		model.addAttribute("listCourse", listCourse);
-		return "courseindex"; // TODO use the correct html page
-	}
+	// TODO later
+	// @PostMapping ("/searchCourse")
+	// public String searchedCourse(@Param("courseId") String courseId, Model model){
+	// 	List<Courses> listCourse = adcserv.getCoursesById(courseId);
+	// 	model.addAttribute("listCourse", listCourse);
+	// 	return "courseindex"; // TODO use the correct html page
+	// }
 
 	@GetMapping("/deleteCourse/{courseId}")
 	public String deleteCourse(@PathVariable(value="courseId") String courseId, Model model){
