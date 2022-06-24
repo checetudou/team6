@@ -28,23 +28,23 @@ public class Admin_Lecturer {
 	@GetMapping("/managelecturers")
 	public String allLecturersPage (Model model){
 		model.addAttribute("listLecturer", adlserv.getAllLecturers());
-		return "lecturerindex"; //TODO Proper html page linking
+		return "admin-lecturer_lecturerlist"; //TODO Proper html page linking
 	}	
 
 	@GetMapping("/newLecturer")
 	public String newLecturer (Model model){
 		Lecturers lecturer = new Lecturers();
 		model.addAttribute("lecturer", lecturer);
-		return "newLecturer"; //TODO linking proper html pages
+		return "admin-lecturer_addlecturer"; //TODO linking proper html pages
 	}
 
 	@PostMapping("/newLecturer")
 	public String newedLecturer (@ModelAttribute @Valid Lecturers lecturer, BindingResult result, Model model){
 		if (result.hasErrors()) {
-			return "newLecturer"; //TODO proper html page linking
+			return "admin-lecturer_addlecturer"; //TODO proper html page linking
 		}
 		adlserv.addLecturer(lecturer);
-		return "newLecturer"; //TODO linking proper html pages
+		return admin-lecturer_lecturerlist"; //TODO linking proper html pages
 	}
 
 	@GetMapping("/updateLecturer/{lecturerId}")
