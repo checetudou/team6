@@ -5,7 +5,7 @@
 		<div th:replace="fragments/defaults.html :: menu"/>
 		<div th:replace="fragments/defaults.html :: header"/> 
 		<h3>Edit course</h3>
-		<form action="#" th:action="@{/admin/updateCourse/}+${course.courseId}" th:object="${course}" method="post">
+		<form action="#" th:action="@{/admin/courses/updateCourse/}+${course.courseId}" th:object="${course}" method="post">
 			<table>
 				<tr> <!--Input Course Id-->
 					<td><b>Course Id</b></td>

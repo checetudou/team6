@@ -21,7 +21,7 @@ public class Courses {
     private int actualEnroll;
     private String description;
 
-    @OneToMany(mappedBy = "courses")
+    @OneToMany(mappedBy = "courses") //TODO probably add cascade type here?
     private Collection<LectureCanTeach> lectureCanTeaches = new ArrayList<LectureCanTeach>();
 
     @OneToMany(mappedBy = "courses")

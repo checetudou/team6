@@ -77,16 +77,16 @@ public class Admin_Course {
 		ArrayList<Lecturers> lecturers = lServ.findAllLecturers();
 		model.addAttribute("course", course);
 		model.addAttribute("lecturerList", lecturers);
-		return "admin-course_editcourseenrollment"; // TODO use the correct html page
+		return "admin-course_editcourseenrollment"; 
 	}
 
 	@PostMapping("/updateCourse/{courseId}")
 	public String updatedCourse (@PathVariable(value="courseId") String courseId, @ModelAttribute @Valid Courses course, BindingResult result, Model model){
 		if (result.hasErrors()) {
-			return "updateCourse"; // TODO use the correct html page
+			return "admin-course_editcourseenrollment"; 
 		}
 		adcserv.updateCourse(course);
-		return "forward:/managecourses"; // TODO use the correct html page
+		return "redirect:/admin/courses/allCourses";
 	}
 
 	@PostMapping ("/searchCourse")
@@ -96,10 +96,11 @@ public class Admin_Course {
 		return "courseindex"; // TODO use the correct html page
 	}
 
-	@PostMapping("/deleteCourse/{courseId}")
+	@GetMapping("/deleteCourse/{courseId}")
 	public String deleteCourse(@PathVariable(value="courseId") String courseId, Model model){
+		// TODO delete all lecturecanteach rows associated with this course before can call delete.
 		adcserv.deleteCourse(adcserv.getCourseById(courseId));
-		return "forward:/managecourses"; // TODO use the correct html page
+		return "redirect:/admin/courses/allCourses";
 	}
 
 	@GetMapping("/addStudentToCourse/{id}")
