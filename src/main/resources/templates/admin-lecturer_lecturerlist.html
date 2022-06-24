@@ -9,13 +9,10 @@
 		<h3>Lecturer List</h3>
 		<a th:href="@{/admin/lecturers/managelecturers}"></a>
 		<div th:if="${not #lists.isEmpty(listLecturer)}">
-		
-			<!--calling the seach lecturer method-->
-			<form action="#" th:action="@{/search}" method="POST">
-			
+
 			<div class="search-container">
-   			 <form th:action="@{/search}">
-     		 	<input type="text" placeholder="Search.." name="search">
+   			 <form th:action="@{/search}" method="POST">
+     		 <input type="text" placeholder="Search.." name="search">
 			<button type="submit">Submit</button>
 		
 			<table style="border: 1;">
