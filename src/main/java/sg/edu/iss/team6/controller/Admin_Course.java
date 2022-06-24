@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.edu.iss.team6.model.Courses;
+import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.StudentAttendCourse;
 import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.services.AdminCourse;
 import sg.edu.iss.team6.services.AdminStudent;
+import sg.edu.iss.team6.services.LecturerService;
 import sg.edu.iss.team6.services.StudentAttendCourseService;
 
 @Controller
@@ -38,6 +40,9 @@ public class Admin_Course {
 	@Autowired
 	private StudentAttendCourseService sacserv;
 
+	@Autowired
+	private LecturerService lServ;
+
 	@InitBinder("admin")
 	private void initUserBinder(WebDataBinder binder) {
 		// TODO Validator for admin (if required)
@@ -47,7 +52,7 @@ public class Admin_Course {
 	public String allCoursesPage (Model model){
 		ArrayList<Courses> courseList = adcserv.getAllCourses();
 		model.addAttribute("courseList", courseList);
-		return "admin-courses_courselist"; // TODO use the correct html page
+		return "admin-courses_courselist";
 	}
 
 	@GetMapping("/createCourse")
@@ -69,8 +74,10 @@ public class Admin_Course {
 	@GetMapping("/updateCourse/{courseId}")
 	public String updateCourse (@PathVariable(value="courseId") String courseId, Model model){
 		Courses course = adcserv.getCourseById(courseId);
+		ArrayList<Lecturers> lecturers = lServ.findAllLecturers();
 		model.addAttribute("course", course);
-		return "updateCourse"; // TODO use the correct html page
+		model.addAttribute("lecturerList", lecturers);
+		return "admin-course_editcourseenrollment"; // TODO use the correct html page
 	}
 
 	@PostMapping("/updateCourse/{courseId}")
