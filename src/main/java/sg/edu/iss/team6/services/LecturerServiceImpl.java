@@ -44,6 +44,11 @@ public class LecturerServiceImpl implements LecturerService{
 	@Override
 	public void updateLecturer(Lecturers lecturer) {
 		lecRepo.saveAndFlush(lecturer);	
-	}	
+	}
+
+	@Override
+	public void updateGradesByCourseidAndUserid(String courseid,String studentid,String grade){
+		lecRepo.updateGradesByCourseidAndUserid(courseid,studentid,grade);
+	}
 
 }

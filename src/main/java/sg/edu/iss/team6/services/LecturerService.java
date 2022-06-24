@@ -8,6 +8,8 @@ import sg.edu.iss.team6.model.Lecturers;
 public interface LecturerService {	
 	
 	ArrayList<Courses> coursesByLecturer(String lecturerId);
+
+	void updateGradesByCourseidAndUserid(String courseid,String studentid,String grade);
 	
 	ArrayList<Lecturers> findAllLecturers();
 	

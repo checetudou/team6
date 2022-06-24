@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/layout.html :: html_head"/>
 	<body>
-		<div th:replace="fragments/layout.html :: menu"/>
-		<div th:replace="fragments/layout.html :: header"/> 
 		<h3>Enroll into Course</h3>
 		<form action="#" th:action="@{/admin/department/edit/}+${department.departmentId}" th:object="${department}" method="post">
 			<table>

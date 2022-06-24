@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import sg.edu.iss.team6.helper.UserSession;
 import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.model.Students;
@@ -63,15 +64,24 @@ public class LoginController {
 			if ((user.getUserId().substring(0, 7).equals("nusstu/"))) {
 				Students s = uservice.findStudentBystuID(user.getUserId().substring(7));
 				usession.setStudent(s);
+				return "StudentHome";
 			}
 			if ((user.getUserId().substring(0, 7).equals("nusstf/"))) {
 				Lecturers l = uservice.findLecturerBylecID(user.getUserId().substring(7));
 				usession.setLecturer(l);
 				usession.setAdminOrNot(l.isAdminOrNot());
+				if(usession.getLecturer().isAdminOrNot()==true)return "AdminHome";
+				else return "LecturerHome";
 			}
 			session.setAttribute("user", usession);
 		}
-		return "forward:/home";
+		return "forward:/common-login";
+	}
+
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 
 }

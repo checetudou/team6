@@ -21,6 +21,8 @@ public interface LecturerRepo extends JpaRepository<Lecturers,String> {
 
     @Query("SELECT lct.courses FROM LectureCanTeach lct WHERE lct.lecturers.lecturerId=:lid")
     ArrayList<Courses> findCoursesByLecturer(@Param("lid") String lecturerid);
-    
+
+    @Query("update StudentAttendCourse s set s.grade=:grade where s.courses.courseId=:cid and s.students.studentId=:sid")
+    void updateGradesByCourseidAndUserid(@Param("cid") String courseid, @Param("sid") String studentid, @Param("g") String grade);
 }
 
