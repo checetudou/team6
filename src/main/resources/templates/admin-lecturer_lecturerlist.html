@@ -4,13 +4,19 @@
 	<body>
 		<div th:replace="fragments/layout.html :: menu"/>
 		<div th:replace="fragments/layout.html :: header"/> 
+		<div></div>
+		
 		<h3>Lecturer List</h3>
 		<a th:href="@{/admin/lecturers/managelecturers}"></a>
 		<div th:if="${not #lists.isEmpty(listLecturer)}">
 		
-			<!--calling the seachEmployee method-->
+			<!--calling the seach lecturer method-->
 			<form action="#" th:action="@{/search}" method="POST">
 			
+			<div class="search-container">
+   			 <form th:action="@{/search}">
+     		 	<input type="text" placeholder="Search.." name="search">
+			<button type="submit">Submit</button>
 		
 			<table style="border: 1;">
 				<tr class="listHeading">
@@ -21,15 +27,15 @@
 				<th colspan="2" align="left">Actions</th>
 				</tr>
 				<tr th:each="listLecturer : ${lecturer}" class="listRecord">
-					<!--Lecturer Id here-->
+
 					<td align="left" th:if="${lecturer.adminOrNot == 'No'" th:text="${lecturer.lecturerId}"}"></td>
-					<!--Lecturer Name here-->
+
 					<td align="left" th:if="${lecturer.adminOrNot == 'No'}" th:text="${lecturer.firstName} + ${lecturer.lastName}"></td>
-					<!--hyperlink to CURRENT lecturer courses here-->
+	
 					<td><a th:href="admin-lecturer_lecturercurrentcourselist.html" class="btn btn-default"></a></td>
-					<!--hyperlink to update lecturer here-->
+	
 					<td><a th:href="@{/admin/lecturers/updateLecturer/}+${lecturers.lecturerId}" class="btn btn-primary">Update</a></td>
-					<!--hyperlink to delete lecturer here-->
+				
 					<td><a th:href="@{/admin/lecturers/deleteLecturer/}+${lecturers.lecturerId}" class="btn btn-danger">Delete</a></td>
 				</tr>
 			</table>
