@@ -7,11 +7,11 @@
 	<div th:replace="fragments/layout.html :: header"/> 
 	<h3>Add New Lecturer</h3>
 	<!--form start-->
-	<form action="#" th:action="@{/admin/employee/create}" th:object="${employee}" method="post">
+	<form action="#" th:action="@{/admin/lecturers/newLecturer}" th:object="${lecturer}" method="post">
 		<table>
 			<tbody>
 				<tr> <!--Input lecturer id-->
-					<td><b>Employee Id</b><span th:text="#{fieldLabel.employeeId}"></span></td>
+					<td><b>Lecturer Id</b><span th:text="#{fieldLabel.employeeId}"></span></td>
 					<td>
 						<fieldset><input type="text" th:field="*{employeeId}" /></fieldset>
 					</td>
@@ -60,8 +60,9 @@
 					<td><b>Admin or not</b><span th:text="#{fieldLabel.lecturerId}"></span></td>
 					<td>
 						<fieldset>
-							<select th:field="*{lecturerId}"><option th:each="lecturer: ${lidlist}" th:value="${admin)" th:text="${Admin}">Select</option></select>
-						</fieldset>
+							<select th:field="*{lecturerId}">
+							<option th:each="lecturer: ${lidlist}" th:value="${admin)" th:text="${Admin}">Select</option></select>
+					</fieldset>
 					</td>
 					<td th:if="${#fields.hasErrors('lecturerId')}" th:errors="*{lecturerId}"></td>
 				</tr>
@@ -69,7 +70,7 @@
 				
 				<tr>
 					<td>
-						<input type="submit" value="Create course" class="blcass" />
+						<input type="submit" value="Create lecturer" class="blcass" />
 					</td>
 					<td></td>
 					<td></td>
