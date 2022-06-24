@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/defaults.html :: html_head">
+</head>
+
+<body>
+	<h3>Create Student page</h3>
+	<div class="row">
+		<form th:action="@{/admin/students/search}" method="get">
+			<div class="col-xs-3">
+				<fieldset>
+					<input type="text" class="form-control" name="searchStr" />
+				</fieldset>
+			</div>
+			<button type="submit" class="btn btn-primary">Search</button>
+		</form>
+	</div>
+	
+</body>
+
+</html>

@@ -64,10 +64,10 @@ public class Admin_Student {
 	}
 
 
-	@GetMapping("/search")
+	@PostMapping("/search")
 	public String searchStudent(Model model,@RequestParam("searchStr") String keyword) {
 		List<Students> student = adsserv.returnStudentsProfileById(keyword);
-		model.addAttribute("student", student);
+		model.addAttribute("listStudent", student);
 		return "studentindex";
 	}
 
