@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/defaults.html :: html_head">
+</head>
+
+<body>
+	<h3>Student List page</h3>
+	<div class="row">
+		<a th:href="@{/admin/students/newStudent}" style="padding-left:18px;"> Add Student</a>
+		<form th:action="@{/admin/students/search}" method="get">
+			<div class="col-xs-3">
+				<fieldset>
+					<input type="text" class="form-control" name="searchStr" />
+				</fieldset>
+			</div>
+			<button type="submit" class="btn btn-primary">Search</button>
+		</form>
+	</div>
+	<div th:if="${not #lists.isEmpty(listStudent)}">
+		<table class="table">
+
+			<tr class="listHeading">
+				<th><span th:text="#{admin.student.id}"></span></th>
+				<th><span th:text="#{admin.student.email}"></span></th>
+				<th><span th:text="#{admin.student.fullname}"></span></th>
+				<th><span>Action</span></th>
+			</tr>
+			<tr th:each="students : ${listStudent}" class="listRecord">
+				<td align="left" th:text="${students.studentId}"></td>
+				<td align="left" th:text="${students.email}"></td>
+				<td align="left"><span th:text="${students.firstName}+' '+${students.lastName}"></span></td>
+				<td><a th:href="@{/admin/students/updateStudent/}+${students.studentId}" class="btn btn-default"><span
+							th:text="#{admin.student.edit}"></span></a></td>
+				<td><a th:href="@{/admin/students/deleteStudent/}+${students.studentId}" class="btn btn-default"><span
+							th:text="#{admin.student.delete}"></span></a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>

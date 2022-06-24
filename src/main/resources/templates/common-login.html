@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:replace = "fragments/defaults.html::html_head">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<style type="text/css">
+	<!--<style type="text/css">
 		h3{
 			text-align: center;
 		}
@@ -25,32 +25,36 @@
 		body{
 			background-color: #80bdff;
 		}
-	</style>
+	</style>-->
 	<title>nus.edu.sg</title>
 </head>
 <body >
-<div id="body">
 	<div>
-		<h3>National University of Singapore</h3>
+		<h3>Sign In</h3>
 	</div>
-	<div>
-		<form action="#" th:object="${user}" th:action="@{/authenticate}" method="get">
-			<div class="form-item">
-				<label>Sign in with your organizational account:</label><br>
-				<input style="margin-left: 5px;margin-right: 1px;width: 95%; height: 30px;" type="text" name="userId" autocomplete="off" th:field="*{userId}">
+	
+		<form action="#" th:object="${user}" th:action="@{/authenticate}" method="get" style="padding-left: 25px;">
+		<div class="row">
+			<div class="col-xs-3">
+				<label>Username</label><br>
+				<input class="form-control" type="text" name="userId" autocomplete="off" th:field="*{userId}">
 				<p  style="color: red; font-size: 12px;margin-top: 0px;" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></p>
 			</div>
-			<div class="form-item" style="margin-top: 10px;">
+		</div>
+		<div class="row">
+			<div class="col-xs-3">
 				<label>Password:</label><br>
-				<input style="margin-left: 5px;margin-right: 1px;width: 95%; height: 30px;" type="password" name="password" th:field="*{password}">
+				<input class="form-control" type="password" name="password" th:field="*{password}">
 				<p  style="color: red; font-size: 12px; margin-top: 0px;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 			</div>
-			<div style="margin-top: 10px;">
-				<input style="margin-left: 5px; width: 95%; height: 30px; background-color: springgreen" type="submit"  value="Sign in">
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-xs-3">
+				<input class="btn btn-primary" type="submit"  value="Sign in">
 			</div>
+		</div>
 		</form>
-	</div>
-</div>
 
 </body>
 </html>
