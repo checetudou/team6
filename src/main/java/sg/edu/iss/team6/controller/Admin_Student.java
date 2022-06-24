@@ -26,46 +26,52 @@ public class Admin_Student {
 
 	@Autowired
 	private AdminStudent adsserv;
-	
+
 	@GetMapping("/managestudents")
-	public String getAllStudentProfile (Model model){
+	public String getAllStudentProfile(Model model) {
 		model.addAttribute("listStudent", adsserv.getAllStudentProfile());
-		return "studentindex";  //TODO proper html page linking
+		return "studentindex"; // TODO proper html page linking
 	}
-		
+
 	@GetMapping("/newStudent")
-	public String newStudent (Model model){
+	public String newStudent(Model model) {
 		Students student = new Students();
 		model.addAttribute("student", student);
-		return "create-student"; //TODO proper html page linking
+		return "create-student"; // TODO proper html page linking
 	}
-
-	@PostMapping("/newStudent")
-	public String newStudent (@ModelAttribute @Valid Students student, BindingResult result, Model model){
-		if (result.hasErrors()) {
-			return "newStudent"; //TODO proper html page linking
-		}
-		adsserv.addStudent(student);
-		return "studentindex";
-	}
+	/*
+	 * @PostMapping("/saveStudent") public String
+	 * saveEmployee(@ModelAttribute("student") Students student) { // saving the
+	 * employee object into the database adsserv.addStudent(student);
+	 * 
+	 * // redirect: -> sends user to another page (in this case, the home page)
+	 * return "redirect:/studentindex"; }
+	 */
+	
+	 @PostMapping("/newStudent") public String newStudent(@ModelAttribute("student") Students student,BindingResult result,Model model){
+	  
+	// if (result.hasErrors()) { return "create-student"; //TODO proper html pagelinking } a adsserv.addStudent(student); model.addAttribute("listStudent",
+	  adsserv.addStudent(student);
+	  model.addAttribute("listStudent", adsserv.getAllStudentProfile());
+	  return "studentindex"; }
+	 
+	 
 
 	@GetMapping("/updateStudent/{id}")
-	public String updateStudent (@PathVariable(value="id") String id, Model model){
+	public String updateStudent(@PathVariable(value = "id") String id, Model model) {
 		Students student = adsserv.getStudentProfileById(id);
 		model.addAttribute("student", student);
 		return "updateStudent";
 	}
 
-
 	@GetMapping("/deleteStudent/{id}")
-	public String deleteStudent(@PathVariable(value="id") String id, Model model){
+	public String deleteStudent(@PathVariable(value = "id") String id, Model model) {
 		adsserv.deleteStudentProfileById(id);
 		return "redirect:/admin/students/managestudents";
 	}
 
-
 	@PostMapping("/search")
-	public String searchStudent(Model model,@RequestParam("searchStr") String keyword) {
+	public String searchStudent(Model model, @RequestParam("searchStr") String keyword) {
 		List<Students> student = adsserv.returnStudentsProfileById(keyword);
 		model.addAttribute("listStudent", student);
 		return "studentindex";

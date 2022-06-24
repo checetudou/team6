@@ -7,16 +7,37 @@
 <body>
 	<h3>Create Student page</h3>
 	<div class="row">
-		<form th:action="@{/admin/students/search}" method="get">
-			<div class="col-xs-3">
-				<fieldset>
-					<input type="text" class="form-control" name="searchStr" />
-				</fieldset>
-			</div>
-			<button type="submit" class="btn btn-primary">Search</button>
+		<div class="col-xs-3">
+<!--private String studentId;
+    private String firstName;
+    private String lastName;
+    private Date enrollmentDate;
+    private String email;
+    private byte[] photo;
+    private String password;-->
+			<form action="#" th:action="@{/admin/students/newStudent}" th:object="${student}" method="POST">
+			<input type="text" th:field="*{studentId}" placeholder="Student ID"
+					class="form-control mb-4 col-4">
+				<input type="text" th:field="*{firstName}" placeholder="Student First Name"
+					class="form-control mb-4 col-4">
+				<input type="text" th:field="*{lastName}" placeholder="Student Last Name"
+					class="form-control mb-4 col-4">
+				<input type="date" th:field="*{enrollmentDate}" placeholder="Student EnrollmentDate"
+					class="form-control mb-4 col-4">
+				<input type="text" th:field="*{email}" placeholder="Student Email" class="form-control mb-4 col-4">
+				<input type="file" th:field="*{photo}" placeholder="Photo"
+					class="form-control mb-4 col-4">
+				<input type="password" th:field="*{password}" placeholder="Password"
+					class="form-control mb-4 col-4">
+				<!-- 
+			the submit button calls the method referred to by the form when clicked.
+			all the values in the text fields will be saved in the object after 
+		-->
+				<button type="submit" class="btn btn-info col-2">Submit</button>
+		
 		</form>
 	</div>
-	
+
 </body>
 
 </html>

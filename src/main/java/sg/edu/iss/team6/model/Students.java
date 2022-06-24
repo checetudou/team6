@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 public class Students {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	/* @GeneratedValue(strategy = GenerationType.) */
     private String studentId;
     private String firstName;
     private String lastName;

@@ -44,7 +44,7 @@ public class Admin_Lecturer {
 			return "admin-lecturer_addlecturer"; //TODO proper html page linking
 		}
 		adlserv.addLecturer(lecturer);
-		return admin-lecturer_lecturerlist"; //TODO linking proper html pages
+		return "admin-lecturer_lecturerlist"; //TODO linking proper html pages
 	}
 
 	@GetMapping("/updateLecturer/{lecturerId}")
