@@ -7,13 +7,13 @@
 	<div th:replace="fragments/layout.html :: header"/> 
 	<h3>Add New Lecturer</h3>
 	<!--form start-->
-	<form action="#" th:action="@{/admin/lecturers/newLecturer}" th:object="${lecturer}" method="post">
+	<form action="#" th:action="@{/admin/lecturers//updateLecturer/}+${lecturer.lecturerId}" th:object="${lecturer}" method="post">
 		<table>
 			<tbody>
 				<tr> <!--Input lecturer id-->
 					<td><b>Lecturer Id</b><span th:text="#{fieldLabel.lecturerId}"></span></td>
 					<td>
-						<fieldset><input type="text" th:field="*{lecturerId}" /></fieldset>
+						<fieldset><input type="text" readonly class = "form-control" th:field="*{lecturerId}" /></fieldset>
 					</td>
 					<td th:if="${#fields.hasErrors('lecturerId')}" th:errors="*{lecturerId}"></td>
 				</tr>
@@ -73,7 +73,7 @@
 				
 				<tr>
 					<td>
-						<input type="submit" value="Create lecturer" class="blcass" />
+						<input type="submit" value="Update" class="blcass" />
 					</td>
 					<td></td>
 					<td></td>
