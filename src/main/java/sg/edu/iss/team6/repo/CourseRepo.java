@@ -29,6 +29,8 @@ public interface CourseRepo extends JpaRepository<Courses,String> {
 	@Query("SELECT c.size FROM Courses c where c.courseId = :cid")
 	int getAllowedSize (@Param("cid") String courseId);
 
+	List<Courses> findAll();
+
 	// Not required; Just call saveAndFlush method
 	// @Query("insert c into Courses c values(:courses.courseId,courses.courseName,courses.size,"
 	// 	+ "courses.actualEnroll,courses.description)")

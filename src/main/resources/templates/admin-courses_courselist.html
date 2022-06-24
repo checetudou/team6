@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: html_head"></head>
+<head th:replace="fragments/defaults.html :: html_head"></head>
 
 	<body>
-		<div th:replace="fragments/layout.html :: menu"></div>
-		<div th:replace="fragments/layout.html :: header"></div> 
+		<div th:replace="fragments/defaults.html :: menu"></div>
+		<div th:replace="fragments/defaults.html :: header"></div> 
 		<h3>Course List</h3>
 		<a th:href="@{/admin/employee/managecourses}"></a>
-		<div th:if="${not #lists.isEmpty(listCourse)}">
 		<table style="border: 1;"><table class="table table-striped table-responsive-md">
-		<thead>
 			<tr>
 				<th>CourseId</th>
 				<th>CourseName</th>
@@ -21,10 +19,7 @@
 				<th colspan="2" align="left">Actions</th>
 
 			</tr>
-		</thead>
-		
-		<tbody>
-			<tr th:each="courses : ${courses}" th:each="lectureCanTeach : ${lecturerList}" class="listRecord">
+			<tr th:each="courses : ${courseList}">
 				<!--
 					use ${var_name.attribute} to access the attributes of the object
 				-->
@@ -39,16 +34,14 @@
 					<!--Course Id here-->
 					<td align="left" th:text="${courses.description}"></td>
 					<!--Lecturer name here-->
-					<td align="left" th:text="${lectureCanTeach.courseId.lecturerId}"></td>
+					<!--<td align="left" th:text="${lectureCanTeach.courseId.lecturerId}"></td>-->
 					<!--Class List here-->
-					<td align="left" th:href="@__need to add hyperlink to class list__"></td>
+					<td align="left" th:href="@{/}"></td>
 					<!--hyperlink to edit course here-->
-					<td><a th:href="@{/admin/updateCourse/}+${course.courseId" class="btn btn-primary">Update</a></td>
+					<td><a th:href="@{/admin/courses/updateCourse/}+${courses.courseId}" class="btn btn-primary">Update</a></td>
 					<!--hyperlink to delete course here-->
-					<td><a th:href="@{/admin/deleteCourse/}+${course.courseId}" class="btn btn-danger">Delete</a></td>
+					<td><a th:href="@{/admin/courses/deleteCourse/}+${courses.courseId}" class="btn btn-danger">Delete</a></td>
 			</tr>
-		</tbody>
 		</table>
-		</div>
 	</body>
 </html>

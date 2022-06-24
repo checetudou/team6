@@ -45,8 +45,9 @@ public class Admin_Course {
 	
 	@GetMapping("/allCourses")
 	public String allCoursesPage (Model model){
-		model.addAttribute("listCourse", adcserv.getAllCourses());
-		return "courseindex"; // TODO use the correct html page
+		ArrayList<Courses> courseList = adcserv.getAllCourses();
+		model.addAttribute("courseList", courseList);
+		return "admin-courses_courselist"; // TODO use the correct html page
 	}
 
 	@GetMapping("/createCourse")
