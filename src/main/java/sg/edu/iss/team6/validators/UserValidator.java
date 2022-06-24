@@ -24,8 +24,7 @@ public class UserValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		User u = (User) target;
         if(u.getUserId().length() > 7) {
-            String testintg = u.getUserId().substring(0,7);
-            if (!(u.getUserId().substring(0,7).equals("nusstu/")) || !(u.getUserId().substring(0,7).equals("nusstf/"))) {
+            if (!(u.getUserId().substring(0,7).equals("nusstu/")) && !(u.getUserId().substring(0,7).equals("nusstf/"))) {
                 errors.rejectValue("userId", "error.invalidUserId", "Invalid Format");
             }
             if ((u.getUserId().substring(0,7).equals("nusstu/"))) {
@@ -40,8 +39,12 @@ public class UserValidator implements Validator{
             }
             if ((u.getUserId().substring(0,7).equals("nusstf/"))) {
                 String actualUser = u.getUserId().substring(8);
-                if (uService.authenticateLecturers(actualUser, u.getPassword())==null) {
-                    errors.rejectValue("userId", "error.invalidUserId", "Wrong Username Or Password");
+                if (uService.findStudentBystuID(actualUser)==null) {
+                    errors.rejectValue("userId", "error.invalidUserId", "User doesn't exist"); 
+                } else {
+                    if (uService.authenticateLecturers(actualUser, u.getPassword())==null) {
+                        errors.rejectValue("userId", "error.invalidUserId", "Wrong Username Or Password");
+                    }
                 }
             }
         }
