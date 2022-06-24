@@ -36,9 +36,9 @@ public class StudentController {
 
 	@RequestMapping(value = "/grades")
 	public String studentGrades(HttpSession session, Model model) {
-		UserSession usession = (UserSession) session.getAttribute("usession");
+		UserSession usession = (UserSession) session.getAttribute("user");
 		
-    if (usession.getStudent() != null) {
+		if (usession.getStudent() != null) {
 			
 			if (sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId()).size() > 0) {
 				model.addAttribute("cStudentAttendCourses", sacService.findStudentAttendCourseByStudentId(usession.getStudent().getStudentId()));

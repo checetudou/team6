@@ -2,6 +2,7 @@ package sg.edu.iss.team6.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import sg.edu.iss.team6.model.Students;
 import sg.edu.iss.team6.services.AdminStudent;
@@ -35,7 +37,7 @@ public class Admin_Student {
 	public String newStudent (Model model){
 		Students student = new Students();
 		model.addAttribute("student", student);
-		return "newStudent"; //TODO proper html page linking
+		return "create-student"; //TODO proper html page linking
 	}
 
 	@PostMapping("/newStudent")
@@ -58,15 +60,15 @@ public class Admin_Student {
 	@GetMapping("/deleteStudent/{id}")
 	public String deleteStudent(@PathVariable(value="id") String id, Model model){
 		adsserv.deleteStudentProfileById(id);
-		return "redirect:/managestudents";
+		return "redirect:/admin/students/managestudents";
 	}
 
 
-	@PostMapping("/search")
-	public String searchStudent(@Param("id")String id, Model model) {
-		List<Students> student = adsserv.returnStudentsProfileById(id);
+	@GetMapping("/search")
+	public String searchStudent(Model model,@RequestParam("searchStr") String keyword) {
+		List<Students> student = adsserv.returnStudentsProfileById(keyword);
 		model.addAttribute("student", student);
-		return "managestudents";
+		return "studentindex";
 	}
 
 }
