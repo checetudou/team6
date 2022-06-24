@@ -60,11 +60,11 @@ public class LoginController {
 			return "common-login";
 		} else {
 			UserSession usession = new UserSession();
-			if ((user.getUserId().substring(0, 8).equals("nusstu/"))) {
+			if ((user.getUserId().substring(0, 7).equals("nusstu/"))) {
 				Students s = uservice.findStudentBystuID(user.getUserId().substring(7));
 				usession.setStudent(s);
 			}
-			if ((user.getUserId().substring(0, 8).equals("nusstf/"))) {
+			if ((user.getUserId().substring(0, 7).equals("nusstf/"))) {
 				Lecturers l = uservice.findLecturerBylecID(user.getUserId().substring(7));
 				usession.setLecturer(l);
 				usession.setAdminOrNot(l.isAdminOrNot());
