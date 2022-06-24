@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,14 +42,14 @@ public class LecturerController {
 	}
 
 	@RequestMapping(value = "/courselist", method = RequestMethod.GET)
-	public ModelAndView lectureCanTeachList(HttpSession session) {
+	public String lectureCanTeachList(HttpSession session, Model model) {
 		//TODO Use HttpSession to check if the User entering this page is ONLY an authorised person that can see his courses(lecturers/admin)
 		Lecturers l = (Lecturers) session.getAttribute("user");
 		ModelAndView mav = new ModelAndView("lecture-can-teach"); //TODO insert proper html page name
 		ArrayList<Courses> courses = lService.coursesByLecturer(l.getLecturerId());
 		mav.addObject("courseslist", courses);
 		mav.addObject("lecturer", l);
-		return mav;
+		return "lecturer-viewcurrentcourses";
 	}
 
 	@RequestMapping(value = "/courselist/{courseid}", method = RequestMethod.GET)

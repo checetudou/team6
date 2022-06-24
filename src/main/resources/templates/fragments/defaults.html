@@ -12,18 +12,18 @@
 	<!-- Navigation Menu-->
 	<div th:fragment="menu" id="menu">
 		<nav class="navbar">
-			<a th:href="@{/about}">Course Application Processing System (CAPS)</a>
+			<a th:href="@{/common-about}">Course Application Processing System (CAPS)</a>
 			<a th:href="@{/home}">Home</a>
 			<a th:href="@{/login}">Login</a>
-			<a th:href="@{/login}">Logout</a>
+			<a th:href="@{/logout}">Logout</a>
 			<a th:href="@{/login}">Change Password</a>
 			<a th:href="@{/about}">About</a>
 			<div th:if="${session.usession?.user}">
-				<div th:each="role : ${session.usession.user.roleSet}">
-					<!-- Lecturer Menu -->
-					<div th:if="${role.roleId == 'manager'}">
+				<div th:each="role : ${session.usession.user.getuserId}">
+					<!-- Lecturer	 Menu -->
+					<div th:if="${role.substring(0,6) == 'nusstf'}">
 						<div class="subnav">
-							<button class="subnavbtn">Lecturer Menu<i class="fa fa-caret-down"></i></button>
+							<button class="subnavbtn">Student Menu<i class="fa fa-caret-down"></i></button>
 							<div class="subnav-content">
 								<!-- Menu Item 1 -->
 								<a th:href="@{/manager/pending}" th:utext="#{menu.coursesForApproval}">View Courses Taught</a>
@@ -33,7 +33,7 @@
 						</div>
 					</div>
 					<!-- Admin Menu -->
-					<div th:if="${role.roleId == 'admin'}">
+					<div th:if="${session.usession.user.getlecturer().adminOrNot}">
 						<div class="subnav">
 							<button class="subnavbtn">Admin Menu<i class="fa fa-caret-down"></i></button>
 							<div class="subnav-content">
@@ -49,7 +49,7 @@
 						</div>
 					</div>
 					<!-- Student Menu -->
-					<div th:if="${role.roleId == 'staff'}">
+					<div th:if="${role.substring(0,6) == 'nusstu'}">
 						<div class="subnav">
 							<button class="subnavbtn">Student Menu<i class="fa fa-caret-down"></i></button>
 							<div class="subnav-content">
