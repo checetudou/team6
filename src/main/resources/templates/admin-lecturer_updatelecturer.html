@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: html_head"/>
+<head th:replace="fragments/defaults.html :: html_head"/>
 
 <body>
-	<div th:replace="fragments/layout.html :: menu"/>
-	<div th:replace="fragments/layout.html :: header"/> 
+	<div th:replace="fragments/defaults.html :: menu"/>
+	<div th:replace="fragments/defaults.html :: header"/> 
 	<h3>Add New Lecturer</h3>
 	<!--form start-->
-	<form action="#" th:action="@{/admin/lecturers//updateLecturer/}+${lecturer.lecturerId}" th:object="${lecturer}" method="post">
+	<form action="#" th:action="@{/admin/lecturers/updateLecturer/}+${lecturer.lecturerId}" th:object="${lecturer}" method="POST">
 		<table>
 			<tbody>
 				<tr> <!--Input lecturer id-->
@@ -23,7 +23,7 @@
 				<tr> <!--Input lecturer firstname-->
 					<td><b>First Name </b><span th:text="#{fieldLabel.firstName}"></span></td>
 					<td>
-						<fieldset><input type="text" th:field="*{firstName}" /></fieldset>
+						<fieldset><input type="text" th:field="*{firstName}"/></fieldset>
 					</td>
 					<td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></td>
 				</tr>
@@ -38,17 +38,20 @@
 				</tr>
 				
 				
+				
 				<tr> <!--Input lecturer email-->
-					<td><b>Email address</b><span th:text="#{fieldLabel.email}"></span></td>
+					<td><b>Email address</b><span th:text="#{fieldLabel.Email}"></span></td>
 					<td>
 						<fieldset><input type="text" th:field="*{email}" /></fieldset>
 					</td>
 					<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
 				</tr>
 				
+				<input type ="text" th:field = "*{email}" th:text="#{fieldLabel.email}" class="form-control mb-4 col-4">
+
 				
 				<tr> <!--Input lecturer email-->
-					<td><b>Photo Id</b><span th:text="#{fieldLabel.photo}"></></td>
+					<td><b>Photo Id</b><span th:text="#{fieldLabel.Photo Id}"></td>
 					<td>
 						<fieldset><input type="file" id="myFile" name="filename"th:field="*{photo}" /></fieldset>
 					</td>
@@ -57,15 +60,14 @@
 				
 				
 				<tr><!--dropdown menu to decide if admin or not-->
-					<td><b>Admin or not</b><span th:text="#{fieldLabel.lecturerId}"></span></td>
-					<td>
-						<fieldset>
-							<select th:field="*{adminOrNot}">
-							<option input type="radio" th:each="lecturer: ${lecturer}" 
-							th:value="${admin)" th:text="${Admin}">Yes</option>
-							<option input type="radio" th:each="lecturer: ${lecturer}" 
-							th:value="${admin)" th:text="${Admin}">No</option></select>
-					</fieldset>
+					<td><b>Admin or not</b><span th:text="#{fieldLabel.adminornot}"></span></td>
+					<td>                                                     
+						<fieldset>				
+							<select class="ml-1" name="adminornot" [(ngModel)]="adminornot">
+							 <option></option>
+							<option [ngValue]="true">Admin</option> 
+							<option [ngValue]="false">Lecturer</option> 
+						</fieldset>
 					</td>
 					<td th:if="${#fields.hasErrors('adminOrNot')}" th:errors="*{adminOrNot}"></td>
 				</tr>
