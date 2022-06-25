@@ -19,7 +19,7 @@ import sg.edu.iss.team6.model.Lecturers;
 import sg.edu.iss.team6.services.AdminLecturer;
 
 @Controller
-@RequestMapping(value ="/admin/lecturers")
+@RequestMapping(value = "/admin/lecturers")
 public class Admin_Lecturer {
 
 	@Autowired
@@ -39,36 +39,38 @@ public class Admin_Lecturer {
 	}
 
 	@PostMapping("/newLecturer")
-	public String newedLecturer (@ModelAttribute @Valid Lecturers lecturer, BindingResult result, Model model){
-		if (result.hasErrors()) {
-			return "admin-lecturer_addlecturer"; //TODO proper html page linking
-		}
+	public String newedLecturer (@ModelAttribute("lecturer") Lecturers lecturer, BindingResult result, Model model){
+//		if (result.hasErrors()) {
+//			return "admin-lecturer_addlecturer"; //TODO proper html page linking
+//		}
 		adlserv.addLecturer(lecturer);
+		model.addAttribute("listLecturer", adlserv.getAllLecturers());
 		return "admin-lecturer_lecturerlist"; //TODO linking proper html pages
 	}
-
+	
+	
 	@GetMapping("/updateLecturer/{lecturerId}")
 	public String updateLecturer (@PathVariable(value="lecturerId") String lecturerId, Model model){
 		Lecturers lecturer = adlserv.getLecturer(lecturerId);
 		model.addAttribute("lecturer", lecturer);
-		return "updateLecturer"; //TODO linking proper html page
+		return "admin-lecturer_updatelecturer"; //TODO linking proper html page
 	}
 
 	@PostMapping("/updateLecturer/{lecturerId}")
 	public String updatingLecturer (@ModelAttribute("lecturer") @Valid Lecturers lecturer, BindingResult result,Model model){
 		if (result.hasErrors()) {
-			return "updateLecturer";
+			return "admin-lecturer_updatelecturer";
 		} 
 		else {
 			adlserv.saveLecturer(lecturer);
 		}
-		return "redirect:/managelecturers"; //TODO linking proper html page
+		return "redirect:/admin/lecturers/managelecturers"; //TODO linking proper html page
 	}
 
 	@GetMapping("/deleteLecturer/{lecturerId}")
 	public String deleteLecturer(@PathVariable(value="lecturerId") String lecturerId, Model model){
 		adlserv.deleteLecturerById(lecturerId);
-		return "redirect:/managelecturers"; //TODO proper html pages
+		return "redirect:admin/lecturers/managelecturers"; //TODO proper html pages
 	}
 	
 	@PostMapping("/search")
