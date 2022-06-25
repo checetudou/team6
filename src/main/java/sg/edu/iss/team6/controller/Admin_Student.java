@@ -48,16 +48,24 @@ public class Admin_Student {
 	 * return "redirect:/studentindex"; }
 	 */
 	
-	 @PostMapping("/newStudent") public String newStudent(@ModelAttribute("student") Students student,BindingResult result,Model model){
+	 @PostMapping("/newStudent") 
+	 public String newStudent(@ModelAttribute("student") Students student,BindingResult result,Model model){
 	  
 	// if (result.hasErrors()) { return "create-student"; //TODO proper html pagelinking } a adsserv.addStudent(student); model.addAttribute("listStudent",
 	  adsserv.addStudent(student);
 	  model.addAttribute("listStudent", adsserv.getAllStudentProfile());
 	  return "studentindex"; }
 	 
-	 
+	 @PostMapping("/updateStudent") 
+	 public String updateStudent(@ModelAttribute("student") Students student,BindingResult result,Model model){
+		  
+	// if (result.hasErrors()) { return "create-student"; //TODO proper html pagelinking } a adsserv.addStudent(student); model.addAttribute("listStudent",
+	  adsserv.updateStudent(student);
+	  model.addAttribute("listStudent", adsserv.getAllStudentProfile());
+	  return "studentindex";
+	}
 
-	@RequestMapping("/updateStudent/{id}")
+	@GetMapping("/updateStudent/{id}")
 	public String updateStudent(@PathVariable(value = "id") String id,@ModelAttribute("student") Students student,BindingResult result, Model model) {
 		 student = adsserv.getStudentProfileById(id);
 		adsserv.updateStudent(student);

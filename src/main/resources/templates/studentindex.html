@@ -21,15 +21,15 @@
 		<table class="table">
 
 			<tr class="listHeading">
-				<th><span th:text="#{admin.student.id}"></span></th>
-				<th><span th:text="#{admin.student.email}"></span></th>
-				<th><span th:text="#{admin.student.fullname}"></span></th>
+				<th><span th:text="#{admin.student.id}"> </span></th>
+				<th><span th:text="#{admin.student.email}"> </span></th>
+				<th><span th:text="#{admin.student.fullname}"> </span></th>
 				<th><span>Action</span></th>
 			</tr>
 			<tr th:each="students : ${listStudent}" class="listRecord">
-				<td align="left" th:text="${students.studentId}"></td>
-				<td align="left" th:text="${students.email}"></td>
-				<td align="left"><span th:text="${students.firstName}+' '+${students.lastName}"></span></td>
+				<td align="left" th:text="${students.studentId}"> </td>
+				<td align="left" th:text="${students.email}"> </td>
+				<td align="left"><span th:text="${students.firstName}+' '+${students.lastName}"> </span></td>
 				<td><a th:href="@{/admin/students/updateStudent/}+${students.studentId}" class="btn btn-secondary"><span
 							th:text="#{admin.student.edit}"></span></a></td>
 				<td><a th:href="@{/admin/students/deleteStudent/}+${students.studentId}" class="btn btn-secondary"><span
