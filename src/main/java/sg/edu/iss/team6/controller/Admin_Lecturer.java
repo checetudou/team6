@@ -44,7 +44,7 @@ public class Admin_Lecturer {
 			return "admin-lecturer_addlecturer"; //TODO proper html page linking
 		}
 		adlserv.addLecturer(lecturer);
-		return admin-lecturer_lecturerlist"; //TODO linking proper html pages
+		return "admin-lecturer_lecturerlist"; //TODO linking proper html pages
 	}
 
 	@GetMapping("/updateLecturer/{lecturerId}")
@@ -73,6 +73,13 @@ public class Admin_Lecturer {
 	
 	@PostMapping("/search")
 	public String searchLecturer(@Param("lecturerId")String lecturerId, Model model) {
+		ArrayList<Lecturers> lecturerss = adlserv.getLecturersById(lecturerId);
+		model.addAttribute("lecturer", lecturerss);
+		return "managelecturers"; //TODO proper html page linking
+	}
+	
+	@GetMapping("/view-lecturer-courses")
+	public String coursesTaughtByLecturer(@Param("lecturerId")String lecturerId,Model model) {
 		ArrayList<Lecturers> lecturerss = adlserv.getLecturersById(lecturerId);
 		model.addAttribute("lecturer", lecturerss);
 		return "managelecturers"; //TODO proper html page linking
