@@ -1,73 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/details.html :: html_head"/>
+<head th:replace="fragments/defaults.html :: html_head"/>
 
 <body>
-	<div th:replace="fragments/layout.html :: menu"/>
-	<div th:replace="fragments/layout.html :: header"/> 
+	<div th:replace="fragments/defaults.html :: menu"/>
+	<div th:replace="fragments/defaults.html :: header"/> 
 	<h3>Add New Lecturer</h3>
 	<!--form start-->
 	<form action="#" th:action="@{/admin/lecturers/newLecturer}" th:object="${lecturer}" method="post">
 		<table>
 			<tbody>
 				<tr> <!--Input lecturer id-->
-					<td><b>Lecturer Id</b><span th:text="#{fieldLabel.lecturerId}"></span></td>
+					<td><span th:text="#{fieldLabel.lecturerId}"></span></td>
 					<td>
-						<fieldset><input type="text" th:field="*{lecturerId}" /></fieldset>
+						<input type="text" th:field="*{lecturerId}" placeholder="Lecturer ID"
+					class="form-control mb-4 col-4">
 					</td>
-					<td th:if="${#fields.hasErrors('lecturerId')}" th:errors="*{lecturerId}"></td>
 				</tr>
 				
 				
 				
 				<tr> <!--Input lecturer firstname-->
-					<td><b>First Name </b><span th:text="#{fieldLabel.firstName}"></span></td>
+					<td><span th:text="#{fieldLabel.firstName}"></span></td>
 					<td>
 						<fieldset><input type="text" th:field="*{firstName}" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></td>
 				</tr>
 				
 				
 				<tr> <!--Input lecturer lastname-->
-					<td><b>Last Name</b><span th:text="#{fieldLabel.lastName}"></span></td>
+					<td><span th:text="#{fieldLabel.lastName}"></span></td>
 					<td>
 						<fieldset><input type="text" th:field="*{lastName}" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></td>
 				</tr>
 				
 				
 				<tr> <!--Input lecturer email-->
-					<td><b>Email address</b><span th:text="#{fieldLabel.email}"></span></td>
+					<td><span th:text="#{fieldLabel.email}"></span></td>
 					<td>
 						<fieldset><input type="text" th:field="*{email}" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
 				</tr>
 				
 				
-				<tr> <!--Input lecturer email-->
-					<td><b>Photo Id</b><span th:text="#{fieldLabel.photo}"></></td>
+				<tr> <!--Input lecturer photo-->
+					<td><span th:text="#{fieldLabel.photo}"></span></td>
 					<td>
 						<fieldset><input type="file" id="myFile" name="filename"th:field="*{photo}" /></fieldset>
 					</td>
-					<td th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}"></td>
 				</tr>
 				
 				
+				
 				<tr><!--dropdown menu to decide if admin or not-->
-					<td><b>Admin or not</b><span th:text="#{fieldLabel.lecturerId}"></span></td>
+					<td><span th:text="#{fieldLabel.adminornot}"></span></td>
 					<td>
-						<fieldset>
-							<select th:field="*{adminOrNot}">
-							<option input type="radio" th:each="lecturer: ${lecturer}" 
-							th:value="${admin)" th:text="${Admin}">Yes</option>
-							<option input type="radio" th:each="lecturer: ${lecturer}" 
-							th:value="${admin)" th:text="${Admin}">No</option></select>
-					</fieldset>
+						<fieldset>				
+							<select class="ml-1" name="adminornot" [(ngModel)]="adminornot">
+							 <option></option>
+							<option [ngValue]="true">Admin</option> 
+							<option [ngValue]="false">Lecturer</option> 
+						</fieldset>
+						
 					</td>
-					<td th:if="${#fields.hasErrors('adminOrNot')}" th:errors="*{adminOrNot}"></td>
 				</tr>
 				
 				

@@ -1,41 +1,59 @@
+Admin lecture lecturelist html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/layout.html :: html_head"/>
-	<body>
-		<div th:replace="fragments/layout.html :: menu"/>
-		<div th:replace="fragments/layout.html :: header"/> 
-		<div></div>
-		
-		<h3>Lecturer List</h3>
-		<a th:href="@{/admin/lecturers/managelecturers}"></a>
-		<div th:if="${not #lists.isEmpty(listLecturer)}">
 
-			<div class="search-container">
-   			 <form th:action="@{/search}" method="POST">
-     		 <input type="text" placeholder="Search.." name="search">
-			<button type="submit">Submit</button>
-		
-			<table style="border: 1;">
-				<tr class="listHeading">
-					<!--headers-->
-				<th style="width:20%">Lecturer Id</th>
-				<th>Name</th>
-				<th>Class List</th> 
-				<th colspan="2" align="left">Actions</th>
-				</tr>
-				<tr th:each="listLecturer : ${lecturer}" class="listRecord">
+<head th:replace="fragments/defaults.html :: html_head" />
 
-					<td align="left" th:if="${lecturer.adminOrNot == 'No'" th:text="${lecturer.lecturerId}"}"></td>
+<body>
+	<!---->
+	<div th:replace="fragments/defaults.html :: menu" />
+	<div th:replace="fragments/defaults.html :: header" />
+	<div></div>
 
-					<td align="left" th:if="${lecturer.adminOrNot == 'No'}" th:text="${lecturer.firstName} + ${lecturer.lastName}"></td>
-	
-					<td><a th:href="admin-lecturer_lecturercurrentcourselist.html" class="btn btn-default"></a></td>
-	
-					<td><a th:href="@{/admin/lecturers/updateLecturer/}+${lecturers.lecturerId}" class="btn btn-primary">Update</a></td>
-				
-					<td><a th:href="@{/admin/lecturers/deleteLecturer/}+${lecturers.lecturerId}" class="btn btn-danger">Delete</a></td>
-				</tr>
-			</table>
+	<h3>Lecturer List</h3>
+	<a th:href="@{/admin/lecturers/managelecturers}"></a>
+	<div th:if="${not #lists.isEmpty(listLecturer)}">
+
+		<div class="search-container">
+			<form th:action="@{/admin/lecturers/search}" method="POST">
+				<input type="text" placeholder="Search.." name="search">
+				<button type="submit">Submit</button>
+			
+			
+		<div class="row">
+			<a th:href="@{/admin/lecturers/newLecturer}" style="padding-left:18px;"class="btn btn-default"> Add Lecturer </a>
+
+
+				<table class="table">
+					<tr class="listHeading">
+						<!--headers-->
+						<th style="width:18%">Lecturer Id</span></th>
+						<th>Name</th>
+						<th>Class List</th>
+						<th colspan="2" align="left">Actions</th>
+
+
+					</tr>
+
+					<tr th:each="lecturer : ${listLecturer}" class="listRecord">
+						<div th:if="${lecturer.adminOrNot == false}">
+							<td align="left" th:text="${lecturer.lecturerId}">
+							</td>
+
+							<td align="left" th:text="${lecturer.firstName} + ${lecturer.lastName}"></td>
+
+							<td><a th:href="@{/admin/lecturers/view-lecturer-courses}">View Course List</a></td>
+
+							<td><a th:href="@{/admin/lecturers/updateLecturer/}+${lecturer.lecturerId}"
+									class="btn btn-primary">Update</a></td>
+
+							<td><a th:href="@{/admin/lecturers/deleteLecturer/}+${lecturer.lecturerId}"
+									class="btn btn-danger"><span th:text="#{admin.lecturer.delete}"></span>Delete</a></td>
+									
+						</div>
+					</tr>
+				</table>
 		</div>
-	</body>
+</body>
+
 </html>
