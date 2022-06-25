@@ -78,4 +78,11 @@ public class Admin_Lecturer {
 		return "managelecturers"; //TODO proper html page linking
 	}
 	
+	@GetMapping("/view-lecturer-courses")
+	public String coursesTaughtByLecturer(@Param("lecturerId")String lecturerId,Model model) {
+		ArrayList<Lecturers> lecturerss = adlserv.getLecturersById(lecturerId);
+		model.addAttribute("lecturer", lecturerss);
+		return "managelecturers"; //TODO proper html page linking
+	}
+	
 }
